@@ -12,7 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.aetherwars.model.Type;
-import com.aetherwars.model.Character;
+import com.aetherwars.model.CharacterCard;
 import com.aetherwars.util.CSVReader;
 
 public class AetherWars extends Application {
@@ -24,8 +24,8 @@ public class AetherWars extends Application {
     characterReader.setSkipHeader(true);
     List<String[]> characterRows = characterReader.read();
     for (String[] row : characterRows) {
-      Character c = new Character(row[1], row[3], Type.valueOf(row[2]));
-      System.out.println(c);
+/*      CharacterCard c = new CharacterCard(row[1], row[3], Type.valueOf(row[2]));*/
+      System.out.println(row[0]);
     }
   }
 
