@@ -49,3 +49,6 @@ gradle-app.setting
 
 .idea
 bin/
+
+# owen's runner
+run.bat
