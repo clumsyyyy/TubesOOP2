@@ -50,7 +50,7 @@ public class AetherWars extends Application {
       MorphList.add(m);
     }
 
-    File potionCSVFile = new File(getClass().getResource(SWAP_FPATH).toURI());
+    File potionCSVFile = new File(getClass().getResource(PTN_FPATH).toURI());
     CSVReader potionReader = new CSVReader(potionCSVFile, "\t");
     potionReader.setSkipHeader(true);
     List<String[]>potionRows = potionReader.read();
