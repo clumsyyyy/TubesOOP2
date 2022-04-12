@@ -1,5 +1,7 @@
 package com.aetherwars.model;
 
+import com.aetherwars.model.cards.Card;
+
 /**
  * Implementation for player class
  */
@@ -36,5 +38,19 @@ public class Player {
      */
     public void discardFromDeck(Card card){
         deck.discardCard(card);
+    }
+
+    /**
+     * @brief method to inspect a card's description from deck
+     */
+    public void inspectDeckCard(int i){
+        this.deck.inspectCard(i);
+    }
+
+    /** 
+     * #brief method to inspect a card's description from hand
+    */
+    public void inspectHandCard(int i){
+        this.hand.inspectCard(i);
     }
 }

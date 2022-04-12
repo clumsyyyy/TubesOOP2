@@ -1,7 +1,12 @@
-package com.aetherwars.model;
+package com.aetherwars.model.cards;
 
+import com.aetherwars.model.Type;
+
+/**
+ * Implementatino for the spell card class
+ */
 public class SpellCard extends Card {
-    private int duration; // Permanent = 0 / Temporary = depends on dasta
+    protected int duration; // Permanent = 0 / Temporary = depends on dasta
 
     /**
      * User-defined constructor for spell card
@@ -18,7 +23,11 @@ public class SpellCard extends Card {
         this.duration = duration;
     }
 
-    public void use(){
-        // TODO: harus diimplementasikan bareng" sama match nya
+    public void setDuration(int duration){
+        this.duration = duration;
+    }
+
+    public int getDuration(){
+        return this.duration;
     }
 }

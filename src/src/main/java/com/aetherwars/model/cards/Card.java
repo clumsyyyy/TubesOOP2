@@ -1,4 +1,6 @@
-package com.aetherwars.model;
+package com.aetherwars.model.cards;
+
+import com.aetherwars.model.Type;
 
 /**
  * Implementation for Card parent class
