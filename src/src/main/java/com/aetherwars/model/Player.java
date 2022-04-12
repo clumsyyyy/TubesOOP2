@@ -10,18 +10,20 @@ public class Player {
     private int HP;
     private int mana;
     private Deck deck;
-    private Deck hand;
+    private Hand hand;
+    private Board board;
 
     /**
      * Constructor for player class
      * default HP point = 80
      */
-    public Player(String name, int HP, int mana, Deck deck, Deck hand) {
+    public Player(String name) {
         this.name = name;
-        this.HP = HP;
-        this.mana = mana;
-        this.deck = deck;
-        this.hand = hand;
+        this.HP = 80;
+        this.mana = 1;
+        this.deck = new Deck();
+        this.hand = new Hand();
+        this.board = new Board();
     }
 
     /**
@@ -50,7 +52,7 @@ public class Player {
     /** 
      * #brief method to inspect a card's description from hand
     */
-    public void inspectHandCard(int i){
-        this.hand.inspectCard(i);
-    }
+//    public void inspectHandCard(int i){
+//        this.hand.inspectCard(i);
+//    }
 }
