@@ -1,17 +1,43 @@
-package com.aetherwars.model.cards;
+package com.aetherwars.models.cards;
 
-import com.aetherwars.model.Type;
+import com.aetherwars.interfaces.Observable;
+import com.aetherwars.interfaces.Prototype;
+import com.aetherwars.models.Type;
 
 /**
  * Implementation for Card parent class
  */
-public class Card {
+public class Card implements Prototype<Card>, Observable {
     protected int id;
     protected String name;
     protected String desc;
     protected Type type;
     protected int required_mana;
     protected String image_path;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public int getRequiredMana() {
+        return required_mana;
+    }
+
+    public String getImagePath() {
+        return image_path;
+    }
 
     /**
      * User-defined constructor for card
@@ -37,5 +63,22 @@ public class Card {
                 "Description: " + this.desc + "\n" +
                 "Required Mana: " + this.required_mana + "\n" +
                 "Image Path: " + this.image_path + "\n";
+    }
+
+    @Override
+    public Card clone() {
+        return new Card(
+            this.id,
+            this.name,
+            this.type,
+            this.desc,
+            this.required_mana,
+            this.image_path
+        );
+    }
+
+    @Override
+    public void update() {
+        // do nothing for ordinary card
     }
 }
