@@ -1,5 +1,6 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.core.GameManager;
 import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
@@ -18,6 +19,7 @@ public class CharacterCard extends Card implements Prototype<Card> {
     private double hp_up;
     private int level;
     private int exp;
+    private boolean canAttack;
 
     /**
      * @brief Default constructor for card
@@ -41,6 +43,7 @@ public class CharacterCard extends Card implements Prototype<Card> {
         this.hp_up = hp_up;
         this.level = 1;
         this.exp = 0;
+        this.canAttack = true;
     }
 
     @Override
@@ -66,6 +69,9 @@ public class CharacterCard extends Card implements Prototype<Card> {
         return this.exp;
     }
 
+    public void toggleAttack() {
+        canAttack = !canAttack;
+    }
 
     public void setHP(double hp) {
         this.hp = (hp > 0 ? hp : 0);
@@ -109,23 +115,34 @@ public class CharacterCard extends Card implements Prototype<Card> {
      * @param target target card
      */
     public void atk(CharacterCard target) {
-        if (this.type == Type.OVERWORLD && target.type == Type.END ||
-                this.type == Type.END && target.type == Type.NETHER ||
-                this.type == Type.NETHER && target.type == Type.OVERWORLD) {
-            target.setHP(target.getHP() - 2 * this.atk);
-        }
-        else if (this.type == Type.OVERWORLD && target.type == Type.NETHER ||
-                this.type == Type.END && target.type == Type.OVERWORLD ||
-                this.type == Type.NETHER && target.type == Type.END) {
-            target.setHP(target.getHP() - 0.5 * this.atk);
-        }
-        else {
-            target.setHP(target.getHP() - this.atk);
-        }
+        if (canAttack) {
+            if (target != null) {
+                if (this.type == Type.OVERWORLD && target.type == Type.END ||
+                        this.type == Type.END && target.type == Type.NETHER ||
+                        this.type == Type.NETHER && target.type == Type.OVERWORLD) {
+                    target.setHP(target.getHP() - 2 * this.atk);
+                } else if (this.type == Type.OVERWORLD && target.type == Type.NETHER ||
+                        this.type == Type.END && target.type == Type.OVERWORLD ||
+                        this.type == Type.NETHER && target.type == Type.END) {
+                    target.setHP(target.getHP() - 0.5 * this.atk);
+                } else {
+                    target.setHP(target.getHP() - this.atk);
+                }
 
-        if (target.getHP() <= 0) {
-            this.addExp(target.getLevel());
+                if (target.getHP() <= 0) {
+                    this.addExp(target.getLevel());
+                }
+            } else { // attack chara
+                GameManager.getInstance().getOpponentPlayer().takeDamage(this.atk);
+            }
+            toggleAttack();
         }
+    }
+
+    @Override
+    public void update() {
+        if (!canAttack)
+            toggleAttack();
     }
 
     @Override

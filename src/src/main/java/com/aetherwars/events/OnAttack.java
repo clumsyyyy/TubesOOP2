@@ -1,37 +1,26 @@
 package com.aetherwars.events;
 
-import com.aetherwars.controllers.Player;
 import com.aetherwars.interfaces.Event;
-import com.aetherwars.models.cards.Card;
 
 public class OnAttack extends Event {
-    private Player pAtt;
-    private Card cAtt;
-    private Player pTgt;
-    private Card cTgt;
+    private final int cAtt;
+    private final int cTgt;
 
-    public OnAttack(Object sender, Player pAtt, Card cAtt, Player pTgt, Card cTgt) {
+    public OnAttack(Object sender, int idx_cAtt, int idx_cTgt) {
         super(sender);
-        this.pAtt = pAtt;
-        this.cAtt = cAtt;
-        this.pTgt = pTgt;
-        this.cTgt = cTgt;
+        this.cAtt = idx_cAtt;
+        this.cTgt = idx_cTgt;
     }
 
-    public Player getAttackerPlayer() {
-        return this.pAtt;
+    public OnAttack(Object sender, int idx_cAtt) {
+        this(sender, idx_cAtt, -1);
     }
 
-    public Card getAttackerCard() {
+    public int getAttackerCardIdx() {
         return this.cAtt;
     }
 
-    public Player getTargetPlayer() {
-        return this.pTgt;
-    }
-
-    public Card getTargetCard() {
+    public int getTargetCardIdx() {
         return this.cTgt;
     }
-
 }

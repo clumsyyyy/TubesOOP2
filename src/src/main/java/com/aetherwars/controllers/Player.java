@@ -1,7 +1,7 @@
 package com.aetherwars.controllers;
 
-import com.aetherwars.events.OnGameStart;
-import com.aetherwars.events.OnPhaseChange;
+import com.aetherwars.core.GameManager;
+import com.aetherwars.events.*;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Publisher;
 import com.aetherwars.interfaces.Subscriber;
@@ -10,8 +10,32 @@ import com.aetherwars.interfaces.Subscriber;
  * Implementation for player class
  */
 public class Player extends Publisher implements Subscriber {
+    public String getName() {
+        return name;
+    }
+
+    public double getHP() {
+        return HP;
+    }
+
+    public void takeDamage(double amount) {
+        HP -= amount;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public Board getHand() {
+        return hand;
+    }
+
     private String name;
-    private int HP;
+    private double HP;
     private int mana;
     private Board board;
     private Board hand;
@@ -32,9 +56,20 @@ public class Player extends Publisher implements Subscriber {
 
     @Override
     public void receiveEvent(Event evt) {
-        sendEvent(evt);
+        GameManager gm = GameManager.getInstance();
         if (evt instanceof OnGameStart) {
-
+            sendEvent(evt);
+        } else if (evt instanceof OnPhaseChange) {
+            switch (((OnPhaseChange) evt).getPhase()) {
+                case END: // update board
+                    sendEvent(evt);
+                    break;
+            }
+        } else if (evt instanceof OnAttack || evt instanceof OnDrawCard || evt instanceof OnPickCard) {
+            // event for specific player.
+            if (this == gm.getCurrentPlayer()) {
+                sendEvent(evt);
+            }
         }
     }
 }

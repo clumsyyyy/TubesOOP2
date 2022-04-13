@@ -28,7 +28,7 @@ public class DeckFactory {
             sum += cnt;
         }
         // leftover N-sum, if any.
-        for (int i = 0; i < N-sum; i++) {
+        for (int i = 0; i < typeVal.size(); i++) {
             cnt = (N - sum) / 5;
             countType.put(typeVal.get(i), countType.get(typeVal.get(i)) + cnt);
             sum += cnt;

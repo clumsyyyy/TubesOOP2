@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 
+import com.aetherwars.events.OnGameStart;
+import com.aetherwars.events.OnPhaseChange;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,6 +22,7 @@ public class AetherWars extends Application {
     public void start(Stage stage) {
         GameManager manager = GameManager.getInstance();
         manager.initGame();
+        manager.sendEvent(new OnGameStart(this));
         Text text = new Text();
         text.setText("Loading...");
         text.setX(50);
@@ -35,6 +38,7 @@ public class AetherWars extends Application {
         stage.show();
 
         text.setText("Minecraft: Aether Wars!");
+        manager.sendEvent(new OnPhaseChange(this, Phase.DRAW));
     }
 
     public static void main(String[] args) {

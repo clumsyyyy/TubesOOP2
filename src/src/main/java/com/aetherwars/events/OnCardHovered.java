@@ -4,7 +4,7 @@ import com.aetherwars.interfaces.Event;
 import com.aetherwars.models.cards.Card;
 
 public class OnCardHovered extends Event {
-    private Card c;
+    private final Card c;
     public OnCardHovered(Object sender, Card c) {
         super(sender);
         this.c = c;

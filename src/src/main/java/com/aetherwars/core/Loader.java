@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Loader {
-    private static final String CHARACTER_FPATH = "card/data/character.csv";
-    private static final String MORPH_FPATH = "card/data/spell_morph.csv";
-    private static final String PTN_FPATH = "card/data/spell_ptn.csv";
-    private static final String SWAP_FPATH = "Card/data/spell_swap.csv";
+    private static final String CHARACTER_FPATH = "../card/data/character.csv";
+    private static final String MORPH_FPATH = "../card/data/spell_morph.csv";
+    private static final String PTN_FPATH = "../card/data/spell_ptn.csv";
+    private static final String SWAP_FPATH = "../card/data/spell_swap.csv";
 
-    private static final ArrayList<Card> CardList = new ArrayList<Card>();
+    private static final ArrayList<Card> CardList = new ArrayList<>();
 
     public static ArrayList<Card> loadCards() throws IOException, URISyntaxException {
         File characterCSVFile = new File(Loader.class.getResource(CHARACTER_FPATH).toURI());
