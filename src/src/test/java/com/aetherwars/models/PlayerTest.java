@@ -1,6 +1,5 @@
 package com.aetherwars.models;
 
-import com.aetherwars.controllers.Player;
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.OnAttack;
 import com.aetherwars.events.OnDrawCard;

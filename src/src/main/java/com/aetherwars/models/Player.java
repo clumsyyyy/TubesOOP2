@@ -1,4 +1,4 @@
-package com.aetherwars.controllers;
+package com.aetherwars.models;
 
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.*;

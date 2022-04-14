@@ -1,16 +1,11 @@
-package com.aetherwars.controllers;
+package com.aetherwars.models;
 
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.*;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Observer;
 import com.aetherwars.interfaces.Subscriber;
-import com.aetherwars.models.BoardType;
-import com.aetherwars.models.Phase;
 import com.aetherwars.models.cards.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 // Board implements Observer
 public class Board implements Observer<Card>, Subscriber {

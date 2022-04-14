@@ -1,6 +1,5 @@
 package com.aetherwars.models;
 
-import com.aetherwars.controllers.Deck;
 import com.aetherwars.models.cards.Card;
 import com.aetherwars.util.CSVReader;
 

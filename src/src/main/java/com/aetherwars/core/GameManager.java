@@ -1,9 +1,8 @@
 package com.aetherwars.core;
 
-import com.aetherwars.controllers.Board;
-import com.aetherwars.controllers.Deck;
-import com.aetherwars.controllers.Player;
-import com.aetherwars.events.OnGameStart;
+import com.aetherwars.models.Board;
+import com.aetherwars.models.Deck;
+import com.aetherwars.models.Player;
 import com.aetherwars.events.OnPhaseChange;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Publisher;

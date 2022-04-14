@@ -19,7 +19,6 @@ public class AetherWars extends Application {
         try{
             GameManager manager = GameManager.getInstance();
             manager.initGame();
-            manager.sendEvent(new OnGameStart(this));
 //        Text text = new Text();
 //        text.setText("Loading...");
 //        text.setX(50);
@@ -32,6 +31,7 @@ public class AetherWars extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root, 1280, 720);
 
+            manager.sendEvent(new OnGameStart(this));
             stage.setTitle("Minecraft: Aether Wars");
             stage.setScene(scene);
             stage.show();
