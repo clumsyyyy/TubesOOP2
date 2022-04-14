@@ -1,5 +1,6 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.interfaces.Informable;
 import com.aetherwars.interfaces.Observable;
 import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
@@ -7,7 +8,7 @@ import com.aetherwars.models.Type;
 /**
  * Implementation for Card parent class
  */
-public class Card implements Prototype<Card>, Observable {
+public class Card implements Prototype<Card>, Observable, Informable {
     protected int id;
     protected String name;
     protected String desc;
@@ -59,10 +60,13 @@ public class Card implements Prototype<Card>, Observable {
     public String toString() {
         return "ID: " + this.id + "\n" +
                 "Name: " + this.name + "\n" +
-                "Type: " + this.type + "\n" +
                 "Description: " + this.desc + "\n" +
-                "Required Mana: " + this.required_mana + "\n" +
-                "Image Path: " + this.image_path + "\n";
+                getInfo();
+    }
+
+    public String getInfo() {
+        return "Type: " + this.type + "\n" +
+                "Required Mana: " + this.required_mana + "\n";
     }
 
     @Override
@@ -79,6 +83,6 @@ public class Card implements Prototype<Card>, Observable {
 
     @Override
     public void update() {
-        // do nothing for ordinary card
+        // do nothing
     }
 }

@@ -1,12 +1,13 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.interfaces.Informable;
 import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
 /**
  * Implementatino for the spell card class
  */
-public class SpellCard extends Card implements Prototype<Card> {
+public class SpellCard extends Card implements Prototype<Card>, Informable {
     protected int init_duration; // Permanent = 0 / Temporary = depends on dasta
     protected int current_duration;
 
@@ -32,6 +33,23 @@ public class SpellCard extends Card implements Prototype<Card> {
         super(id, name, type, description, mana, image_path);
         this.init_duration = duration;
         this.current_duration = duration;
+    }
+
+    private String ingfo() {
+        return "Duration: " + this.init_duration + "\n";
+    }
+
+    public String toString() {
+        return super.toString() + ingfo();
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + ingfo();
+    }
+
+    public void reset() {
+        this.current_duration = this.init_duration;
     }
 
     public void setDuration(int duration){

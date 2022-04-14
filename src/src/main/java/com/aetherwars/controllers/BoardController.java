@@ -3,6 +3,7 @@ package com.aetherwars.controllers;
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.OnGameStart;
 import com.aetherwars.interfaces.Event;
+import com.aetherwars.interfaces.Informable;
 import com.aetherwars.interfaces.Subscriber;
 import com.aetherwars.models.Board;
 import com.aetherwars.models.cards.Card;
@@ -23,47 +24,63 @@ public class BoardController implements Subscriber {
     public Pane p1_hand3;
     public Pane p1_hand4;
     public Pane p1_hand5;
+    public Pane[] p1;
+    public Pane[] p2;
     public Pane p2_hand1;
     public Pane p2_hand2;
     public Pane p2_hand3;
     public Pane p2_hand4;
     public Pane p2_hand5;
-    public Pane[] p1;
-    public Pane[] p2;
-    public Pane[][] p = {null, null};
-    final BackgroundSize bgSize = new BackgroundSize(0.9, 0.9, true, true, true, false);
+    public Pane[][] p;
+    final BackgroundSize bgSize = new BackgroundSize(
+        0.9, 0.9, true, true,
+        true, false
+    );
     public Label c_name;
     public Label c_info;
     public Label c_desc;
     public ImageView c_img;
+    public Pane p1_board1;
+    public Pane p1_board2;
+    public Pane p1_board3;
+    public Pane p1_board4;
+    public Pane p1_board5;
+    public Pane[] p1b;
+    public Pane p2_board1;
+    public Pane p2_board2;
+    public Pane p2_board3;
+    public Pane p2_board4;
+    public Pane p2_board5;
+    public Pane[] p2b;
+    public Pane[][] pb;
 
     public BoardController () {
         GameManager.getInstance().addSubscriber(this);
     }
 
     public EventHandler<? super MouseEvent> OnHoverExitCard = (event -> {
-        c_name.setVisible(false);
-        c_desc.setVisible(false);
-        c_info.setVisible(false);
-        c_img.setVisible(false);
+        toggleCharacterInfo(false);
     });
 
-    public EventHandler<? super MouseEvent> OnHoverCard(int player_idx, int card_idx) {
+    public void toggleCharacterInfo(boolean state) {
+        c_name.setVisible(state);
+        c_desc.setVisible(state);
+        c_info.setVisible(state);
+        c_img.setVisible(state);
+    }
+
+    public EventHandler<? super MouseEvent> OnHoverCard(int player_idx, int card_idx, boolean isHand) {
         return (event -> {
-            c_name.setVisible(true);
-            c_desc.setVisible(true);
-            c_info.setVisible(true);
-            c_img.setVisible(true);
+            toggleCharacterInfo(true);
             GameManager gm = GameManager.getInstance();
-            Card c = gm.getPlayer(player_idx).getHand().getCard(card_idx);
+            Card c;
+            if (isHand)
+                c = gm.getPlayer(player_idx).getHand().getCard(card_idx);
+            else
+                c = gm.getPlayer(player_idx).getBoard().getCard(card_idx);
             if (c != null) {
                 c_name.setText(c.getName());
-                if (c instanceof CharacterCard) {
-                    CharacterCard cd = (CharacterCard) c;
-                    c_info.setText(String.format("Atk : %.2f %s\nHP : %.2f\nLevel : %d\nEXP : %d/%d\nType : %s",
-                            cd.getATK(), "", cd.getHP(), cd.getLevel(), cd.getExp(), cd.getLevel(), cd.getType().toString()
-                    ));
-                }
+                c_info.setText(((Informable)c).getInfo());
                 c_desc.setText(c.getDesc());
                 c_img.setImage(new Image("/com/aetherwars/" + c.getImagePath()));
             }
@@ -74,11 +91,11 @@ public class BoardController implements Subscriber {
         GameManager gm = GameManager.getInstance();
         // Start UI
         Board[] b = new Board[] {
-                gm.getCurrentPlayer().getHand(),
-                gm.getOpponentPlayer().getHand()
+            gm.getCurrentPlayer().getHand(),
+            gm.getOpponentPlayer().getHand()
         };
-        p1 = new Pane[] {p1_hand1, p1_hand2, p1_hand3, p1_hand4, p1_hand5};
-        p2 = new Pane[] {p2_hand1, p2_hand2, p2_hand3, p2_hand4, p2_hand5};
+        p1 = new Pane[]{p1_hand1, p1_hand2, p1_hand3, p1_hand4, p1_hand5};
+        p2 = new Pane[]{p2_hand1, p2_hand2, p2_hand3, p2_hand4, p2_hand5};
         p = new Pane[][]{p1, p2};
         for (int k = 0; k < 2; k++) {
             for (int i = 0; i < 5; i++) {
@@ -90,7 +107,22 @@ public class BoardController implements Subscriber {
                             bgSize
                     );
                     p[k][i].setBackground(new Background(bg));
-                    p[k][i].setOnMouseEntered(OnHoverCard(k, i));
+                    p[k][i].setOnMouseEntered(OnHoverCard(k, i, true));
+                    p[k][i].setOnMouseExited(OnHoverExitCard);
+                }
+            }
+        }
+        b = new Board[] {
+            gm.getCurrentPlayer().getBoard(),
+            gm.getOpponentPlayer().getBoard()
+        };
+        p1b = new Pane[]{p1_board1, p1_board2, p1_board3, p1_board4, p1_board5};
+        p2b = new Pane[]{p1_board1, p1_board2, p1_board3, p1_board4, p1_board5};
+        pb = new Pane[][]{p1b, p2b};
+        for (int k = 0; k < 2; k++) {
+            for (int i = 0; i < 5; i++) {
+                if (b[k].getCard(i) != null) {
+                    p[k][i].setOnMouseEntered(OnHoverCard(k, i, false));
                     p[k][i].setOnMouseExited(OnHoverExitCard);
                 }
             }

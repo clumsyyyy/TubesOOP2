@@ -1,6 +1,7 @@
 package com.aetherwars.models.cards;
 
 import com.aetherwars.core.GameManager;
+import com.aetherwars.interfaces.Informable;
 import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
@@ -10,20 +11,13 @@ import com.aetherwars.models.Type;
  * to be used whenever reset
  * Leveling up and using potion will update the atk/hp value
  */
-public class CharacterCard extends Card implements Prototype<Card> {
-    private double base_atk;
-    private double base_hp;
-    private double atk;
-    private double hp;
-    private double atk_up;
-    private double hp_up;
-    private int level;
-    private int exp;
-    private boolean canAttack;
-
-    /**
-     * @brief Default constructor for card
-     */
+public class CharacterCard extends Card implements Prototype<Card>, Informable {
+    protected double base_atk;
+    protected double base_hp;
+    protected double atk;
+    protected double hp;
+    protected double atk_up;
+    protected double hp_up;
 
     /**
      * @brief User-defined constructor for card, used during parsing
@@ -41,36 +35,14 @@ public class CharacterCard extends Card implements Prototype<Card> {
         this.hp = hp;
         this.atk_up = atk_up;
         this.hp_up = hp_up;
-        this.level = 1;
-        this.exp = 0;
-        this.canAttack = true;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                "atk: " + this.atk + "\n" +
-                "hp: " + this.hp + "\n";
+    public double getAtkUp() {
+        return atk_up;
     }
 
-    public void setLevel(int level){
-        this.level = level;
-    }
-
-    public int getLevel(){
-        return this.level;
-    }
-
-    public void setExp(int exp){
-        this.exp = exp;
-    }
-
-    public int getExp(){
-        return this.exp;
-    }
-
-    public void toggleAttack() {
-        canAttack = !canAttack;
+    public double getHpUp() {
+        return hp_up;
     }
 
     public void setHP(double hp) {
@@ -94,55 +66,18 @@ public class CharacterCard extends Card implements Prototype<Card> {
         this.hp = this.base_hp;
     }
 
-    /**
-     * TODO: implementasinya masih kurang jelas, lagi ditanyain di QnA
-     * @param exp
-     */
-    public void addExp(int exp){
-        this.exp += exp;
-    }
-
-    public void levelUp(){
-        if (this.level < 10) {
-            this.atk += this.atk_up;
-            this.hp += this.hp_up;
-            this.level++;
-        }
-    }
-
-    /**
-     * @brief atks the target character card by type
-     * @param target target card
-     */
-    public void atk(CharacterCard target) {
-        if (canAttack) {
-            if (target != null) {
-                if (this.type == Type.OVERWORLD && target.type == Type.END ||
-                        this.type == Type.END && target.type == Type.NETHER ||
-                        this.type == Type.NETHER && target.type == Type.OVERWORLD) {
-                    target.setHP(target.getHP() - 2 * this.atk);
-                } else if (this.type == Type.OVERWORLD && target.type == Type.NETHER ||
-                        this.type == Type.END && target.type == Type.OVERWORLD ||
-                        this.type == Type.NETHER && target.type == Type.END) {
-                    target.setHP(target.getHP() - 0.5 * this.atk);
-                } else {
-                    target.setHP(target.getHP() - this.atk);
-                }
-
-                if (target.getHP() <= 0) {
-                    this.addExp(target.getLevel());
-                }
-            } else { // attack chara
-                GameManager.getInstance().getOpponentPlayer().takeDamage(this.atk);
-            }
-            toggleAttack();
-        }
+    private String ingfo() {
+        return "ATK: " + this.atk + "\n" +
+                "HP: " + this.hp + "\n";
     }
 
     @Override
-    public void update() {
-        if (!canAttack)
-            toggleAttack();
+    public String toString() {
+        return super.toString() + ingfo();
+    }
+
+    public String getInfo() {
+        return super.getInfo() + ingfo();
     }
 
     @Override

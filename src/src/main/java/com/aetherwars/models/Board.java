@@ -93,15 +93,15 @@ public class Board implements Observer<Card>, Subscriber {
 
     void attack(OnAttack evt) {
         Card card_att = cards[evt.getAttackerCardIdx()];
-        if (card_att instanceof CharacterCard) {
+        if (card_att instanceof SpawnedCard) {
             if (evt.getTargetCardIdx() == -1) {
                 // attack character directly
-                ((CharacterCard) card_att).atk(null);
+                ((SpawnedCard) card_att).atk(null);
             } else {
                 // use attack function on CharacterCard
                 Card target_att = cards[evt.getTargetCardIdx()];
-                if (target_att instanceof CharacterCard) {
-                    ((CharacterCard) card_att).atk((CharacterCard) target_att);
+                if (target_att instanceof SpawnedCard) {
+                    ((SpawnedCard) card_att).atk((SpawnedCard) target_att);
                 }
             }
         }
