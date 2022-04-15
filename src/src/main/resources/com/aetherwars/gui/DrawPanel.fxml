@@ -38,5 +38,8 @@
             </Label>
          </children>
       </Pane>
+      <Label fx:id="draw1_details" layoutX="216.0" layoutY="520.0" prefHeight="173.0" prefWidth="212.0" text="Label" />
+      <Label fx:id="draw2_details" layoutX="534.0" layoutY="520.0" prefHeight="173.0" prefWidth="212.0" text="Label" />
+      <Label fx:id="draw3_details" layoutX="840.0" layoutY="520.0" prefHeight="173.0" prefWidth="212.0" text="Label" />
    </children>
 </AnchorPane>
