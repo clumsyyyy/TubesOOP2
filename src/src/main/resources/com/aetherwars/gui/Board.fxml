@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -12,13 +18,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane fx:id="board" dividerPositions="0.1910200250312891" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.BoardController">
+<SplitPane fx:id="board" dividerPositions="0.19874804381846636" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.BoardController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
          <children>
             <VBox layoutX="14.0" layoutY="14.0" prefHeight="687.0" prefWidth="214.0">
                <children>
-                  <TitledPane animated="false" text="Card Stats">
+                  <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Card Stats">
                     <content>
                       <AnchorPane fx:id="cardstats_container" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -50,36 +56,53 @@
                </children>
             </VBox>
          </children></AnchorPane>
-    <AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1020.0" prefWidth="1020.0">
          <children>
-            <SplitPane layoutX="-1.0" layoutY="2.0" prefHeight="663.0" prefWidth="1011.0">
+            <SplitPane layoutX="-1.0" layoutY="2.0" maxHeight="660.0" maxWidth="1010.0" minHeight="660.0" minWidth="1010.0" prefHeight="660.0" prefWidth="1010.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="443.0">
                      <children>
-                        <SplitPane dividerPositions="0.5007587253414264" orientation="VERTICAL" prefHeight="661.0" prefWidth="1018.0">
+                        <SplitPane dividerPositions="0.5068285280728376" orientation="VERTICAL" prefHeight="661.0" prefWidth="1018.0">
                           <items>
                             <AnchorPane fx:id="play_area" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <SplitPane fx:id="p1_side" dividerPositions="0.36742800397219466" layoutY="3.0" prefHeight="326.0" prefWidth="1009.0">
+                                    <SplitPane fx:id="p1_side" dividerPositions="0.36941410129096325" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="1020.0">
                                       <items>
-                                        <AnchorPane fx:id="p1_cards" minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="394.0">
+                                        <AnchorPane fx:id="p1_cards" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="324.0" prefWidth="368.0">
                                              <children>
-                                                <Pane fx:id="p1_deck" layoutX="14.0" layoutY="6.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p1_hand1" layoutX="14.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p1_hand2" layoutX="129.0" layoutY="6.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p1_hand3" layoutX="129.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p1_hand4" layoutX="244.0" layoutY="6.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p1_hand5" layoutX="244.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
+                                                <Pane fx:id="p1_hand1" layoutX="14.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p1_hand1_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [1] MANA:" />
+                                                   </children></Pane>
+                                                <Pane fx:id="p1_hand4" layoutX="67.0" layoutY="6.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p1_hand4_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [4] MANA: " />
+                                                   </children></Pane>
+                                                <Pane fx:id="p1_hand2" layoutX="129.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p1_hand2_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [2] MANA: " />
+                                                   </children></Pane>
+                                                <Pane fx:id="p1_hand5" layoutX="191.0" layoutY="6.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p1_hand5_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [5] MANA: " />
+                                                   </children></Pane>
+                                                <Pane fx:id="p1_hand3" layoutX="244.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p1_hand3_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [3] MANA: " />
+                                                   </children></Pane>
                                              </children>
                                           </AnchorPane>
-                                        <AnchorPane fx:id="p1_board" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                        <AnchorPane fx:id="p1_board" maxHeight="-Infinity" maxWidth="-Infinity">
                                              <children>
                                                 <Pane fx:id="p1_board1" layoutX="14.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p1_board2" layoutX="139.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p1_board3" layoutX="264.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p1_board4" layoutX="388.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p1_board5" layoutX="513.0" layoutY="168.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2199ff" height="31.0" layoutX="97.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="515.0" />
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff7e" height="31.0" layoutX="127.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="485.0" />
+                                                <Label fx:id="p1_name" layoutX="559.0" layoutY="49.0" text="Player 1" />
+                                                <Label fx:id="p1_mana" layoutX="14.0" layoutY="49.0" text="MANA: " />
+                                                <Label fx:id="p1_hp" layoutX="14.0" layoutY="17.0" text="HP XX / 80" />
                                              </children>
                                           </AnchorPane>
                                       </items>
@@ -88,26 +111,44 @@
                               </AnchorPane>
                             <AnchorPane fx:id="player_2" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <SplitPane fx:id="p2_side" dividerPositions="0.36587771203155817" layoutX="-1.0" layoutY="-7.0" prefHeight="340.0" prefWidth="1016.0">
+                                    <SplitPane fx:id="p2_side" dividerPositions="0.3668639053254438" layoutX="-1.0" layoutY="-7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="1020.0">
                                       <items>
-                                        <AnchorPane fx:id="p2_cards" minHeight="0.0" minWidth="0.0" prefHeight="338.0" prefWidth="452.0">
+                                        <AnchorPane fx:id="p2_cards" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="324.0" prefWidth="368.0">
                                              <children>
-                                                <Pane fx:id="p2_hand1" layoutX="14.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p2_deck" layoutX="14.0" layoutY="176.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p2_hand2" layoutX="130.0" layoutY="176.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p2_hand5" layoutX="245.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p2_hand3" layoutX="130.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Pane fx:id="p2_hand4" layoutX="245.0" layoutY="176.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
+                                                <Pane fx:id="p2_hand1" layoutX="14.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p2_hand1_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [1] MANA: " />
+                                                   </children></Pane>
+                                                <Pane fx:id="p2_hand4" layoutX="67.0" layoutY="176.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p2_hand4_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [4] MANA: " />
+                                                   </children></Pane>
+                                                <Pane fx:id="p2_hand3" layoutX="245.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p2_hand3_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [3] MANA: " />
+                                                   </children>
+                                                </Pane>
+                                                <Pane fx:id="p2_hand2" layoutX="130.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p2_hand2_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [2] MANA: " />
+                                                   </children></Pane>
+                                                <Pane fx:id="p2_hand5" layoutX="192.0" layoutY="176.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;">
+                                                   <children>
+                                                      <Label fx:id="p2_hand5_mana" layoutY="123.0" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" [5] MANA: " />
+                                                   </children></Pane>
                                              </children>
                                           </AnchorPane>
-                                        <AnchorPane fx:id="p2_board" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                        <AnchorPane fx:id="p2_board" maxHeight="-Infinity" maxWidth="-Infinity">
                                              <children>
                                                 <Pane fx:id="p2_board1" layoutX="14.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p2_board2" layoutX="142.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p2_board3" layoutX="267.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p2_board4" layoutX="389.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
                                                 <Pane fx:id="p2_board5" layoutX="513.0" layoutY="14.0" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4d1f" height="31.0" layoutX="103.0" layoutY="290.0" stroke="BLACK" strokeType="INSIDE" width="515.0" />
+                                                <Label fx:id="p2_name" layoutX="566.0" layoutY="260.0" text="Player 2" />
+                                                <Label fx:id="p2_mana" layoutX="14.0" layoutY="260.0" text="MANA: " />
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff7e" height="31.0" layoutX="133.0" layoutY="283.0" stroke="BLACK" strokeType="INSIDE" width="485.0" />
+                                                <Label fx:id="p2_hp" layoutX="14.0" layoutY="288.0" text="HP XX / 80" />
                                              </children>
                                           </AnchorPane>
                                       </items>
