@@ -45,28 +45,7 @@ public class CharacterCard extends Card implements Prototype<Card>, Informable {
         return hp_up;
     }
 
-    public void setHP(double hp) {
-        this.hp = (hp > 0 ? hp : 0);
-    }
-
-    public double getHP() {
-        return this.hp;
-    }
-
-    public void setATK(double atk) {
-        this.atk = (atk > 0 ? atk : 0);
-    }
-
-    public double getATK(){
-        return this.atk;
-    }
-
-    public void reset(){
-        this.atk = this.base_atk;
-        this.hp = this.base_hp;
-    }
-
-    private String ingfo() {
+    protected String ingfo() {
         return "ATK: " + this.atk + "\n" +
                 "HP: " + this.hp + "\n";
     }

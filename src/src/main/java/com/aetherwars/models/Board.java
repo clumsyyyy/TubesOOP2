@@ -83,25 +83,30 @@ public class Board implements Observer<Card>, Subscriber {
         }
     }
 
-    void getFirstDraw() {
-        GameManager gm = GameManager.getInstance();
-        Deck deck = gm.getDeck();
-        for (int i = 0; i < 3; i++) {
-            register(deck.takeCard());
-        }
-    }
-
-    void attack(OnAttack evt) {
-        Card card_att = cards[evt.getAttackerCardIdx()];
+    void attack(OnCardAction evt) {
+        Card card_att = cards[evt.getFromCardIdx()];
         if (card_att instanceof SpawnedCard) {
-            if (evt.getTargetCardIdx() == -1) {
+            SpawnedCard sc_att = (SpawnedCard) card_att;
+            if (evt.getToCardIdx() == -1) {
                 // attack character directly
-                ((SpawnedCard) card_att).atk(null);
+                sc_att.atk(null);
             } else {
+                GameManager gm = GameManager.getInstance();
                 // use attack function on CharacterCard
-                Card target_att = cards[evt.getTargetCardIdx()];
+                Card target_att = gm.getOpponentPlayer().getBoard().getCard(evt.getToCardIdx());
                 if (target_att instanceof SpawnedCard) {
-                    ((SpawnedCard) card_att).atk((SpawnedCard) target_att);
+                    SpawnedCard tg_att = (SpawnedCard) target_att;
+                    if (sc_att.canAttack()) {
+                        sc_att.atk(tg_att);
+                        tg_att.atk(sc_att);
+                        if (tg_att.getHP() <= 0) {
+                            gm.getOpponentPlayer().getBoard().unregister(tg_att);
+                        }
+                        if (sc_att.getHP() <= 0) {
+                            gm.getCurrentPlayer().getBoard().unregister(sc_att);
+                        }
+                        sc_att.toggleAttack();
+                    }
                 }
             }
         }
@@ -109,26 +114,64 @@ public class Board implements Observer<Card>, Subscriber {
 
     @Override
     public void receiveEvent(Event evt) {
+        GameManager gm = GameManager.getInstance();
         if (type == BoardType.HAND) {
-           if (evt instanceof OnGameStart) {
-               getFirstDraw();
-           } else if (evt instanceof OnDrawCard) {
+           if (evt instanceof OnDrawCard) {
                register(((OnDrawCard) evt).getSelectedCard());
-           } else if (evt instanceof OnPhaseChange) {
-               switch (((OnPhaseChange) evt).getPhase()) {
-                   case END:
-                       notifyObjects();
-                       break;
-               }
-           } else if (evt instanceof OnPickCard) {
-                unregister(((OnPickCard) evt).getSelectedCard());
+           } else if (evt instanceof OnCardAction) {
+               OnCardAction ec = (OnCardAction) evt;
+               if (ec.getAction() == CardAction.PICK)
+                   // Prereq: player has enough mana
+                   unregister(ec.getFromCardIdx());
            }
         } else {
-            if (evt instanceof OnAttack) {
-                attack((OnAttack) evt);
-            } else if (evt instanceof OnPickCard) {
-                OnPickCard e = (OnPickCard)evt;
-                register(e.getSelectedCard(), e.getIndex());
+            if (evt instanceof OnCardAction) {
+                OnCardAction ec = (OnCardAction) evt;
+                Player p = gm.getCurrentPlayer();
+                switch (ec.getAction()) {
+                    case ATTACK:
+                        attack(ec);
+                        break;
+                    case PICK:
+                        // Prereq: player has enough mana
+                        CharacterCard cc = (CharacterCard) p.getHand().getCard(ec.getFromCardIdx());
+                        SpawnedCard c = new SpawnedCard(cc);
+                        register(c, ec.getToCardIdx());
+                        p.setMana(p.getMana() - cc.getRequiredMana());
+                        break;
+                    case SPELL:
+                        // Prereq: player has enough mana
+                        SpellCard sc = (SpellCard) p.getHand().getCard(ec.getFromCardIdx());
+                        p.getHand().unregister(sc);
+                        p.setMana(p.getMana() - sc.getRequiredMana());
+                        Player target = gm.getPlayer(ec.getToPlayerIdx());
+                        Board tgt_b = target.getBoard();
+                        SpawnedCard sc_tgt = (SpawnedCard) tgt_b.getCard(ec.getToCardIdx());
+                        switch (sc.getType()) {
+                            case SWAP:
+                            case PTN:
+                                sc_tgt.addSpell(sc);
+                                break;
+                            case LVL:
+                                sc_tgt.levelUp();
+                                break;
+                            case MORPH:
+                                tgt_b.unregister(ec.getToCardIdx());
+                                MorphCard mc = (MorphCard) sc;
+                                tgt_b.register(
+                                    new SpawnedCard((CharacterCard) gm.getCardById(mc.getTargetId())),
+                                    ec.getToCardIdx()
+                                );
+                                break;
+                        }
+                        break;
+                }
+            } else if (evt instanceof OnPhaseChange) {
+                switch (((OnPhaseChange) evt).getPhase()) {
+                    case DRAW:
+                        notifyObjects();
+                        break;
+                }
             }
         }
     }

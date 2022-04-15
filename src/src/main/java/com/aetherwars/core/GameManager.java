@@ -16,11 +16,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameManager extends Publisher implements Subscriber {
     private static GameManager ins = null;
     private Player[] players;
-    private Deck decks;
     private Phase phase;
     private int currentPlayer = 0;
     private ArrayList<Card> cardList;
@@ -29,6 +29,10 @@ public class GameManager extends Publisher implements Subscriber {
         if (ins == null)
             ins = new GameManager();
         return ins;
+    }
+
+    public int getCurrentPlayerIdx() {
+        return currentPlayer;
     }
 
     public Player getCurrentPlayer() {
@@ -47,19 +51,11 @@ public class GameManager extends Publisher implements Subscriber {
         return players[index];
     }
 
-    public Deck getDeck() {
-        return decks;
-    }
-
     public Phase getPhase() {
         return phase;
     }
 
     public void initGame(int deckSize, File deckFile) {
-        ins.players = new Player[]{
-            new Player("Alex", new Board(BoardType.BOARD), new Board(BoardType.HAND)),
-            new Player("Steve", new Board(BoardType.BOARD), new Board(BoardType.HAND))
-        };
         try {
             ins.cardList = Loader.loadCards();
         } catch (IOException e) {
@@ -67,18 +63,44 @@ public class GameManager extends Publisher implements Subscriber {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+        Deck[] decks;
         if (deckFile != null)
-            ins.decks = DeckFactory.create(ins.cardList, deckFile);
+            decks = new Deck[]{
+                DeckFactory.create(ins.cardList, deckFile),
+                DeckFactory.create(ins.cardList, deckFile),
+            };
         else
-            ins.decks = DeckFactory.create(ins.cardList, deckSize);
+            decks = new Deck[]{
+                DeckFactory.create(ins.cardList, deckSize),
+                DeckFactory.create(ins.cardList, deckSize)
+            };
+        ins.players = new Player[]{
+                new Player("Alex",
+                        new Board(BoardType.BOARD),
+                        new Board(BoardType.HAND),
+                        decks[0]
+                ),
+                new Player("Steve",
+                        new Board(BoardType.BOARD),
+                        new Board(BoardType.HAND),
+                        decks[1]
+                )
+        };
         addSubscriber(ins.players[0]);
         addSubscriber(ins.players[1]);
-        addSubscriber(ins.decks);
         addSubscriber(ins);
     }
 
     public void initGame() {
         initGame(40, null);
+    }
+
+    public Card getCardById(int id) {
+        for (Card c: cardList) {
+            if (c.getId() == id)
+                return c;
+        }
+        return null;
     }
 
     @Override
@@ -88,8 +110,9 @@ public class GameManager extends Publisher implements Subscriber {
             phase = curPhase;
             if (curPhase == Phase.END) {
                 changeCurrentPlayer();
-                sendEvent(new OnPhaseChange(this, Phase.DRAW));
             }
         }
+        // cek apakah end game.
+        // kalau deck kosong atau hp = 0.
     }
 }

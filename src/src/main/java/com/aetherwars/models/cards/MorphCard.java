@@ -14,11 +14,8 @@ public class MorphCard extends SpellCard implements Prototype<Card> {
         this.target_id = target_id;
     }
 
-    public void use(CharacterCard target){
-        // File characterCSVFile = new File(getClass().getResource("card/data/character.csv").toURI());
-        // CSVReader characterReader = new CSVReader(characterCSVFile, "\t");
-        // characterReader.setSkipHeader(true);
-        // List<String[]> characterRows = characterReader.read();
+    public int getTargetId() {
+        return target_id;
     }
 
     @Override

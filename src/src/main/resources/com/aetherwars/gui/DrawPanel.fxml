@@ -5,14 +5,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="discard_drawer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="discard_drawer" fx:controller="com.aetherwars.controllers.DrawController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="470.0" layoutY="100.0" text="Select a card to draw.">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Pane fx:id="draw_1" layoutX="216.0" layoutY="212.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black; -fx-background-image: url('../card/image/character/Creeper.png');">
+      <Pane fx:id="draw_1" layoutX="216.0" layoutY="212.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="draw1_mana" layoutY="266.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
                <font>
@@ -20,7 +20,7 @@
                </font>
             </Label>
          </children></Pane>
-      <Pane fx:id="draw_3" layoutX="840.0" layoutY="211.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black; -fx-background-image: url('../card/image/character/Creeper.png');">
+      <Pane fx:id="draw_3" layoutX="840.0" layoutY="211.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="draw3_mana" layoutY="269.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
                <font>
@@ -29,7 +29,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="draw_2" layoutX="534.0" layoutY="212.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black; -fx-background-image: url('../card/image/character/Creeper.png');">
+      <Pane fx:id="draw_2" layoutX="534.0" layoutY="212.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="draw2_mana" layoutY="269.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
                <font>

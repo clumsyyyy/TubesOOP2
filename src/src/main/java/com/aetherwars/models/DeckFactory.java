@@ -43,6 +43,7 @@ public class DeckFactory {
             countType.put(c.getType(), countType.get(c.getType()) - 1);
             deck.addCard(c);
         }
+        deck.shuffle();
         return deck;
     }
 

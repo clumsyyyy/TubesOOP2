@@ -48,6 +48,11 @@ public class SpellCard extends Card implements Prototype<Card>, Informable {
         return super.getInfo() + ingfo();
     }
 
+    @Override
+    public void update() {
+        this.current_duration--;
+    }
+
     public void reset() {
         this.current_duration = this.init_duration;
     }

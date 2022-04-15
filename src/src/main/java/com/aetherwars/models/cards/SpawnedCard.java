@@ -6,6 +6,7 @@ import com.aetherwars.interfaces.Observable;
 import com.aetherwars.models.Type;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 // Using adapter with Character Card
 public class SpawnedCard extends CharacterCard implements Observable, Informable {
@@ -26,8 +27,28 @@ public class SpawnedCard extends CharacterCard implements Observable, Informable
         this.activeSpells = new ArrayList<>();
     }
 
-    public void setLevel(int level){
-        this.level = level;
+    public boolean canAttack() {
+        return canAttack;
+    }
+
+    public int getAtkBuff() {
+        int atk_buf = 0;
+        for (SpellCard c: activeSpells) {
+            if (c instanceof PotionCard) {
+                atk_buf += ((PotionCard) c).getAtkBuff();
+            }
+        }
+        return atk_buf;
+    }
+
+    public int getHpBuff() {
+        int hp_buf = 0;
+        for (SpellCard c: activeSpells) {
+            if (c instanceof PotionCard) {
+                hp_buf += ((PotionCard) c).getHpBuff();
+            }
+        }
+        return hp_buf;
     }
 
     public int getLevel(){
@@ -42,12 +63,60 @@ public class SpawnedCard extends CharacterCard implements Observable, Informable
         return this.exp;
     }
 
+    public double getHP() {
+        if (hasSwapEffect())
+            return this.atk + this.getAtkBuff();
+        else
+            return this.hp + this.getHpBuff();
+    }
+
+    public double getATK(){
+        if (hasSwapEffect())
+            return this.hp + this.getHpBuff();
+        else
+            return this.atk + this.getAtkBuff();
+    }
+
+    public void takeDamage(double damage) {
+        double take = 0, hp_buff;
+        boolean hasSwap = hasSwapEffect();
+        for (int i = 0; i < activeSpells.size(); i++) {
+            SpellCard c = activeSpells.get(i);
+            if (c instanceof PotionCard) {
+                PotionCard pc = (PotionCard) c;
+                if (hasSwap) {
+                    hp_buff = pc.getAtkBuff();
+                } else {
+                    hp_buff = pc.getHpBuff();
+                }
+                if (hp_buff >= 0) {
+                    take = Math.min(damage, hp_buff);
+                    damage -= take;
+                    take = hp_buff - take;
+                    pc.setHpBuff(take);
+                    if (take <= 0) {
+                        activeSpells.remove(i);
+                        i--;
+                    }
+                } else {
+                    damage -= hp_buff;
+                }
+            }
+        }
+        if (damage <= 0)
+            return;
+        if (hasSwap)
+            atk -= damage;
+        else
+            hp -= damage;
+    }
+
     public void toggleAttack() {
         canAttack = !canAttack;
     }
 
     public void addExp(int exp){
-        while (level < 10 && exp + this.exp > this.getLevelUpExp()) {
+        while (level < 10 && exp + this.exp >= this.getLevelUpExp()) {
             exp -= this.getLevelUpExp() - this.exp;
             this.levelUp();
         }
@@ -63,40 +132,68 @@ public class SpawnedCard extends CharacterCard implements Observable, Informable
         }
     }
 
+    public void addSpell(SpellCard sc) {
+        if (sc instanceof SwapCard) {
+            for (SpellCard s: activeSpells) {
+                if (s instanceof SwapCard) {
+                    s.setDuration(s.getDuration() + sc.getDuration());
+                    return;
+                }
+            }
+        }
+        activeSpells.add(sc);
+    }
+
     /**
      * @brief atks the target character card by type
      * @param target target card
      */
     public void atk(SpawnedCard target) {
-        if (canAttack) {
-            if (target != null) {
-                Type curType = this.type;
-                Type tgtType = target.type;
-                if (curType == Type.OVERWORLD && tgtType == Type.END ||
-                        curType == Type.END && tgtType == Type.NETHER ||
-                        curType == Type.NETHER && tgtType == Type.OVERWORLD) {
-                    target.setHP(target.getHP() - 2 * this.atk);
-                } else if (curType == Type.OVERWORLD && tgtType == Type.NETHER ||
-                        curType == Type.END && tgtType == Type.OVERWORLD ||
-                        curType == Type.NETHER && tgtType == Type.END) {
-                    target.setHP(target.getHP() - 0.5 * this.atk);
-                } else {
-                    target.setHP(target.getHP() - this.atk);
-                }
-
-                if (target.getHP() <= 0) {
-                    this.addExp(target.getLevel());
-                    // TODO: delete target card next round.
-                }
-            } else { // attack chara
-                GameManager.getInstance().getOpponentPlayer().takeDamage(this.atk);
+        if (target != null) {
+            Type curType = this.type;
+            Type tgtType = target.type;
+            if (curType == Type.OVERWORLD && tgtType == Type.END ||
+                    curType == Type.END && tgtType == Type.NETHER ||
+                    curType == Type.NETHER && tgtType == Type.OVERWORLD) {
+                target.takeDamage(2 * this.atk);
+            } else if (curType == Type.OVERWORLD && tgtType == Type.NETHER ||
+                    curType == Type.END && tgtType == Type.OVERWORLD ||
+                    curType == Type.NETHER && tgtType == Type.END) {
+                target.takeDamage(0.5 * this.atk);
+            } else {
+                target.takeDamage(this.atk);
             }
-            toggleAttack();
+
+            if (target.getHP() <= 0) {
+                this.addExp(target.getLevel());
+                // TODO: delete target card after this
+            }
+        } else { // attack chara
+            GameManager.getInstance().getOpponentPlayer().takeDamage(this.atk);
         }
     }
 
-    private String ingfo() {
-        return "Level: " + this.level + "\n" +
+    public boolean hasSwapEffect() {
+        boolean res = false;
+        for (SpellCard s: activeSpells) {
+            if (s instanceof SwapCard) {
+                res = true;
+            }
+        }
+        return res;
+    }
+
+    protected String ingfo() {
+        boolean swap = hasSwapEffect();
+        double hpBuff = swap ? getAtkBuff() : getHpBuff();
+        double atkBuff = swap ? getHpBuff() : getAtkBuff();
+        String before = String.format("ATK: %s\nHP: %s\n",
+            String.format("%.2f", (swap ? this.hp : this.atk)) +
+                (atkBuff != 0 ? " (" + (atkBuff > 0 ? "+":"") + atkBuff + ")" : ""),
+            String.format("%.2f", (swap ? this.atk : this.hp)) +
+                (hpBuff != 0 ? " (" + (hpBuff > 0 ? "+":"") + hpBuff + ")" : "")
+        );
+        return before + "Level: " + this.level + "\n" +
                 "Exp: " + (this.level < 10 ? this.exp : "MAX") +
                           (this.level < 10 ? "/" + this.getLevelUpExp() : "") + "\n";
     }
@@ -117,6 +214,7 @@ public class SpawnedCard extends CharacterCard implements Observable, Informable
             activeSpells.get(i).update();
             if (activeSpells.get(i).current_duration == 0) {
                 activeSpells.remove(i);
+                i--;
             }
         }
     }

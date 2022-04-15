@@ -8,19 +8,31 @@ import com.aetherwars.models.Type;
  * extens SpellCard class
  */
 public class PotionCard extends SpellCard implements Prototype<Card> {
-    private int atk_value = 0;
-    private int hp_value = 0;
+    private double atk_value = 0;
+    private double hp_value = 0;
 
-    public PotionCard(int id, String name, String description, String image_path, int atk_value, int hp_value, int mana, int duration) {
+    public PotionCard(int id, String name, String description, String image_path, double atk_value, double hp_value, int mana, int duration) {
         super(id, name, Type.PTN, description, image_path, mana, duration);
         this.atk_value = atk_value;
         this.hp_value = hp_value;
     }
 
-    @Override
-    public void update() {
-        this.current_duration--;
+    public double getAtkBuff() {
+        return atk_value;
     }
+
+    public double getHpBuff() {
+        return hp_value;
+    }
+
+    public void setHpBuff(double val) {
+        hp_value = val;
+    }
+
+    public void setAtkBuff(double val) {
+        atk_value = val;
+    }
+
 
     @Override
     public Card clone() {

@@ -41,7 +41,9 @@ public class Deck implements Subscriber {
         return cards.size();
     }
 
-
+    public void shuffle() {
+        Collections.shuffle(cards);
+    }
 
     @Override
     public void receiveEvent(Event evt) {
@@ -49,7 +51,7 @@ public class Deck implements Subscriber {
             // remove and shuffle deck
             Card c = ((OnDrawCard) evt).getSelectedCard();
             cards.remove(c);
-            Collections.shuffle(cards);
+            shuffle();
             // should change phase
         }
     }
