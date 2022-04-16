@@ -11,7 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,12 +25,19 @@ public class DisplayManager implements Subscriber {
     private Stage stage;
     private Scene curScene;
     private Map<String, Scene> sceneMap = new HashMap<>();
+    private static DropShadow cardShadow;
     static final BackgroundSize bgSize = new BackgroundSize(
         0.9, 0.9, true, true,
         true, false
     );
 
     public void init(Stage stage) throws IOException {
+        cardShadow = new DropShadow();
+        cardShadow.setRadius(10.0);
+        cardShadow.setOffsetX(6.0);
+        cardShadow.setOffsetY(6.0);
+        cardShadow.setColor(Color.color(0.3, 0.3, 0.3));
+
         this.stage = stage;
         stage.setTitle("Minecraft: Aether Wars");
         addDisplay("main.board", "Board.fxml");
@@ -78,5 +88,25 @@ public class DisplayManager implements Subscriber {
             this.showDisplay("main.board");
             gm.sendEvent(new OnPhaseChange(this, Phase.PLAN));
         }
+    }
+
+    public static void cardHoverFX(Pane card){
+        card.setPrefHeight(card.getPrefHeight() + 5);
+        card.setPrefWidth(card.getPrefWidth() + 5);
+        card.setEffect(cardShadow);
+    }
+
+    public static void cardExitFX(Pane card){
+        card.setPrefHeight(card.getPrefHeight() - 5);
+        card.setPrefWidth(card.getPrefWidth() - 5);
+        card.setEffect(null);
+    }
+
+    public static void cardLabelHoverFX(Label lb){
+        lb.setPrefWidth(lb.getPrefWidth() + 5);
+    }
+
+    public static void cardLabelExitFX(Label lb){
+        lb.setPrefWidth(lb.getPrefWidth() - 5);
     }
 }

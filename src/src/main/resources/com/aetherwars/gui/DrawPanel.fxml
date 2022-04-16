@@ -5,14 +5,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="discard_drawer" fx:controller="com.aetherwars.controllers.DrawController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="discard_drawer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.DrawController">
    <children>
-      <Label layoutX="470.0" layoutY="100.0" text="Select a card to draw.">
+      <Label fx:id="player_label" layoutX="391.0" layoutY="51.0" text="&lt;NAME&gt;, it's your turn to draw!">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Pane fx:id="draw_1" layoutX="216.0" layoutY="212.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
+      <Pane fx:id="draw_1" layoutX="222.0" layoutY="143.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="draw1_mana" layoutY="266.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
                <font>
@@ -20,7 +20,7 @@
                </font>
             </Label>
          </children></Pane>
-      <Pane fx:id="draw_3" layoutX="840.0" layoutY="211.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
+      <Pane fx:id="draw_3" layoutX="846.0" layoutY="142.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="draw3_mana" layoutY="269.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
                <font>
@@ -29,7 +29,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="draw_2" layoutX="534.0" layoutY="212.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
+      <Pane fx:id="draw_2" layoutX="540.0" layoutY="143.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="draw2_mana" layoutY="269.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
                <font>
@@ -38,8 +38,25 @@
             </Label>
          </children>
       </Pane>
-      <Label fx:id="draw1_details" layoutX="216.0" layoutY="520.0" prefHeight="173.0" prefWidth="212.0" text="Label" />
-      <Label fx:id="draw2_details" layoutX="534.0" layoutY="520.0" prefHeight="173.0" prefWidth="212.0" text="Label" />
-      <Label fx:id="draw3_details" layoutX="840.0" layoutY="520.0" prefHeight="173.0" prefWidth="212.0" text="Label" />
+      <Label fx:id="draw1_name" layoutX="222.0" layoutY="451.0" prefHeight="43.0" prefWidth="212.0" text="draw1_name">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Label fx:id="draw2_name" layoutX="540.0" layoutY="451.0" prefHeight="43.0" prefWidth="212.0" text="draw2_name">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="draw3_name" layoutX="846.0" layoutY="451.0" prefHeight="43.0" prefWidth="212.0" text="draw3_name">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="draw1_info" layoutX="222.0" layoutY="494.0" prefHeight="82.0" prefWidth="212.0" text="draw1_info" wrapText="true" />
+      <Label fx:id="draw2_info" layoutX="540.0" layoutY="494.0" prefHeight="82.0" prefWidth="212.0" text="draw2_info" wrapText="true" />
+      <Label fx:id="draw3_info" layoutX="846.0" layoutY="494.0" prefHeight="82.0" prefWidth="212.0" text="draw3_info" wrapText="true" />
+      <Label fx:id="draw1_desc" layoutX="222.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw1_desc" wrapText="true" />
+      <Label fx:id="draw2_desc" layoutX="534.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw2_desc" wrapText="true" />
+      <Label fx:id="draw3_desc" layoutX="846.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw3_desc" wrapText="true" />
    </children>
 </AnchorPane>

@@ -21,6 +21,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,6 +75,19 @@ public class BoardController implements Subscriber {
     public Label p2_hand5_mana;
     public Label[] p2_hand_mana;
     public Label[][] p_hand_mana;
+    public Label p1_board1_lv;
+    public Label p1_board2_lv;
+    public Label p1_board3_lv;
+    public Label p1_board4_lv;
+    public Label p1_board5_lv;
+    public Label[] p1_board_lv;
+    public Label p2_board1_lv;
+    public Label p2_board2_lv;
+    public Label p2_board3_lv;
+    public Label p2_board4_lv;
+    public Label p2_board5_lv;
+    public Label[] p2_board_lv;
+    public Label[][] p_board_lv;
     public Label p1_mana;
     public Label p1_name;
     public Label p1_hp;
@@ -84,14 +99,12 @@ public class BoardController implements Subscriber {
     public Label attack_phase;
     public Label end_phase;
     public Button next_phase;
+    private Board[] b;
+    private Player[] players;
 
     public BoardController () {
         GameManager.getInstance().addSubscriber(this);
     }
-
-    public EventHandler<? super MouseEvent> OnHoverExitCard = (event -> {
-        toggleCharacterInfo(false);
-    });
 
     public void toggleCharacterInfo(boolean state) {
         c_name.setVisible(state);
@@ -99,9 +112,6 @@ public class BoardController implements Subscriber {
         c_info.setVisible(state);
         c_img.setVisible(state);
     }
-
-    private Board[] b;
-    private Player[] players;
 
     public EventHandler<? super MouseEvent> OnHoverCard(int player_idx, int card_idx, boolean isHand) {
         return (event -> {
@@ -116,7 +126,30 @@ public class BoardController implements Subscriber {
                 c_info.setText(((Informable)c).getInfo());
                 c_desc.setText(c.getDesc());
                 c_img.setImage(new Image("/com/aetherwars/" + c.getImagePath()));
+                if (isHand){
+                    DisplayManager.cardHoverFX(p[player_idx][card_idx]);
+                    DisplayManager.cardLabelHoverFX(p_hand_mana[player_idx][card_idx]);
+
+                } else {
+                    DisplayManager.cardHoverFX(pb[player_idx][card_idx]);
+                    DisplayManager.cardLabelHoverFX(p_board_lv[player_idx][card_idx]);
+                }
+
             }
+        });
+    }
+
+    public EventHandler<? super MouseEvent> OnHoverExitCard(int player_idx, int card_idx, boolean isHand) {
+        return (event -> {
+            if (isHand) {
+                DisplayManager.cardExitFX(p[player_idx][card_idx]);
+                DisplayManager.cardLabelExitFX(p_hand_mana[player_idx][card_idx]);
+
+            } else {
+                DisplayManager.cardExitFX(pb[player_idx][card_idx]);
+                DisplayManager.cardLabelExitFX(p_board_lv[player_idx][card_idx]);
+            }
+            toggleCharacterInfo(false);
         });
     }
 
@@ -162,21 +195,21 @@ public class BoardController implements Subscriber {
                 String[] s = event.getDragboard().getString().split(" ");
                 Player fromPlayer = players[Integer.parseInt(s[0])];
                 Card cfrom = fromPlayer.getHand().getCard(
-                    Integer.parseInt(s[1])
+                        Integer.parseInt(s[1])
                 );
                 if (
                     // make sure it's plan
-                    (gm.getPhase() == Phase.PLAN &&
-                        ( // and check if it's character usage or spell card usage
-                            (c == null && player_idx == gm.getCurrentPlayerIdx()) ||
-                            (c != null && cfrom instanceof SpellCard)
-                        )
-                        // and make sure players from have enough mana to use card
-                        && fromPlayer.getMana() >= cfrom.getRequiredMana()) ||
-                    // ... or if it's attack and coming from another player which card is exist
-                    (gm.getPhase() == Phase.ATTACK &&
-                    player_idx != gm.getCurrentPlayerIdx() &&
-                    c != null)
+                        (gm.getPhase() == Phase.PLAN &&
+                                ( // and check if it's character usage or spell card usage
+                                        (c == null && player_idx == gm.getCurrentPlayerIdx()) ||
+                                                (c != null && cfrom instanceof SpellCard)
+                                )
+                                // and make sure players from have enough mana to use card
+                                && fromPlayer.getMana() >= cfrom.getRequiredMana()) ||
+                                // ... or if it's attack and coming from another player which card is exist
+                                (gm.getPhase() == Phase.ATTACK &&
+                                        player_idx != gm.getCurrentPlayerIdx() &&
+                                        c != null)
                 )
                     event.acceptTransferModes(TransferMode.MOVE);
             }
@@ -193,20 +226,20 @@ public class BoardController implements Subscriber {
                 GameManager gm = GameManager.getInstance();
                 if (gm.getPhase() == Phase.PLAN) {
                     Card cfrom = players[pidx].getHand().getCard(
-                        Integer.parseInt(db.getString().split(" ")[1])
+                            Integer.parseInt(db.getString().split(" ")[1])
                     );
                     if (cfrom instanceof CharacterCard) {
                         gm.sendEvent(
-                            new OnCardAction(this, db.getString(), pidx, cidx, CardAction.PICK)
+                                new OnCardAction(this, db.getString(), pidx, cidx, CardAction.PICK)
                         );
                     } else if (cfrom instanceof SpellCard) {
                         gm.sendEvent(
-                            new OnCardAction(this, db.getString(), pidx, cidx, CardAction.SPELL)
+                                new OnCardAction(this, db.getString(), pidx, cidx, CardAction.SPELL)
                         );
                     }
                 } else if (gm.getPhase() == Phase.ATTACK) {
                     gm.sendEvent(
-                        new OnCardAction(this, db.getString(), pidx, cidx, CardAction.ATTACK)
+                            new OnCardAction(this, db.getString(), pidx, cidx, CardAction.ATTACK)
                     );
                 }
             }
@@ -246,14 +279,17 @@ public class BoardController implements Subscriber {
                     p[k][i].setBackground(null);
                     p_hand_mana[k][i].setText(" [" + (i + 1) + "] EMPTY");
                 }
-                if (firstInit) {
-                    p[k][i].setOnMouseEntered(OnHoverCard(k, i, true));
-                    p[k][i].setOnMouseExited(OnHoverExitCard);
+                if (firstInit || (b[k].getCard(i) != null)) {
+                    if (b[k].getCard(i) != null) {
+                        p[k][i].setOnMouseEntered(OnHoverCard(k, i, true));
+                        p[k][i].setOnMouseExited(OnHoverExitCard(k, i, true));
+                    }
                     p[k][i].setOnDragDetected(OnDragCardPlanHand(k, i));
                 }
             }
         }
         // Update card on board
+
         for (int k = 2; k < 4; k++) {
             for (int i = 0; i < 5; i++) {
                 if (b[k].getCard(i) != null) {
@@ -261,9 +297,11 @@ public class BoardController implements Subscriber {
                 } else {
                     pb[k-2][i].setBackground(null);
                 }
-                if (firstInit) {
-                    pb[k-2][i].setOnMouseEntered(OnHoverCard(k-2, i, false));
-                    pb[k-2][i].setOnMouseExited(OnHoverExitCard);
+                if (firstInit || (b[k].getCard(i) != null)) {
+                    if (b[k].getCard(i) != null){
+                        pb[k-2][i].setOnMouseEntered(OnHoverCard(k-2, i, false));
+                        pb[k-2][i].setOnMouseExited(OnHoverExitCard(k-2, i, false));
+                    }
                     pb[k-2][i].setOnDragOver(OnDragAcceptCardBoard(k-2, i));
                     pb[k-2][i].setOnDragDropped(OnDragEndCardBoard(k-2, i));
                     pb[k-2][i].setOnDragDetected(OnDragCardAttackBoard(k-2, i));
@@ -291,11 +329,17 @@ public class BoardController implements Subscriber {
         p2 = new Pane[]{p2_hand1, p2_hand2, p2_hand3, p2_hand4, p2_hand5};
         p1_hand_mana = new Label[]{p1_hand1_mana, p1_hand2_mana, p1_hand3_mana, p1_hand4_mana, p1_hand5_mana};
         p2_hand_mana = new Label[]{p2_hand1_mana, p2_hand2_mana, p2_hand3_mana, p2_hand4_mana, p2_hand5_mana};
-        p = new Pane[][]{p1, p2};
+
         p_hand_mana = new Label[][]{p1_hand_mana, p2_hand_mana};
+        p1_board_lv = new Label[]{p1_board1_lv, p1_board2_lv, p1_board3_lv, p1_board4_lv, p1_board5_lv};
+        p2_board_lv = new Label[]{p2_board1_lv, p2_board2_lv, p2_board3_lv, p2_board4_lv, p2_board5_lv};
+        p_board_lv = new Label[][]{p1_board_lv, p2_board_lv};
+        p = new Pane[][]{p1, p2};
         p1b = new Pane[]{p1_board1, p1_board2, p1_board3, p1_board4, p1_board5};
         p2b = new Pane[]{p2_board1, p2_board2, p2_board3, p2_board4, p2_board5};
         pb = new Pane[][]{p1b, p2b};
+
+
         Random rand = new Random();
         next_phase.setOnMousePressed((event -> {
             Phase nextPhase = null;
