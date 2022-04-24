@@ -1,6 +1,8 @@
 package com.aetherwars;
 
 
+import java.io.IOException;
+
 import com.aetherwars.core.DisplayManager;
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.OnGameStart;
@@ -24,7 +26,7 @@ public class AetherWars extends Application {
 
             manager.sendEvent(new OnGameStart(this));
             manager.sendEvent(new OnPhaseChange(this, Phase.DRAW));
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("bruh? " + e);
         }
 

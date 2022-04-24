@@ -14,8 +14,8 @@ public class Publisher {
     }
 
     public void sendEvent(Event evt) {
-        for (Subscriber s: subscribers) {
-            s.receiveEvent(evt);
+        for (int i = 0; i < subscribers.size(); i++) {
+            subscribers.get(i).receiveEvent(evt);
         }
     }
 }

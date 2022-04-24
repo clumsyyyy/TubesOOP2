@@ -180,6 +180,7 @@ public class SpawnedCard extends CharacterCard {
         return res;
     }
 
+    @Override
     protected String ingfo() {
         boolean swap = hasSwapEffect();
         double hpBuff = swap ? getAtkBuff() : getHpBuff();
@@ -196,11 +197,11 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public String toString() {
-        return super.toString() + ingfo();
+        return super.toString();
     }
 
     public String getInfo() {
-        return super.getInfo() + ingfo();
+        return super.getInfo();
     }
 
     @Override

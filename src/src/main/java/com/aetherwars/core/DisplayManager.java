@@ -5,6 +5,7 @@ import com.aetherwars.events.OnPhaseChange;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Subscriber;
 import com.aetherwars.models.Phase;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 public class DisplayManager implements Subscriber {
     private static DisplayManager ins = null;
+    public static final String FXML_PATH = "/com/aetherwars/gui/";
     private Stage stage;
     private Map<String, Scene> sceneMap = new HashMap<>();
     private static DropShadow cardShadow;
@@ -38,7 +40,7 @@ public class DisplayManager implements Subscriber {
 
         this.stage = stage;
         stage.setTitle("Minecraft: Aether Wars");
-        addDisplay("main.board", "Board.fxml");
+        addDisplay("main.board", "Game.fxml");
         addDisplay("panel.discard", "DiscardPanel.fxml");
         addDisplay("panel.draw", "DrawPanel.fxml");
         showDisplay("main.board");
@@ -54,10 +56,17 @@ public class DisplayManager implements Subscriber {
     }
 
     public void addDisplay(String displayName, String fileName) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/aetherwars/gui/" + fileName));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(FXML_PATH + fileName));
         Parent root = loader.load();
         Scene scene = new Scene(root, 1280, 720);
         sceneMap.put(displayName, scene);
+    }
+
+    public static void loadGui(String fileName, Object root, Object controller) throws IOException {
+        FXMLLoader loader = new FXMLLoader(DisplayManager.class.getResource(FXML_PATH + fileName));
+        loader.setRoot(root);
+        loader.setController(controller);
+        loader.load();
     }
 
     public void showDisplay(String displayName) {
