@@ -1,15 +1,12 @@
 package com.aetherwars.models.cards;
 
 import com.aetherwars.core.GameManager;
-import com.aetherwars.interfaces.Informable;
-import com.aetherwars.interfaces.Observable;
 import com.aetherwars.models.Type;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 // Using adapter with Character Card
-public class SpawnedCard extends CharacterCard implements Observable, Informable {
+public class SpawnedCard extends CharacterCard {
     private final ArrayList<SpellCard> activeSpells;
     private int level;
     private int exp;

@@ -1,13 +1,11 @@
 package com.aetherwars.models.cards;
 
-import com.aetherwars.interfaces.Informable;
-import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
 /**
  * Implementatino for the spell card class
  */
-public class SpellCard extends Card implements Prototype<Card>, Informable {
+public class SpellCard extends Card {
     protected int init_duration; // Permanent = 0 / Temporary = depends on dasta
     protected int current_duration;
 

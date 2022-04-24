@@ -142,7 +142,7 @@ public class Board implements Observer<Card>, Subscriber {
                     case SPELL:
                         // Prereq: player has enough mana
                         SpellCard sc = (SpellCard) p.getHand().getCard(ec.getFromCardIdx());
-                        p.getHand().unregister(sc);
+                        p.getHand().unregister(ec.getFromCardIdx());
                         p.setMana(p.getMana() - sc.getRequiredMana());
                         Player target = gm.getPlayer(ec.getToPlayerIdx());
                         Board tgt_b = target.getBoard();
@@ -163,6 +163,8 @@ public class Board implements Observer<Card>, Subscriber {
                                     ec.getToCardIdx()
                                 );
                                 break;
+                            default:
+                                break;
                         }
                         break;
                 }
@@ -170,6 +172,8 @@ public class Board implements Observer<Card>, Subscriber {
                 switch (((OnPhaseChange) evt).getPhase()) {
                     case DRAW:
                         notifyObjects();
+                        break;
+                    default:
                         break;
                 }
             }

@@ -1,7 +1,5 @@
 package com.aetherwars.interfaces;
 
-import com.aetherwars.interfaces.Observable;
-
 public interface Observer<T extends Observable> {
     void register(T obj, int index);
     void register(T obj);

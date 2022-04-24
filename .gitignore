@@ -48,6 +48,7 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/java,gradle
 
 .idea
+.vscode
 bin/
 
 # owen's runner

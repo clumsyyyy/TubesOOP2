@@ -12,7 +12,6 @@ import com.aetherwars.models.Phase;
 import com.aetherwars.models.cards.Card;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 

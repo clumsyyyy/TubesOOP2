@@ -64,7 +64,7 @@ public class PlayerTest {
 
     @Test
     public void test_d_playerAttack() {
-        GameManager gm = GameManager.getInstance();
+        //GameManager gm = GameManager.getInstance();
         //gm.sendEvent(new OnCardAction(this, 2, -1, CardAction.ATTACK));
     }
 }

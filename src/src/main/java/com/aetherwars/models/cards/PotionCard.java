@@ -1,13 +1,12 @@
 package com.aetherwars.models.cards;
 
-import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
 /**
  * Implementation for PotionCard class
  * extens SpellCard class
  */
-public class PotionCard extends SpellCard implements Prototype<Card> {
+public class PotionCard extends SpellCard {
     private double atk_value = 0;
     private double hp_value = 0;
 

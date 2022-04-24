@@ -1,8 +1,5 @@
 package com.aetherwars.models.cards;
 
-import com.aetherwars.core.GameManager;
-import com.aetherwars.interfaces.Informable;
-import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
 /**
@@ -11,7 +8,7 @@ import com.aetherwars.models.Type;
  * to be used whenever reset
  * Leveling up and using potion will update the atk/hp value
  */
-public class CharacterCard extends Card implements Prototype<Card>, Informable {
+public class CharacterCard extends Card {
     protected double base_atk;
     protected double base_hp;
     protected double atk;

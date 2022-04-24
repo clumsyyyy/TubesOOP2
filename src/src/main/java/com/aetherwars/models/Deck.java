@@ -3,17 +3,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.aetherwars.core.GameManager;
 import com.aetherwars.events.OnDrawCard;
-import com.aetherwars.events.OnPhaseChange;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Subscriber;
-import com.aetherwars.models.Phase;
 import com.aetherwars.models.cards.Card;
 
 public class Deck implements Subscriber {
-    private final int MIN_CAP = 40;
-    private final int MAX_CAP = 60;
     private ArrayList<Card> cards;
 
     public Deck() {

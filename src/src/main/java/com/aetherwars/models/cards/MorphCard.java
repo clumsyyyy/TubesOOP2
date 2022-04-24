@@ -1,12 +1,10 @@
 package com.aetherwars.models.cards;
 
 
-
-import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
 
-public class MorphCard extends SpellCard implements Prototype<Card> {
+public class MorphCard extends SpellCard {
     private int target_id = 0;
 
     public MorphCard(int id, String name, String description, String image_path, int mana, int target_id){

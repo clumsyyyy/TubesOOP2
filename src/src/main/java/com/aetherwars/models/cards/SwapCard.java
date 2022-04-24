@@ -1,12 +1,11 @@
 package com.aetherwars.models.cards;
 
-import com.aetherwars.interfaces.Prototype;
 import com.aetherwars.models.Type;
 
 /**
  * Implementation for the swap card class
  */
-public class SwapCard extends SpellCard implements Prototype<Card> {
+public class SwapCard extends SpellCard {
     public SwapCard(
         int id,
         String name,

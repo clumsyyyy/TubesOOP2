@@ -21,13 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.zip.DataFormatException;
 
 public class BoardController implements Subscriber {
     public SplitPane board;
@@ -129,7 +123,6 @@ public class BoardController implements Subscriber {
                 if (isHand){
                     DisplayManager.cardHoverFX(p[player_idx][card_idx]);
                     DisplayManager.cardLabelHoverFX(p_hand_mana[player_idx][card_idx]);
-
                 } else {
                     DisplayManager.cardHoverFX(pb[player_idx][card_idx]);
                     DisplayManager.cardLabelHoverFX(p_board_lv[player_idx][card_idx]);
@@ -141,13 +134,19 @@ public class BoardController implements Subscriber {
 
     public EventHandler<? super MouseEvent> OnHoverExitCard(int player_idx, int card_idx, boolean isHand) {
         return (event -> {
-            if (isHand) {
-                DisplayManager.cardExitFX(p[player_idx][card_idx]);
-                DisplayManager.cardLabelExitFX(p_hand_mana[player_idx][card_idx]);
-
-            } else {
-                DisplayManager.cardExitFX(pb[player_idx][card_idx]);
-                DisplayManager.cardLabelExitFX(p_board_lv[player_idx][card_idx]);
+            Card c;
+            if (isHand)
+                c = players[player_idx].getHand().getCard(card_idx);
+            else
+                c = players[player_idx].getBoard().getCard(card_idx);
+            if (c != null) {
+                if (isHand) {
+                    DisplayManager.cardExitFX(p[player_idx][card_idx]);
+                    DisplayManager.cardLabelExitFX(p_hand_mana[player_idx][card_idx]);
+                } else {
+                    DisplayManager.cardExitFX(pb[player_idx][card_idx]);
+                    DisplayManager.cardLabelExitFX(p_board_lv[player_idx][card_idx]);
+                }
             }
             toggleCharacterInfo(false);
         });
@@ -199,17 +198,19 @@ public class BoardController implements Subscriber {
                 );
                 if (
                     // make sure it's plan
-                        (gm.getPhase() == Phase.PLAN &&
-                                ( // and check if it's character usage or spell card usage
-                                        (c == null && player_idx == gm.getCurrentPlayerIdx()) ||
-                                                (c != null && cfrom instanceof SpellCard)
-                                )
-                                // and make sure players from have enough mana to use card
-                                && fromPlayer.getMana() >= cfrom.getRequiredMana()) ||
-                                // ... or if it's attack and coming from another player which card is exist
-                                (gm.getPhase() == Phase.ATTACK &&
-                                        player_idx != gm.getCurrentPlayerIdx() &&
-                                        c != null)
+                    (gm.getPhase() == Phase.PLAN &&
+                            ( // and check if it's character usage or spell card usage
+                                (c == null && player_idx == gm.getCurrentPlayerIdx()
+                                        && !(cfrom instanceof SpellCard)) ||
+                                (c != null && cfrom instanceof SpellCard)
+                            )
+                            // and make sure players from have enough mana to use card
+                            && fromPlayer.getMana() >= cfrom.getRequiredMana()
+                    ) ||
+                    // ... or if it's attack and coming from another player which card is exist
+                    (gm.getPhase() == Phase.ATTACK &&
+                            player_idx != gm.getCurrentPlayerIdx() &&
+                            c != null)
                 )
                     event.acceptTransferModes(TransferMode.MOVE);
             }
@@ -279,11 +280,9 @@ public class BoardController implements Subscriber {
                     p[k][i].setBackground(null);
                     p_hand_mana[k][i].setText(" [" + (i + 1) + "] EMPTY");
                 }
-                if (firstInit || (b[k].getCard(i) != null)) {
-                    if (b[k].getCard(i) != null) {
-                        p[k][i].setOnMouseEntered(OnHoverCard(k, i, true));
-                        p[k][i].setOnMouseExited(OnHoverExitCard(k, i, true));
-                    }
+                if (firstInit) {
+                    p[k][i].setOnMouseEntered(OnHoverCard(k, i, true));
+                    p[k][i].setOnMouseExited(OnHoverExitCard(k, i, true));
                     p[k][i].setOnDragDetected(OnDragCardPlanHand(k, i));
                 }
             }
@@ -297,11 +296,9 @@ public class BoardController implements Subscriber {
                 } else {
                     pb[k-2][i].setBackground(null);
                 }
-                if (firstInit || (b[k].getCard(i) != null)) {
-                    if (b[k].getCard(i) != null){
-                        pb[k-2][i].setOnMouseEntered(OnHoverCard(k-2, i, false));
-                        pb[k-2][i].setOnMouseExited(OnHoverExitCard(k-2, i, false));
-                    }
+                if (firstInit) {
+                    pb[k-2][i].setOnMouseEntered(OnHoverCard(k-2, i, false));
+                    pb[k-2][i].setOnMouseExited(OnHoverExitCard(k-2, i, false));
                     pb[k-2][i].setOnDragOver(OnDragAcceptCardBoard(k-2, i));
                     pb[k-2][i].setOnDragDropped(OnDragEndCardBoard(k-2, i));
                     pb[k-2][i].setOnDragDetected(OnDragCardAttackBoard(k-2, i));

@@ -7,10 +7,7 @@ import com.aetherwars.events.OnGameStart;
 import com.aetherwars.events.OnPhaseChange;
 import javafx.application.Application;
 
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.fxml.FXMLLoader;
 
 import com.aetherwars.models.*;
 

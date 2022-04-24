@@ -84,6 +84,8 @@ public class Player extends Publisher implements Subscriber {
                         sendEvent(evt);
                     }
                     break;
+                default:
+                    break;
             }
         } else if (
             evt instanceof OnCardAction ||

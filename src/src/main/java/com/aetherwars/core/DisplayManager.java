@@ -1,7 +1,6 @@
 package com.aetherwars.core;
 
 import com.aetherwars.events.OnDrawCard;
-import com.aetherwars.events.OnGameStart;
 import com.aetherwars.events.OnPhaseChange;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Subscriber;
@@ -23,7 +22,6 @@ import java.util.Map;
 public class DisplayManager implements Subscriber {
     private static DisplayManager ins = null;
     private Stage stage;
-    private Scene curScene;
     private Map<String, Scene> sceneMap = new HashMap<>();
     private static DropShadow cardShadow;
     static final BackgroundSize bgSize = new BackgroundSize(
@@ -82,6 +80,8 @@ public class DisplayManager implements Subscriber {
             switch (((OnPhaseChange) evt).getPhase()) {
                 case DRAW:
                     this.showDisplay("panel.draw");
+                    break;
+                default:
                     break;
             }
         } else if (evt instanceof OnDrawCard) {
