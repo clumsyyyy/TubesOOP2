@@ -27,7 +27,8 @@ public class AetherWars extends Application {
             manager.sendEvent(new OnGameStart(this));
             manager.sendEvent(new OnPhaseChange(this, Phase.DRAW));
         } catch (IOException e) {
-            System.out.println("bruh? " + e);
+            System.out.println("bruh? ");
+            e.printStackTrace();
         }
 
     }

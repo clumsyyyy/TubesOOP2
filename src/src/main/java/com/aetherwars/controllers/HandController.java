@@ -15,7 +15,7 @@ public class HandController  {
     @FXML public Pane hand5;
     public Pane[] hands;
 
-    public HandController(GridPane root, int index){
+    public HandController(FlowPane root, int index){
         try {
             DisplayManager.loadGui("Hand.fxml", root, this);
         } catch (IOException e) {

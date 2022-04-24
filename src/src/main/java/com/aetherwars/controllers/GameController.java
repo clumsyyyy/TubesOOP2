@@ -9,10 +9,10 @@ import javafx.scene.layout.*;
 
 public class GameController implements Subscriber {
     public SplitPane board;
-    public GridPane p1_hand;
-    public GridPane p2_hand;
-    public GridPane p1_board;
-    public GridPane p2_board;
+    public FlowPane p1_hand;
+    public FlowPane p2_hand;
+    public FlowPane p1_board;
+    public FlowPane p2_board;
     public HBox panel_phase;
 
     public GameController () {

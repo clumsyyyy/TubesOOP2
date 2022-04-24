@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -5,13 +8,13 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root type="GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="296.0" prefWidth="600.0" type="FlowPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Pane fx:id="board1" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board2" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board3" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board4" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board5" prefHeight="148.0" prefWidth="106.0" style="-fx-border-color: black;" />
+        <Pane fx:id="board1" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
+        <Pane fx:id="board2" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
+        <Pane fx:id="board3" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
+        <Pane fx:id="board4" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
+        <Pane fx:id="board5" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
         <Pane fx:id="player" />
     </children>
 </fx:root>

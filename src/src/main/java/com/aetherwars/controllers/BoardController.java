@@ -21,7 +21,7 @@ public class BoardController {
     public Pane[] boards;
     public Pane player;
 
-    public BoardController(GridPane root, int index) {
+    public BoardController(FlowPane root, int index) {
         try {
             DisplayManager.loadGui("Board.fxml", root, this);
         } catch (IOException e) {
