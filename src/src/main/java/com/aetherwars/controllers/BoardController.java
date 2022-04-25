@@ -19,7 +19,8 @@ public class BoardController {
     @FXML
     public Pane board5;
     public Pane[] boards;
-    public Pane player;
+    @FXML
+    public FlowPane player;
 
     public BoardController(FlowPane root, int index) {
         try {

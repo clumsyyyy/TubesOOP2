@@ -8,17 +8,21 @@ import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Subscriber;
 import com.aetherwars.models.Player;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.FlowPane;
 
 public class PlayerController implements Subscriber {
+    @FXML
     public Label mana;
+    @FXML
     public Label name;
+    @FXML
     public Label hp;
 
     public Player player;
 
-    public PlayerController (Pane root, int index) {
+    public PlayerController (FlowPane root, int index) {
         GameManager gm = GameManager.getInstance();
         gm.addSubscriber(this);
         player = gm.getPlayer(index);

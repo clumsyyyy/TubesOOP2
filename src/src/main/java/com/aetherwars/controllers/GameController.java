@@ -14,6 +14,7 @@ public class GameController implements Subscriber {
     public FlowPane p1_board;
     public FlowPane p2_board;
     public HBox panel_phase;
+    public AnchorPane info;
 
     public GameController () {
         GameManager.getInstance().addSubscriber(this);
@@ -26,6 +27,7 @@ public class GameController implements Subscriber {
         new BoardController(p2_board, 1);
         new HandController(p1_hand, 0);
         new HandController(p2_hand, 1);
+        new InfoController(info);
     }
 
     @Override

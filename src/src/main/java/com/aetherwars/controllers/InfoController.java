@@ -1,5 +1,8 @@
 package com.aetherwars.controllers;
 
+import java.io.IOException;
+
+import com.aetherwars.core.DisplayManager;
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.OnCardHovered;
 import com.aetherwars.interfaces.Event;
@@ -9,6 +12,7 @@ import com.aetherwars.models.cards.Card;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 public class InfoController implements Subscriber {
     @FXML
@@ -20,8 +24,13 @@ public class InfoController implements Subscriber {
     @FXML
     public ImageView c_img;
 
-    public InfoController() {
+    public InfoController(AnchorPane root) {
         GameManager.getInstance().addSubscriber(this);
+        try {
+            DisplayManager.loadGui("Info.fxml", root, this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void toggleCharacterInfo(boolean state) {
