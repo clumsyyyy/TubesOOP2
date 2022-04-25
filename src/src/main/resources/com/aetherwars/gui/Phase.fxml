@@ -11,7 +11,7 @@
     <children>
         <Label fx:id="draw_phase" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #8aceed;" text="Draw" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
             <font>
-            <Font name="Eras Light ITC" size="20.0" />
+            <Font name="Eras Demi ITC" size="20.0" />
             </font>
         </Label>
         <Label fx:id="planning_phase" alignment="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #fad37a;" text="Plan">
@@ -31,7 +31,7 @@
         </Label>
         <Button fx:id="next_phase" mnemonicParsing="false" onAction="#nextPhase" prefHeight="32.0" prefWidth="200.0" text="Next Phase &gt;&gt;">
          <font>
-            <Font name="Eras Bold ITC" size="15.0" />
+            <Font name="Eras Demi ITC" size="14.0" />
          </font></Button>
     </children>
 </fx:root>

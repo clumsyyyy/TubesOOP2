@@ -121,8 +121,8 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public void levelUp(){
-        this.exp = 0;
         if (this.level < 10) {
+            this.exp = 0;
             this.atk += this.atk_up;
             this.hp += this.hp_up;
             this.level++;
@@ -130,8 +130,11 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public void levelDown(){
-        this.exp = 0;
-        this.level--;
+        if (this.level > 1){
+            this.exp = 0;
+            this.level--;
+        }
+
     }
 
     public void addSpell(SpellCard sc) {

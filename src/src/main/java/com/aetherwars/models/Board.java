@@ -87,9 +87,10 @@ public class Board implements Observer<Card>, Subscriber {
         Card card_att = cards[evt.getFromCardIdx()];
         if (card_att instanceof SpawnedCard) {
             SpawnedCard sc_att = (SpawnedCard) card_att;
-            if (evt.getToCardIdx() == -1) {
+            if (evt.getToCardIdx() == -1 && sc_att.canAttack()) {
                 // attack character directly
                 sc_att.atk(null);
+                sc_att.toggleAttack();
             } else {
                 GameManager gm = GameManager.getInstance();
                 // use attack function on CharacterCard
@@ -129,6 +130,7 @@ public class Board implements Observer<Card>, Subscriber {
                 OnCardAction ec = (OnCardAction) evt;
                 Player p = gm.getCurrentPlayer();
                 switch (ec.getAction()) {
+                    case CHAR_ATTACK:
                     case ATTACK:
                         attack(ec);
                         break;
@@ -174,6 +176,10 @@ public class Board implements Observer<Card>, Subscriber {
                                 break;
                         }
                         break;
+                    // case CHAR_ATTACK:
+                    //     SpawnedCard spawned = (SpawnedCard) p.getBoard().getCard(ec.getFromCardIdx());
+                    //     gm.getOpponentPlayer().takeDamage(spawned.getATK());
+                    //     break;
                 }
             } else if (evt instanceof OnPhaseChange) {
                 switch (((OnPhaseChange) evt).getPhase()) {
