@@ -77,12 +77,14 @@ public class GameManager extends Publisher implements Subscriber {
                 new Player("Alex",
                         new Board(BoardType.BOARD),
                         new Board(BoardType.HAND),
-                        decks[0]
+                        decks[0],
+                        "card/image/character/player1.png"
                 ),
                 new Player("Steve",
                         new Board(BoardType.BOARD),
                         new Board(BoardType.HAND),
-                        decks[1]
+                        decks[1],
+                        "card/image/character/player2.png"
                 )
         };
         addSubscriber(ins.players[0]);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -7,11 +8,30 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root prefHeight="73.0" prefWidth="550.0" type="FlowPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="111.0" prefWidth="550.0" style="-fx-border-radius: 10; -fx-border-color: #c2c2c2;" type="FlowPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="name" layoutX="566.0" layoutY="260.0" prefHeight="21.0" prefWidth="243.0" text="Player Name" />
-        <Label fx:id="mana" alignment="TOP_RIGHT" layoutX="14.0" layoutY="260.0" text="Mana: " textAlignment="RIGHT" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff7e" height="31.0" layoutX="133.0" layoutY="283.0" stroke="BLACK" strokeType="INSIDE" width="527.0" />
-        <Label fx:id="hp" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="14.0" layoutY="288.0" prefHeight="21.0" prefWidth="510.0" text="  HP XXXX/ 80" />
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="440.0" style="-fx-border-radius: 20;">
+         <children>
+            <ProgressBar fx:id="healthbar" layoutX="4.0" layoutY="34.0" prefHeight="40.0" prefWidth="430.0" progress="1.0" style="-fx-accent: #03fc6f;" />
+              <Label fx:id="name" layoutX="193.0" layoutY="-1.0" prefHeight="31.0" prefWidth="61.0" text="Steve">
+               <font>
+                  <Font name="Eras Demi ITC" size="22.0" />
+               </font>
+            </Label>
+              <Label fx:id="mana" alignment="TOP_LEFT" layoutX="14.0" layoutY="73.0" prefHeight="21.0" prefWidth="84.0" text="Mana: ">
+               <font>
+                  <Font name="Eras Light ITC" size="18.0" />
+               </font></Label>
+              <Label fx:id="hp" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="307.0" layoutY="73.0" prefHeight="21.0" prefWidth="133.0" text="  HP XX.XX/ 80">
+               <font>
+                  <Font name="Eras Medium ITC" size="18.0" />
+               </font></Label>
+            <Label fx:id="turn" alignment="TOP_RIGHT" layoutX="185.0" layoutY="73.0" text="Turn:" textAlignment="RIGHT">
+               <font>
+                  <Font name="Eras Light ITC" size="18.0" />
+               </font></Label>
+         </children>
+      </Pane>
+      <Pane fx:id="avatar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" style="-fx-border-radius: 10;" />
     </children>
 </fx:root>

@@ -26,7 +26,8 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
-
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 public class CardController implements Subscriber {
     @FXML
     private Pane card;
@@ -85,7 +86,7 @@ public class CardController implements Subscriber {
         else
             c = player.getBoard().getCard(card_idx);
         if (c != null) {
-            DisplayManager.cardExitFX(card);
+            DisplayManager.cardExitFX(card, is_hand);
             DisplayManager.cardLabelExitFX(card_label);
         }
     });
@@ -192,20 +193,34 @@ public class CardController implements Subscriber {
             } else {
                 card.setBackground(null);
                 card_label.setText(" [" + (card_idx + 1) + "] EMPTY");
+                card.setEffect(null);
             }
         } else {
             Card c = player.getBoard().getCard(card_idx);
+            GameManager gm = GameManager.getInstance();
+
             if (c != null) {
                 card.setBackground(DisplayManager.getImage(c.getImagePath()));
                 if (c instanceof SpawnedCard){
                     SpawnedCard temp = (SpawnedCard)c;
                     card_label.setText("LV: " + temp.getLevel() + " / EXP: " + temp.getExp());
+                    DropShadow cardShadow = new DropShadow();
+                    if (temp.canAttack())
+                        cardShadow.setColor(Color.web("#03fc6f"));
+                    else
+                        cardShadow.setColor(Color.web("#fa7a7a"));
+                    card.setEffect(cardShadow);
                 } else {
                     card_label.setText("SPELL");
                 }
             } else {
                 card.setBackground(null);
                 card_label.setText("EMPTY");
+                card.setEffect(null);
+            }
+
+            if (gm.getCurrentPlayer() != player){
+                card.setEffect(null);
             }
         }
     }

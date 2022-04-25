@@ -11,24 +11,27 @@
     <children>
         <Label fx:id="draw_phase" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #8aceed;" text="Draw" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
             <font>
-            <Font size="14.0" />
+            <Font name="Eras Light ITC" size="20.0" />
             </font>
         </Label>
         <Label fx:id="planning_phase" alignment="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #fad37a;" text="Plan">
             <font>
-            <Font size="14.0" />
+            <Font name="Eras Medium ITC" size="20.0" />
             </font>
         </Label>
         <Label fx:id="attack_phase" alignment="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #fa7a7a;" text="Attack">
             <font>
-            <Font size="14.0" />
+            <Font name="Eras Medium ITC" size="20.0" />
             </font>
         </Label>
         <Label fx:id="end_phase" alignment="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #e0acf2;" text="End">
             <font>
-            <Font size="14.0" />
+            <Font name="Eras Medium ITC" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="next_phase" onAction="#nextPhase" mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" text="Next Phase &gt;&gt;" />
+        <Button fx:id="next_phase" mnemonicParsing="false" onAction="#nextPhase" prefHeight="32.0" prefWidth="200.0" text="Next Phase &gt;&gt;">
+         <font>
+            <Font name="Eras Bold ITC" size="15.0" />
+         </font></Button>
     </children>
 </fx:root>

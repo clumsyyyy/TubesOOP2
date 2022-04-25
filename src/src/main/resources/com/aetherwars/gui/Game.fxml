@@ -18,7 +18,7 @@
 
 <SplitPane fx:id="board" dividerPositions="0.19874804381846636" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.GameController">
   <items>
-    <AnchorPane fx:id="info" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="230.0">
+    <AnchorPane fx:id="info" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="230.0" style="-fx-background-color: #c4c4c4;">
    </AnchorPane>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1020.0" prefWidth="1020.0">
          <children>
@@ -32,29 +32,23 @@
                                  <children>
                                     <SplitPane fx:id="p1_side" dividerPositions="0.36941410129096325" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="1020.0">
                                       <items>
-                                          <FlowPane fx:id="p1_hand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="450.0">
+                                          <FlowPane fx:id="p1_hand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="400.0" style="-fx-background-color: white;">
                                              <padding>
                                                 <Insets left="10.0" />
                                              </padding></FlowPane>
-                                          <FlowPane fx:id="p1_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="550.0">
-                                             <padding>
-                                                <Insets left="50.0" top="10.0" />
-                                             </padding></FlowPane>
+                                          <FlowPane fx:id="p1_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0" style="-fx-background-color: white;" />
                                       </items>
                                     </SplitPane>
                                     <SplitPane fx:id="p2_side" dividerPositions="0.5" layoutY="333.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="1020.0">
                                        <items>
-                                          <FlowPane fx:id="p2_hand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="450.0">
+                                          <FlowPane fx:id="p2_hand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="400.0" style="-fx-background-color: white;">
                                              <opaqueInsets>
                                                 <Insets />
                                              </opaqueInsets>
                                              <padding>
                                                 <Insets left="10.0" />
                                              </padding></FlowPane>
-                                          <FlowPane fx:id="p2_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="550.0">
-                                             <padding>
-                                                <Insets left="50.0" top="10.0" />
-                                             </padding></FlowPane>   
+                                          <FlowPane fx:id="p2_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0" style="-fx-background-color: white;" />   
                                        </items>
                                     </SplitPane>
                                  </children>
@@ -64,7 +58,7 @@
                      </children></AnchorPane>
               </items>
             </SplitPane>
-            <HBox fx:id="panel_phase" layoutX="10.0" layoutY="676.0" prefHeight="31.0" prefWidth="1018.0" />
+            <HBox fx:id="panel_phase" layoutX="8.0" layoutY="668.0" prefHeight="31.0" prefWidth="1018.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>

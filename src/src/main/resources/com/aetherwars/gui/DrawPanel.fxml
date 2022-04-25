@@ -9,29 +9,29 @@
    <children>
       <Label fx:id="player_label" layoutX="391.0" layoutY="51.0" text="&lt;NAME&gt;, it's your turn to draw!">
          <font>
-            <Font size="36.0" />
+            <Font name="Eras Bold ITC" size="36.0" />
          </font>
       </Label>
-      <Pane fx:id="draw_1" layoutX="222.0" layoutY="143.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
+      <Pane fx:id="draw_1" layoutX="222.0" layoutY="143.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: #c2c2c2; -fx-border-radius: 10;">
          <children>
-            <Label fx:id="draw1_mana" layoutY="266.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
+            <Label fx:id="draw1_mana" alignment="CENTER" layoutY="239.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #c2c2c2;" text=" MANA:" textAlignment="CENTER">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
          </children></Pane>
-      <Pane fx:id="draw_3" layoutX="846.0" layoutY="142.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
+      <Pane fx:id="draw_3" layoutX="856.0" layoutY="143.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: #c2c2c2; -fx-border-radius: 10;">
          <children>
-            <Label fx:id="draw3_mana" layoutY="269.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
+            <Label fx:id="draw3_mana" alignment="CENTER" layoutY="239.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #c2c2c2;" text=" MANA:">
                <font>
                   <Font size="21.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="draw_2" layoutX="540.0" layoutY="143.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: black;">
+      <Pane fx:id="draw_2" layoutX="540.0" layoutY="143.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: #c2c2c2; -fx-border-radius: 10;">
          <children>
-            <Label fx:id="draw2_mana" layoutY="269.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #8aceed; -fx-border-color: black;" text=" MANA:">
+            <Label fx:id="draw2_mana" alignment="CENTER" layoutY="239.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #c2c2c2;" text=" MANA:">
                <font>
                   <Font size="21.0" />
                </font>
@@ -40,11 +40,11 @@
       </Pane>
       <Label fx:id="draw1_name" layoutX="222.0" layoutY="451.0" prefHeight="43.0" prefWidth="212.0" text="draw1_name">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="Eras Demi ITC" size="20.0" />
          </font></Label>
       <Label fx:id="draw2_name" layoutX="540.0" layoutY="451.0" prefHeight="43.0" prefWidth="212.0" text="draw2_name">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="Eras Demi ITC" size="20.0" />
          </font>
       </Label>
       <Label fx:id="draw3_name" layoutX="846.0" layoutY="451.0" prefHeight="43.0" prefWidth="212.0" text="draw3_name">
@@ -52,11 +52,26 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="draw1_info" layoutX="222.0" layoutY="494.0" prefHeight="82.0" prefWidth="212.0" text="draw1_info" wrapText="true" />
-      <Label fx:id="draw2_info" layoutX="540.0" layoutY="494.0" prefHeight="82.0" prefWidth="212.0" text="draw2_info" wrapText="true" />
-      <Label fx:id="draw3_info" layoutX="846.0" layoutY="494.0" prefHeight="82.0" prefWidth="212.0" text="draw3_info" wrapText="true" />
-      <Label fx:id="draw1_desc" layoutX="222.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw1_desc" wrapText="true" />
-      <Label fx:id="draw2_desc" layoutX="534.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw2_desc" wrapText="true" />
-      <Label fx:id="draw3_desc" layoutX="846.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw3_desc" wrapText="true" />
+      <Label fx:id="draw1_info" layoutX="222.0" layoutY="494.0" prefHeight="96.0" prefWidth="212.0" text="draw1_info" wrapText="true">
+         <font>
+            <Font name="Eras Light ITC" size="15.0" />
+         </font></Label>
+      <Label fx:id="draw2_info" layoutX="540.0" layoutY="494.0" prefHeight="96.0" prefWidth="212.0" text="draw2_info" wrapText="true">
+         <font>
+            <Font name="Eras Light ITC" size="15.0" />
+         </font></Label>
+      <Label fx:id="draw3_info" layoutX="846.0" layoutY="494.0" prefHeight="96.0" prefWidth="212.0" text="draw3_info" wrapText="true" />
+      <Label fx:id="draw1_desc" layoutX="222.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw1_desc" wrapText="true">
+         <font>
+            <Font name="Eras Light ITC" size="16.0" />
+         </font></Label>
+      <Label fx:id="draw2_desc" layoutX="534.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw2_desc" wrapText="true">
+         <font>
+            <Font name="Eras Light ITC" size="16.0" />
+         </font></Label>
+      <Label fx:id="draw3_desc" layoutX="846.0" layoutY="591.0" prefHeight="108.0" prefWidth="212.0" text="draw3_desc" wrapText="true">
+         <font>
+            <Font name="Eras Light ITC" size="15.0" />
+         </font></Label>
    </children>
 </AnchorPane>

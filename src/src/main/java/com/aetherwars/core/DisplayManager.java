@@ -34,12 +34,11 @@ public class DisplayManager implements Subscriber {
     public void init(Stage stage) throws IOException {
         cardShadow = new DropShadow();
         cardShadow.setRadius(20.0);
-        cardShadow.setColor(Color.color(0.5, 1, 1));
+        cardShadow.setColor(Color.web("#fad37a"));
 
         this.stage = stage;
         stage.setTitle("Minecraft: Aether Wars");
         addDisplay("main.board", "Game.fxml");
-        addDisplay("panel.discard", "DiscardPanel.fxml");
         addDisplay("panel.draw", "DrawPanel.fxml");
         showDisplay("main.board");
     }
@@ -103,10 +102,13 @@ public class DisplayManager implements Subscriber {
         card.setEffect(cardShadow);
     }
 
-    public static void cardExitFX(Pane card){
+    public static void cardExitFX(Pane card, boolean is_hand){
         card.setPrefHeight(card.getPrefHeight() - 5);
         card.setPrefWidth(card.getPrefWidth() - 5);
-        card.setEffect(null);
+        if (is_hand){
+            card.setEffect(null);
+        }
+
     }
 
     public static void cardLabelHoverFX(Label lb){
