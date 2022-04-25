@@ -15,6 +15,7 @@ import com.aetherwars.models.cards.Card;
 import com.aetherwars.models.cards.CharacterCard;
 import com.aetherwars.models.cards.SpawnedCard;
 import com.aetherwars.models.cards.SpellCard;
+import com.aetherwars.models.cards.LevelCard;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -114,6 +115,7 @@ public class CardController implements Subscriber {
             Card cfrom = fromPlayer.getHand().getCard(
                     Integer.parseInt(s[1])
             );
+
             if (
                 // make sure it's plan
                 (gm.getPhase() == Phase.PLAN &&
@@ -123,7 +125,10 @@ public class CardController implements Subscriber {
                             (c != null && cfrom instanceof SpellCard)
                         )
                         // and make sure players from have enough mana to use card
-                        && fromPlayer.getMana() >= cfrom.getRequiredMana()
+                        && fromPlayer.getMana() >=
+                         ((cfrom instanceof LevelCard) ? 
+                         ((LevelCard)cfrom).getRequiredMana(((SpawnedCard)c).getLevel()) : 
+                         cfrom.getRequiredMana())
                 ) ||
                 // ... or if it's attack and coming from another player which card is exist
                 (gm.getPhase() == Phase.ATTACK &&

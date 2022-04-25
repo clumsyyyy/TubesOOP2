@@ -129,6 +129,11 @@ public class SpawnedCard extends CharacterCard {
         }
     }
 
+    public void levelDown(){
+        this.exp = 0;
+        this.level--;
+    }
+
     public void addSpell(SpellCard sc) {
         if (sc instanceof SwapCard) {
             for (SpellCard s: activeSpells) {
