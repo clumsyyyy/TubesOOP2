@@ -176,10 +176,6 @@ public class Board implements Observer<Card>, Subscriber {
                                 break;
                         }
                         break;
-                    // case CHAR_ATTACK:
-                    //     SpawnedCard spawned = (SpawnedCard) p.getBoard().getCard(ec.getFromCardIdx());
-                    //     gm.getOpponentPlayer().takeDamage(spawned.getATK());
-                    //     break;
                 }
             } else if (evt instanceof OnPhaseChange) {
                 switch (((OnPhaseChange) evt).getPhase()) {

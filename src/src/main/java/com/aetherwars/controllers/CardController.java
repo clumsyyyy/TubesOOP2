@@ -72,6 +72,7 @@ public class CardController implements Subscriber {
         else
             c = player.getBoard().getCard(card_idx);
         GameManager.getInstance().sendEvent(new OnCardHovered(this, c));
+        update();
         if (c != null) {
             DisplayManager.cardHoverFX(card);
             DisplayManager.cardLabelHoverFX(card_label);
@@ -80,6 +81,7 @@ public class CardController implements Subscriber {
 
     public EventHandler<? super MouseEvent> OnHoverExitCard = (event -> {
         GameManager.getInstance().sendEvent(new OnCardHovered(this, null));
+        update();
         Card c;
         if (is_hand)
             c = player.getHand().getCard(card_idx);
@@ -227,6 +229,7 @@ public class CardController implements Subscriber {
 
     @Override
     public void receiveEvent(Event evt) {
-        update();
+        if (!(evt instanceof OnCardHovered))
+            update();
     }
 }
