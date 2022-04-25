@@ -18,46 +18,8 @@
 
 <SplitPane fx:id="board" dividerPositions="0.19874804381846636" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.GameController">
   <items>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="230.0">
-         <children>
-            <VBox alignment="CENTER" layoutX="18.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="693.0" prefWidth="200.0">
-               <children>
-                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" prefWidth="200.0" text="Card Stats">
-                    <content>
-                      <AnchorPane fx:id="cardstats_container" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="c_name" layoutX="8.0" layoutY="14.0" prefHeight="31.0" prefWidth="184.0">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="c_info" alignment="TOP_LEFT" layoutX="8.0" layoutY="57.0" prefHeight="167.0" prefWidth="181.0" wrapText="true" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="149.0" prefWidth="200.0" text="Card Info">
-                    <content>
-                      <AnchorPane fx:id="cardinfo_container" minHeight="0.0" minWidth="0.0" prefHeight="122.0" prefWidth="212.0">
-                           <children>
-                              <Label fx:id="c_desc" alignment="TOP_LEFT" layoutY="1.0" prefHeight="116.0" prefWidth="214.0" wrapText="true" />
-                              <Label fx:id="c_desc1" alignment="TOP_LEFT" layoutX="10.0" layoutY="8.0" prefHeight="102.0" prefWidth="176.0" wrapText="true" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-                  <TitledPane fx:id="cardphoto_container" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="274.0" prefWidth="200.0" text="Card Photo">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="212.0">
-                           <children>
-                              <ImageView fx:id="c_img" fitHeight="222.0" fitWidth="168.0" layoutX="15.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </TitledPane>
-               </children>
-            </VBox>
-         </children></AnchorPane>
+    <AnchorPane fx:id="info" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="230.0">
+   </AnchorPane>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1020.0" prefWidth="1020.0">
          <children>
             <SplitPane layoutX="-1.0" layoutY="2.0" maxHeight="660.0" maxWidth="1010.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1080.0">
