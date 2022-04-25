@@ -33,10 +33,8 @@ public class DisplayManager implements Subscriber {
 
     public void init(Stage stage) throws IOException {
         cardShadow = new DropShadow();
-        cardShadow.setRadius(10.0);
-        cardShadow.setOffsetX(6.0);
-        cardShadow.setOffsetY(6.0);
-        cardShadow.setColor(Color.color(0.3, 0.3, 0.3));
+        cardShadow.setRadius(20.0);
+        cardShadow.setColor(Color.color(0.5, 1, 1));
 
         this.stage = stage;
         stage.setTitle("Minecraft: Aether Wars");

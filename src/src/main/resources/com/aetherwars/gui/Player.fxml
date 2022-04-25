@@ -7,11 +7,11 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root type="FlowPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="73.0" prefWidth="550.0" type="FlowPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="name" text="Player Name" />
-        <Label fx:id="mana" text="Mana: " />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff7e" height="31.0" stroke="BLACK" strokeType="INSIDE" width="485.0" />
-        <Label fx:id="hp" text="HP XX / 80" />
+        <Label fx:id="name" layoutX="566.0" layoutY="260.0" prefHeight="21.0" prefWidth="243.0" text="Player Name" />
+        <Label fx:id="mana" alignment="TOP_RIGHT" layoutX="14.0" layoutY="260.0" text="Mana: " textAlignment="RIGHT" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#21ff7e" height="31.0" layoutX="133.0" layoutY="283.0" stroke="BLACK" strokeType="INSIDE" width="527.0" />
+        <Label fx:id="hp" alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="14.0" layoutY="288.0" prefHeight="21.0" prefWidth="510.0" text="  HP XXXX/ 80" />
     </children>
 </fx:root>

@@ -10,11 +10,32 @@
 
 <fx:root prefHeight="296.0" prefWidth="600.0" type="FlowPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Pane fx:id="board1" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board2" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board3" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board4" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
-        <Pane fx:id="board5" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;" />
-      <FlowPane fx:id="player" prefHeight="148.0" prefWidth="597.0" />
+        <Pane fx:id="board1" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <FlowPane.margin>
+            <Insets right="10.0" />
+         </FlowPane.margin></Pane>
+        <Pane fx:id="board2" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;">
+         <FlowPane.margin>
+            <Insets right="10.0" />
+         </FlowPane.margin></Pane>
+        <Pane fx:id="board3" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;">
+         <FlowPane.margin>
+            <Insets right="10.0" />
+         </FlowPane.margin></Pane>
+        <Pane fx:id="board4" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;">
+         <FlowPane.margin>
+            <Insets right="10.0" />
+         </FlowPane.margin></Pane>
+        <Pane fx:id="board5" prefHeight="140.0" prefWidth="100.0" style="-fx-border-color: black;">
+         <FlowPane.margin>
+            <Insets />
+         </FlowPane.margin></Pane>
+      <FlowPane fx:id="player" prefHeight="148.0" prefWidth="597.0">
+         <padding>
+            <Insets top="80.0" />
+         </padding></FlowPane>
     </children>
 </fx:root>

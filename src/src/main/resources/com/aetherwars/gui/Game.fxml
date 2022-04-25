@@ -34,11 +34,11 @@
                                       <items>
                                           <FlowPane fx:id="p1_hand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="450.0">
                                              <padding>
-                                                <Insets left="75.0" top="20.0" />
+                                                <Insets left="10.0" />
                                              </padding></FlowPane>
                                           <FlowPane fx:id="p1_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="550.0">
                                              <padding>
-                                                <Insets left="50.0" />
+                                                <Insets left="50.0" top="10.0" />
                                              </padding></FlowPane>
                                       </items>
                                     </SplitPane>
@@ -49,11 +49,11 @@
                                                 <Insets />
                                              </opaqueInsets>
                                              <padding>
-                                                <Insets left="75.0" top="20.0" />
+                                                <Insets left="10.0" />
                                              </padding></FlowPane>
                                           <FlowPane fx:id="p2_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="550.0">
                                              <padding>
-                                                <Insets left="50.0" />
+                                                <Insets left="50.0" top="10.0" />
                                              </padding></FlowPane>   
                                        </items>
                                     </SplitPane>
