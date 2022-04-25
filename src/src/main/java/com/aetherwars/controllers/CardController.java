@@ -150,8 +150,9 @@ public class CardController implements Subscriber {
             success = true;
             GameManager gm = GameManager.getInstance();
             if (gm.getPhase() == Phase.PLAN) {
-                Card cfrom = player.getHand().getCard(
-                        Integer.parseInt(db.getString().split(" ")[1])
+                String[] d = db.getString().split(" ");
+                Card cfrom = gm.getPlayer(Integer.parseInt(d[0])).getHand().getCard(
+                        Integer.parseInt(d[1])
                 );
                 if (cfrom instanceof CharacterCard) {
                     gm.sendEvent(
