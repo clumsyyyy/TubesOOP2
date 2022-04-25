@@ -87,9 +87,10 @@ public class Board implements Observer<Card>, Subscriber {
         Card card_att = cards[evt.getFromCardIdx()];
         if (card_att instanceof SpawnedCard) {
             SpawnedCard sc_att = (SpawnedCard) card_att;
-            if (evt.getToCardIdx() == -1) {
+            if (evt.getToCardIdx() == -1 && sc_att.canAttack()) {
                 // attack character directly
                 sc_att.atk(null);
+                sc_att.toggleAttack();
             } else {
                 GameManager gm = GameManager.getInstance();
                 // use attack function on CharacterCard
@@ -129,6 +130,7 @@ public class Board implements Observer<Card>, Subscriber {
                 OnCardAction ec = (OnCardAction) evt;
                 Player p = gm.getCurrentPlayer();
                 switch (ec.getAction()) {
+                    case CHAR_ATTACK:
                     case ATTACK:
                         attack(ec);
                         break;
@@ -144,6 +146,7 @@ public class Board implements Observer<Card>, Subscriber {
                         SpellCard sc = (SpellCard) p.getHand().getCard(ec.getFromCardIdx());
                         p.getHand().unregister(ec.getFromCardIdx());
                         p.setMana(p.getMana() - sc.getRequiredMana());
+                        //get mana + getreqmana - getmana dari lvl
                         Player target = gm.getPlayer(ec.getToPlayerIdx());
                         Board tgt_b = target.getBoard();
                         SpawnedCard sc_tgt = (SpawnedCard) tgt_b.getCard(ec.getToCardIdx());
@@ -153,7 +156,13 @@ public class Board implements Observer<Card>, Subscriber {
                                 sc_tgt.addSpell(sc);
                                 break;
                             case LVL:
-                                sc_tgt.levelUp();
+                                LevelCard lv_sc = (LevelCard) sc;
+                                p.setMana(p.getMana() - lv_sc.getRequiredMana(sc_tgt.getLevel()));
+                                if (lv_sc.getLevelType() == Type.UP){
+                                    sc_tgt.levelUp();
+                                } else {
+                                    sc_tgt.levelDown();
+                                }
                                 break;
                             case MORPH:
                                 tgt_b.unregister(ec.getToCardIdx());
@@ -167,6 +176,10 @@ public class Board implements Observer<Card>, Subscriber {
                                 break;
                         }
                         break;
+                    // case CHAR_ATTACK:
+                    //     SpawnedCard spawned = (SpawnedCard) p.getBoard().getCard(ec.getFromCardIdx());
+                    //     gm.getOpponentPlayer().takeDamage(spawned.getATK());
+                    //     break;
                 }
             } else if (evt instanceof OnPhaseChange) {
                 switch (((OnPhaseChange) evt).getPhase()) {

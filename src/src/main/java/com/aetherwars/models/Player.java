@@ -42,6 +42,7 @@ public class Player extends Publisher implements Subscriber {
     private double HP;
     private int mana;
     private int turn;
+    private String image_path;
     private Board board;
     private Board hand;
     private Deck deck;
@@ -50,17 +51,26 @@ public class Player extends Publisher implements Subscriber {
      * Constructor for player class
      * default HP point = 80
      */
-    public Player(String name, Board board, Board hand, Deck deck) {
+    public Player(String name, Board board, Board hand, Deck deck, String image_path) {
         this.name = name;
         this.HP = 80;
         this.mana = 0;
         this.turn = 0;
+        this.image_path = image_path;
         this.board = board;
         this.hand = hand;
         this.deck = deck;
         addSubscriber(this.board);
         addSubscriber(this.hand);
         addSubscriber(this.deck);
+    }
+
+    public String getImagePath(){
+        return this.image_path;
+    }
+
+    public int getTurn(){
+        return this.turn;
     }
 
     void getFirstDraw() {

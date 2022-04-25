@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane fx:id="board" dividerPositions="0.19874804381846636" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.GameController">
+  <items>
+    <AnchorPane fx:id="info" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="230.0" style="-fx-background-color: #c4c4c4;">
+   </AnchorPane>
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1020.0" prefWidth="1020.0">
+         <children>
+            <SplitPane layoutX="-1.0" layoutY="2.0" maxHeight="660.0" maxWidth="1010.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="1080.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="443.0">
+                     <children>
+                        <SplitPane orientation="VERTICAL" prefHeight="661.0" prefWidth="1018.0">
+                          <items>
+                            <AnchorPane fx:id="play_area" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <SplitPane fx:id="p1_side" dividerPositions="0.36941410129096325" layoutY="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="1020.0">
+                                      <items>
+                                          <FlowPane fx:id="p1_hand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="400.0" style="-fx-background-color: white;">
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding></FlowPane>
+                                          <FlowPane fx:id="p1_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0" style="-fx-background-color: white;" />
+                                      </items>
+                                    </SplitPane>
+                                    <SplitPane fx:id="p2_side" dividerPositions="0.5" layoutY="333.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="1020.0">
+                                       <items>
+                                          <FlowPane fx:id="p2_hand" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="400.0" style="-fx-background-color: white;">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding></FlowPane>
+                                          <FlowPane fx:id="p2_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="600.0" style="-fx-background-color: white;" />   
+                                       </items>
+                                    </SplitPane>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+              </items>
+            </SplitPane>
+            <HBox fx:id="panel_phase" layoutX="8.0" layoutY="668.0" prefHeight="31.0" prefWidth="1018.0" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

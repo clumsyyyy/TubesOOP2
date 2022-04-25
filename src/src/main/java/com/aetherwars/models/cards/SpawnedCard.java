@@ -121,12 +121,20 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public void levelUp(){
-        this.exp = 0;
         if (this.level < 10) {
+            this.exp = 0;
             this.atk += this.atk_up;
             this.hp += this.hp_up;
             this.level++;
         }
+    }
+
+    public void levelDown(){
+        if (this.level > 1){
+            this.exp = 0;
+            this.level--;
+        }
+
     }
 
     public void addSpell(SpellCard sc) {
@@ -180,6 +188,7 @@ public class SpawnedCard extends CharacterCard {
         return res;
     }
 
+    @Override
     protected String ingfo() {
         boolean swap = hasSwapEffect();
         double hpBuff = swap ? getAtkBuff() : getHpBuff();
@@ -196,11 +205,11 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public String toString() {
-        return super.toString() + ingfo();
+        return super.toString();
     }
 
     public String getInfo() {
-        return super.getInfo() + ingfo();
+        return super.getInfo();
     }
 
     @Override

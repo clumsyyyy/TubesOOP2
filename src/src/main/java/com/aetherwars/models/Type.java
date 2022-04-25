@@ -7,5 +7,7 @@ public enum Type {
     PTN,
     LVL,
     SWAP,
-    MORPH
+    MORPH,
+    UP,
+    DOWN
 };

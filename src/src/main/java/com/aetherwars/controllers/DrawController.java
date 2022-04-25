@@ -63,7 +63,7 @@ public class DrawController implements Subscriber {
 
     public EventHandler<? super MouseEvent> OnDrawHoverExitCard(int i) {
         return (event -> {
-            DisplayManager.cardExitFX(draw_img[i]);
+            DisplayManager.cardExitFX(draw_img[i], true);
             DisplayManager.cardLabelExitFX(draw_mana[i]);
         });
     }
