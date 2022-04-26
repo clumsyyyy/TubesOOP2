@@ -10,10 +10,10 @@
 
 <fx:root prefHeight="111.0" prefWidth="550.0" style="-fx-border-radius: 10; -fx-border-color: #c2c2c2;" type="FlowPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="440.0" style="-fx-border-radius: 20;">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="440.0" style="-fx-border-radius: 20;" stylesheets="@../font/font.css">
          <children>
-            <ProgressBar fx:id="healthbar" layoutX="4.0" layoutY="34.0" prefHeight="40.0" prefWidth="430.0" progress="1.0" style="-fx-accent: #03fc6f;" />
-              <Label fx:id="name" layoutX="193.0" layoutY="-1.0" prefHeight="31.0" prefWidth="61.0" text="Steve">
+            <ProgressBar fx:id="healthbar" layoutX="5.0" layoutY="40.0" prefHeight="31.0" prefWidth="430.0" progress="1.0" style="-fx-accent: #03fc6f;" />
+              <Label fx:id="name" layoutX="14.0" layoutY="3.0" prefHeight="31.0" prefWidth="100.0" text="Steve">
                <font>
                   <Font name="Eras Demi ITC" size="22.0" />
                </font>
@@ -22,7 +22,7 @@
                <font>
                   <Font name="Eras Light ITC" size="18.0" />
                </font></Label>
-              <Label fx:id="hp" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="307.0" layoutY="73.0" prefHeight="21.0" prefWidth="133.0" text="  HP XX.XX/ 80">
+              <Label fx:id="hp" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="307.0" layoutY="8.0" prefHeight="21.0" prefWidth="133.0" text="  HP XX.XX/ 80">
                <font>
                   <Font name="Eras Medium ITC" size="18.0" />
                </font></Label>

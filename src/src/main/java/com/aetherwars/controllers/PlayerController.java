@@ -96,7 +96,19 @@ public class PlayerController implements Subscriber {
         healthbar.setProgress((float) (player.getHP() / 80.0));
         GameManager gm = GameManager.getInstance();
         DropShadow avatarShadow = new DropShadow();
-        avatarShadow.setColor(Color.web("#03fc6f"));
+        if (healthbar.getProgress() >= 0.67){
+            avatarShadow.setColor(Color.web("#03fc6f"));
+            healthbar.setStyle("-fx-accent: #03fc6f;");
+        } else {
+            if (healthbar.getProgress() >= 0.33){
+                avatarShadow.setColor(Color.web("#fad37a"));
+                healthbar.setStyle("-fx-accent: #fad37a;");
+            } else {
+                avatarShadow.setColor(Color.web("#fa7a7a"));
+                healthbar.setStyle("-fx-accent: #fa7a7a;");
+            }
+        }
+
         avatarShadow.setRadius(30.0);
         if (gm.getCurrentPlayer() == player) {
             avatar.setEffect(avatarShadow);

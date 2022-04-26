@@ -1,0 +1,7 @@
+@font-face {
+	src: url("Minecraft.ttf");
+}
+
+.label, .button, .titled-pane {
+	-fx-font-family: "Minecraft";
+}

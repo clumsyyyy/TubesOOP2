@@ -35,7 +35,7 @@ public class DisplayManager implements Subscriber {
         cardShadow = new DropShadow();
         cardShadow.setRadius(20.0);
         cardShadow.setColor(Color.web("#fad37a"));
-
+        // Font font = Font.loadFont("file:resources/com/aetherwars/font/font.ttf", 12);
         this.stage = stage;
         stage.setTitle("Minecraft: Aether Wars");
         addDisplay("main.board", "Game.fxml");
