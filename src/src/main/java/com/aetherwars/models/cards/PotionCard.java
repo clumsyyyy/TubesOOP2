@@ -32,6 +32,24 @@ public class PotionCard extends SpellCard {
         atk_value = val;
     }
 
+    public String infoAtk() {
+        if (getAtkBuff() > 0) {
+            return "ATK: +" + getAtkBuff() +  "\n";
+        }
+        return "ATK: " + getAtkBuff() +  "\n";
+    }
+
+    public String infoHp() {
+        if (getHpBuff() > 0) {
+            return "HP: +" + getAtkBuff() +  "\n";
+        }
+        return "HP: " + getAtkBuff() +  "\n";
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + infoAtk() + infoHp();
+    }
 
     @Override
     public Card clone() {
