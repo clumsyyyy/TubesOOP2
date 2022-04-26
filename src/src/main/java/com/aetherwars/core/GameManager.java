@@ -95,6 +95,17 @@ public class GameManager extends Publisher implements Subscriber {
         addSubscriber(ins.players[1]);
         addSubscriber(ins);
     }
+    
+    public void updateCards( File deckFile1, File deckFile2) {
+
+        Deck[]decks = new Deck[]{
+            DeckFactory.create(ins.cardList, deckFile1),
+            DeckFactory.create(ins.cardList, deckFile2),
+        };
+
+        ins.players[0].setDeck(decks[0]);
+        ins.players[1].setDeck(decks[1]);
+    }
 
     public void initGame() {
         initGame(40, null, null);

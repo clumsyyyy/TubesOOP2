@@ -40,11 +40,12 @@ public class DisplayManager implements Subscriber {
         stage.setTitle("Minecraft: Aether Wars");
         addDisplay("main.board", "Game.fxml");
         addDisplay("panel.draw", "DrawPanel.fxml");
+        addDisplay("panel.select", "SelectPanel.fxml");
         showDisplay("main.board");
     }
 
-    public Stage getStage(){
-        return stage;
+    public final Stage getStage(){
+        return this.stage;
     }
 
     public static Background getImage(String filePath) {
@@ -91,6 +92,8 @@ public class DisplayManager implements Subscriber {
                 case DRAW:
                     this.showDisplay("panel.draw");
                     break;
+                case SELECT:
+                    this.showDisplay("panel.select");
                 default:
                     break;
             }

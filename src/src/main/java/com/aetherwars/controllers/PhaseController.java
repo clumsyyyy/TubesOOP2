@@ -68,6 +68,8 @@ public class PhaseController implements Subscriber {
                         gm.getCurrentPlayer().getHand().unregister(rand.nextInt(5));
                     nextPhase = Phase.DRAW;
                     break;
+                default:
+                    break;
             }
             gm.sendEvent(new OnPhaseChange(this, nextPhase));
         }));

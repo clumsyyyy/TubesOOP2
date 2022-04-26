@@ -35,12 +35,13 @@ public class Player extends Publisher implements Subscriber {
     public Board getBoard() {
         return board;
     }
-
     public Board getHand() {
         return hand;
     }
 
     public Deck getDeck() { return deck; }
+
+    public void setDeck(Deck deck) { this.deck = deck; }
 
     private String name;
     private double HP;

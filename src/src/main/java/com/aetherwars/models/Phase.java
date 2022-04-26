@@ -4,5 +4,6 @@ public enum Phase {
     DRAW,
     PLAN,
     ATTACK,
-    END
+    END,
+    SELECT
 }
