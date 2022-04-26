@@ -12,6 +12,10 @@ import com.aetherwars.models.DeckFactory;
 import com.aetherwars.models.Phase;
 import com.aetherwars.models.cards.Card;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Modality;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -54,7 +58,7 @@ public class GameManager extends Publisher implements Subscriber {
         return phase;
     }
 
-    public void initGame(int deckSize, File deckFile) {
+    public void initGame(int deckSize, File deckFile1, File deckFile2) {
         try {
             ins.cardList = Loader.loadCards();
         } catch (IOException e) {
@@ -63,10 +67,10 @@ public class GameManager extends Publisher implements Subscriber {
             e.printStackTrace();
         }
         Deck[] decks;
-        if (deckFile != null)
+        if (deckFile1 != null & deckFile2 != null)
             decks = new Deck[]{
-                DeckFactory.create(ins.cardList, deckFile),
-                DeckFactory.create(ins.cardList, deckFile),
+                DeckFactory.create(ins.cardList, deckFile1),
+                DeckFactory.create(ins.cardList, deckFile2),
             };
         else
             decks = new Deck[]{
@@ -93,7 +97,7 @@ public class GameManager extends Publisher implements Subscriber {
     }
 
     public void initGame() {
-        initGame(40, null);
+        initGame(40, null, null);
     }
 
     public Card getCardById(int id) {
@@ -111,6 +115,33 @@ public class GameManager extends Publisher implements Subscriber {
             phase = curPhase;
             if (curPhase == Phase.END) {
                 changeCurrentPlayer();
+                GameManager gm = GameManager.getInstance();
+                if (gm.getCurrentPlayer().getHP() <= 0 ||
+                    gm.getOpponentPlayer().getHP() <= 0 ||
+                    gm.getCurrentPlayer().getDeck().getSize() == 0 ||
+                    gm.getOpponentPlayer().getDeck().getSize() == 0) {
+
+                    Alert a = new Alert(AlertType.INFORMATION);
+                    a.initModality(Modality.APPLICATION_MODAL);
+                    a.initOwner(DisplayManager.getInstance().getStage());
+
+                    if (gm.getCurrentPlayer().getHP() <= 0 ) {
+                        a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
+                        a.setContentText(gm.getCurrentPlayer().getName() + " lost because he has no HP left!");
+                    } else if (gm.getOpponentPlayer().getHP() <= 0){
+                        a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
+                        a.setContentText(gm.getOpponentPlayer().getName() + " lost because he has no HP left!");
+                    } else if (gm.getCurrentPlayer().getDeck().getSize() <= 0){
+                        a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
+                        a.setContentText(gm.getCurrentPlayer().getName() + " lost - no cards remaining!");
+                    }else if (gm.getCurrentPlayer().getDeck().getSize() <= 0){
+                        a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
+                        a.setContentText(gm.getOpponentPlayer().getName() + " lost - no cards remaining!");
+                    }
+                    
+                    a.showAndWait();
+                    System.exit(0);
+                }
             }
         }
         // cek apakah end game.

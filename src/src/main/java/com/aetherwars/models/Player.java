@@ -19,7 +19,11 @@ public class Player extends Publisher implements Subscriber {
     }
 
     public void takeDamage(double amount) {
-        HP -= amount;
+        if (HP - amount > 0) {
+            HP -= amount;
+        } else {
+            HP = 0;
+        }
     }
 
     public int getMana() {

@@ -90,14 +90,14 @@ public class Loader {
             CardList.add(s);
         }
         LevelCard lv_up = new LevelCard(
-            0, 
+            401, 
             "Level Up", 
             "Levels up your/enemy card",
             "card/image/spell/level/level_up.png",
             Type.UP);
         CardList.add(lv_up);
         LevelCard lv_down = new LevelCard(
-            0, 
+            402, 
             "Level Down", 
             "Levels down your/enemy card",
             "card/image/spell/level/level_down.png",

@@ -43,6 +43,10 @@ public class DisplayManager implements Subscriber {
         showDisplay("main.board");
     }
 
+    public Stage getStage(){
+        return stage;
+    }
+
     public static Background getImage(String filePath) {
         BackgroundImage bg = new BackgroundImage(
                 new Image("/com/aetherwars/" + filePath),
