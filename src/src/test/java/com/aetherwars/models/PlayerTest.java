@@ -35,7 +35,7 @@ public class PlayerTest {
     @Test
     public void test_b_playerDraw() {
         GameManager gm = GameManager.getInstance();
-        List<Card> cards = gm.getCurrentPlayer().getDeck().getDrawCard();
+        List<Card> cards = gm.getCurrentPlayer().getDeck().getDrawCard(3);
         Card c = cards.get(0);
         gm.sendEvent(new OnDrawCard(this, c));
         Player a = gm.getPlayer(0);

@@ -28,8 +28,8 @@ public class Deck implements Subscriber {
         return cards.remove(idx);
     }
 
-    public List<Card> getDrawCard() {
-        return cards.subList(0, 3);
+    public List<Card> getDrawCard(int draw_cap) {
+        return cards.subList(0, draw_cap);
     }
 
     public int getSize() {

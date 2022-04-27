@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import java.util.List;
 
 public class DrawController implements Subscriber {
     public Pane draw_1;
@@ -80,8 +81,14 @@ public class DrawController implements Subscriber {
         } else if (evt instanceof OnPhaseChange) {
             if (((OnPhaseChange) evt).getPhase() == Phase.DRAW) {
                 player_label.setText(gm.getCurrentPlayer().getName() + ", it's your turn to draw!");
-                for (int i = 0; i < 3; i++) {
-                    Card c = gm.getCurrentPlayer().getDeck().takeCard();
+                int draw_cap = 3;
+                if (draw_cap > gm.getCurrentPlayer().getDeck().getSize()) {
+                    draw_cap = gm.getCurrentPlayer().getDeck().getSize();
+                }
+                System.out.println("Player " + gm.getCurrentPlayerIdx() + ": " + draw_cap);
+                List<Card> random_card = gm.getCurrentPlayer().getDeck().getDrawCard(draw_cap);
+                for (int i = 0; i < draw_cap; i++) {
+                    Card c = random_card.get(i);
                     draw_img[i].setBackground(DisplayManager.getImage(c.getImagePath()));
                     draw_img[i].setOnMousePressed(OnSelectCard(c));
                     draw_img[i].setOnMouseEntered(OnDrawHoverCard(i));
