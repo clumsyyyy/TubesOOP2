@@ -32,9 +32,12 @@ public class PlayerController implements Subscriber {
     @FXML
     public Label turn;
     @FXML
+    public Label deck;
+    @FXML
     public ProgressBar healthbar;
     @FXML 
     public Pane avatar;
+
 
     public int player_idx;
     public Player player;
@@ -93,6 +96,7 @@ public class PlayerController implements Subscriber {
         hp.setText("HP: " + String.format("%.2f", player.getHP()) + " / 80");
         mana.setText("Mana: " + player.getMana());
         turn.setText("Turn: " + player.getTurn());
+        deck.setText("Deck: " + player.getDeck().getSize());
         healthbar.setProgress((float) (player.getHP() / 80.0));
         GameManager gm = GameManager.getInstance();
         DropShadow avatarShadow = new DropShadow();
