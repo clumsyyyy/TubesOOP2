@@ -10,6 +10,7 @@ public class SpawnedCard extends CharacterCard {
     private final ArrayList<SpellCard> activeSpells;
     private int level;
     private int exp;
+    private int swap_duration;
     private boolean canAttack;
 
     public SpawnedCard(CharacterCard card) {
@@ -90,7 +91,7 @@ public class SpawnedCard extends CharacterCard {
                     take = Math.min(damage, hp_buff);
                     damage -= take;
                     take = hp_buff - take;
-                    pc.setHpBuff(take);
+                    pc.setHpBuff((int)take);
                     if (take <= 0) {
                         activeSpells.remove(i);
                         i--;
@@ -139,8 +140,10 @@ public class SpawnedCard extends CharacterCard {
 
     public void addSpell(SpellCard sc) {
         if (sc instanceof SwapCard) {
+            this.swap_duration = sc.getDuration();
             for (SpellCard s: activeSpells) {
                 if (s instanceof SwapCard) {
+                    this.swap_duration = s.getDuration() + sc.getDuration();
                     s.setDuration(s.getDuration() + sc.getDuration());
                     return;
                 }
@@ -201,7 +204,8 @@ public class SpawnedCard extends CharacterCard {
         );
         return before + "Level: " + this.level + "\n" +
                 "Exp: " + (this.level < 10 ? this.exp : "MAX") +
-                          (this.level < 10 ? "/" + this.getLevelUpExp() : "") + "\n";
+                          (this.level < 10 ? "/" + this.getLevelUpExp() : "") + "\n" + 
+                (this.swap_duration > 0 ? "Swap duration: " + this.swap_duration + "\n" : "");
     }
 
     public String toString() {
@@ -218,6 +222,9 @@ public class SpawnedCard extends CharacterCard {
             toggleAttack();
         for (int i = 0; i < activeSpells.size(); i++) {
             activeSpells.get(i).update();
+            if (activeSpells.get(i) instanceof SwapCard) {
+                this.swap_duration = activeSpells.get(i).current_duration;
+            }
             if (activeSpells.get(i).current_duration == 0) {
                 activeSpells.remove(i);
                 i--;

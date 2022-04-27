@@ -98,10 +98,17 @@ public class GameManager extends Publisher implements Subscriber {
     
     public void updateCards( File deckFile1, File deckFile2) {
 
-        Deck[]decks = new Deck[]{
-            DeckFactory.create(ins.cardList, deckFile1),
-            DeckFactory.create(ins.cardList, deckFile2),
-        };
+        Deck[] decks;
+        if (deckFile1 != null & deckFile2 != null)
+            decks = new Deck[]{
+                DeckFactory.create(ins.cardList, deckFile1),
+                DeckFactory.create(ins.cardList, deckFile2),
+            };
+        else
+            decks = new Deck[]{
+                DeckFactory.create(ins.cardList, 40),
+                DeckFactory.create(ins.cardList, 40)
+            };
 
         ins.players[0].setDeck(decks[0]);
         ins.players[1].setDeck(decks[1]);
@@ -142,10 +149,10 @@ public class GameManager extends Publisher implements Subscriber {
                     } else if (gm.getOpponentPlayer().getHP() <= 0){
                         a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
                         a.setContentText(gm.getOpponentPlayer().getName() + " lost because he has no HP left!");
-                    } else if (gm.getCurrentPlayer().getDeck().getSize() <= 0){
+                    } else if (gm.getCurrentPlayer().getDeck().getSize() == 0){
                         a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
                         a.setContentText(gm.getCurrentPlayer().getName() + " lost - no cards remaining!");
-                    }else if (gm.getCurrentPlayer().getDeck().getSize() <= 0){
+                    }else if (gm.getOpponentPlayer().getDeck().getSize() == 0){
                         a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
                         a.setContentText(gm.getOpponentPlayer().getName() + " lost - no cards remaining!");
                     }

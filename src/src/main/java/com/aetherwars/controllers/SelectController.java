@@ -55,7 +55,6 @@ public class SelectController implements Subscriber  {
 
     public SelectController(){
         GameManager.getInstance().addSubscriber(this);
-
     }
 
     @Override

@@ -7,10 +7,10 @@ import com.aetherwars.models.Type;
  * extens SpellCard class
  */
 public class PotionCard extends SpellCard {
-    private double atk_value = 0;
-    private double hp_value = 0;
+    private int atk_value = 0;
+    private int hp_value = 0;
 
-    public PotionCard(int id, String name, String description, String image_path, double atk_value, double hp_value, int mana, int duration) {
+    public PotionCard(int id, String name, String description, String image_path, int atk_value, int hp_value, int mana, int duration) {
         super(id, name, Type.PTN, description, image_path, mana, duration);
         this.atk_value = atk_value;
         this.hp_value = hp_value;
@@ -24,26 +24,26 @@ public class PotionCard extends SpellCard {
         return hp_value;
     }
 
-    public void setHpBuff(double val) {
+    public void setHpBuff(int val) {
         hp_value = val;
     }
 
-    public void setAtkBuff(double val) {
+    public void setAtkBuff(int val) {
         atk_value = val;
     }
 
     public String infoAtk() {
-        if (getAtkBuff() > 0) {
+        if (getAtkBuff() >= 0) {
             return "ATK: +" + getAtkBuff() +  "\n";
         }
-        return "ATK: " + getAtkBuff() +  "\n";
+        return "ATK: -" + getAtkBuff() +  "\n";
     }
 
     public String infoHp() {
-        if (getHpBuff() > 0) {
-            return "HP: +" + getAtkBuff() +  "\n";
+        if (getHpBuff() >= 0) {
+            return "HP: +" + getHpBuff() +  "\n";
         }
-        return "HP: " + getAtkBuff() +  "\n";
+        return "HP: -" + getHpBuff() +  "\n";
     }
 
     @Override

@@ -94,7 +94,9 @@ public class Player extends Publisher implements Subscriber {
                 case DRAW:
                     if (this == gm.getCurrentPlayer()) {
                         turn++;
-                        mana = Math.min(turn, 10);
+
+                        // TODO: RESET THE +50 POINT
+                        mana = Math.min(turn, 10) + 50;
                         // update board
                         sendEvent(evt);
                     }
