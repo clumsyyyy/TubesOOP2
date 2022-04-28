@@ -149,8 +149,16 @@ public class Board implements Observer<Card>, Subscriber {
                         //get mana + getreqmana - getmana dari lvl
                         Player target = gm.getPlayer(ec.getToPlayerIdx());
                         Board tgt_b = target.getBoard();
-                        SpawnedCard sc_tgt = (SpawnedCard) tgt_b.getCard(ec.getToCardIdx());
+                        SpawnedCard sc_tgt = null;
+                        if (ec.getToCardIdx() != -1){
+                            sc_tgt = (SpawnedCard) tgt_b.getCard(ec.getToCardIdx());
+                        }
+                        
                         switch (sc.getType()) {
+                            case HEAL:
+                                HealCard hc = (HealCard) sc;
+                                p.heal(hc.getHeal());
+                                break;
                             case SWAP:
                             case PTN:
                                 sc_tgt.addSpell(sc);

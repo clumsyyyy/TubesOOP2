@@ -62,9 +62,11 @@ public class PlayerController implements Subscriber {
     public EventHandler<? super DragEvent> OnDragAcceptAvatar = (event -> {
         if (event.getDragboard().hasString()) {
             GameManager gm = GameManager.getInstance();
-            if (gm.getPhase() == Phase.ATTACK && 
+            if ((gm.getPhase() == Phase.ATTACK && 
             gm.getCurrentPlayer() != player &&
-            player.getBoard().getSize() == 0 ) {
+            player.getBoard().getSize() == 0)
+            || (gm.getPhase() == Phase.PLAN &&
+            gm.getCurrentPlayer() == player)) {
                 // make sure si player controller ini
                 // itu ga sama dengan current player
                 event.acceptTransferModes(TransferMode.MOVE);
@@ -84,6 +86,10 @@ public class PlayerController implements Subscriber {
             if (gm.getPhase() == Phase.ATTACK) {
                 gm.sendEvent(
                     new OnCardAction(this, db.getString(), player_idx, -1, CardAction.CHAR_ATTACK)
+                );
+            } else if (gm.getPhase() == Phase.PLAN) {
+                gm.sendEvent(
+                    new OnCardAction(this, db.getString(), player_idx, -1, CardAction.SPELL)
                 );
             }
         }

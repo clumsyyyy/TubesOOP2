@@ -20,9 +20,21 @@ public class Player extends Publisher implements Subscriber {
 
     public void takeDamage(double amount) {
         if (HP - amount > 0) {
-            HP -= amount;
+            if (HP - amount >= 80){
+                HP = 80;
+            } else {
+                HP -= amount;
+            }
         } else {
             HP = 0;
+        }
+    }
+
+    public void heal(double amount){
+        if (HP + amount >= 80){
+            HP = 80;
+        } else {
+            HP += amount;
         }
     }
 

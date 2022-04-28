@@ -65,8 +65,8 @@ public class Loader {
                 row[1],
                 row[2], 
                 row[3], 
-                Integer.parseInt(row[4]), 
-                Integer.parseInt(row[5]),
+                Double.parseDouble(row[4]), 
+                Double.parseDouble(row[5]),
                 Integer.parseInt(row[6]), 
                 Integer.parseInt(row[7])
             );
@@ -103,6 +103,18 @@ public class Loader {
             "card/image/spell/level/level_down.png",
             Type.DOWN);
         CardList.add(lv_down);
+
+        for (int i = 1; i < 11; i++){
+            HealCard heal = new HealCard(
+                500 + i,
+                "Heal - " + i,
+                "Heals yourself by " + i + " points",
+                "card/image/spell/heal/heal" + i + ".png",
+                i,
+                (double) i
+            );
+            CardList.add(heal);
+        }
         return CardList;
     }
 

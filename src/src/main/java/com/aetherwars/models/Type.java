@@ -8,6 +8,7 @@ public enum Type {
     LVL,
     SWAP,
     MORPH,
+    HEAL,
     UP,
     DOWN
 };

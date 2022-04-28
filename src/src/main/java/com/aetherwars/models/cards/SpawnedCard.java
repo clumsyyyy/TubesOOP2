@@ -29,8 +29,8 @@ public class SpawnedCard extends CharacterCard {
         return canAttack;
     }
 
-    public int getAtkBuff() {
-        int atk_buf = 0;
+    public double getAtkBuff() {
+        double atk_buf = 0;
         for (SpellCard c: activeSpells) {
             if (c instanceof PotionCard) {
                 atk_buf += ((PotionCard) c).getAtkBuff();
@@ -39,8 +39,8 @@ public class SpawnedCard extends CharacterCard {
         return atk_buf;
     }
 
-    public int getHpBuff() {
-        int hp_buf = 0;
+    public double getHpBuff() {
+        double hp_buf = 0;
         for (SpellCard c: activeSpells) {
             if (c instanceof PotionCard) {
                 hp_buf += ((PotionCard) c).getHpBuff();
@@ -63,14 +63,14 @@ public class SpawnedCard extends CharacterCard {
 
     public double getHP() {
         if (hasSwapEffect())
-            return this.atk + this.getAtkBuff();
+            return this.atk + this.getHpBuff();
         else
             return this.hp + this.getHpBuff();
     }
 
     public double getATK(){
         if (hasSwapEffect())
-            return this.hp + this.getHpBuff();
+            return this.hp + this.getAtkBuff();
         else
             return this.atk + this.getAtkBuff();
     }
@@ -91,7 +91,7 @@ public class SpawnedCard extends CharacterCard {
                     take = Math.min(damage, hp_buff);
                     damage -= take;
                     take = hp_buff - take;
-                    pc.setHpBuff((int)take);
+                    pc.setHpBuff(take);
                     if (take <= 0) {
                         activeSpells.remove(i);
                         i--;
@@ -104,9 +104,9 @@ public class SpawnedCard extends CharacterCard {
         if (damage <= 0)
             return;
         if (hasSwap)
-            atk -= damage;
+            this.atk -= damage;
         else
-            hp -= damage;
+            this.hp -= damage;
     }
 
     public void toggleAttack() {
@@ -148,8 +148,11 @@ public class SpawnedCard extends CharacterCard {
                     return;
                 }
             }
-        }
+        } 
         activeSpells.add(sc);
+        if (this.getHP() <= 0){
+            GameManager.getInstance().getCurrentPlayer().getBoard().unregister(this);
+        }
     }
 
     /**
@@ -163,13 +166,13 @@ public class SpawnedCard extends CharacterCard {
             if (curType == Type.OVERWORLD && tgtType == Type.END ||
                     curType == Type.END && tgtType == Type.NETHER ||
                     curType == Type.NETHER && tgtType == Type.OVERWORLD) {
-                target.takeDamage(2 * this.atk);
+                target.takeDamage(2 * this.getATK());
             } else if (curType == Type.OVERWORLD && tgtType == Type.NETHER ||
                     curType == Type.END && tgtType == Type.OVERWORLD ||
                     curType == Type.NETHER && tgtType == Type.END) {
-                target.takeDamage(0.5 * this.atk);
+                target.takeDamage(0.5 * this.getATK());
             } else {
-                target.takeDamage(this.atk);
+                target.takeDamage(this.getATK());
             }
 
             if (target.getHP() <= 0) {
@@ -177,7 +180,7 @@ public class SpawnedCard extends CharacterCard {
                 // TODO: delete target card after this
             }
         } else { // attack chara
-            GameManager.getInstance().getOpponentPlayer().takeDamage(this.atk);
+            GameManager.getInstance().getOpponentPlayer().takeDamage(this.getATK());
         }
     }
 
@@ -194,6 +197,8 @@ public class SpawnedCard extends CharacterCard {
     @Override
     protected String ingfo() {
         boolean swap = hasSwapEffect();
+        // double atkBuff = getAtkBuff();
+        // double hpBuff = getHpBuff();
         double hpBuff = swap ? getAtkBuff() : getHpBuff();
         double atkBuff = swap ? getHpBuff() : getAtkBuff();
         String before = String.format("ATK: %s\nHP: %s\n",
