@@ -11,6 +11,7 @@ public class SpawnedCard extends CharacterCard {
     private int level;
     private int exp;
     private int swap_duration;
+    private boolean is_swapped;
     private boolean canAttack;
 
     public SpawnedCard(CharacterCard card) {
@@ -22,6 +23,8 @@ public class SpawnedCard extends CharacterCard {
         this.level = 1;
         this.exp = 0;
         this.canAttack = true;
+        this.is_swapped = false;
+        this.swap_duration = 0;
         this.activeSpells = new ArrayList<>();
     }
 
@@ -62,31 +65,20 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public double getHP() {
-        if (hasSwapEffect())
-            return this.atk + this.getHpBuff();
-        else
-            return this.hp + this.getHpBuff();
+        return this.hp + this.getHpBuff();
     }
 
     public double getATK(){
-        if (hasSwapEffect())
-            return this.hp + this.getAtkBuff();
-        else
-            return this.atk + this.getAtkBuff();
+        return this.atk + this.getAtkBuff();
     }
 
     public void takeDamage(double damage) {
         double take = 0, hp_buff;
-        boolean hasSwap = hasSwapEffect();
         for (int i = 0; i < activeSpells.size(); i++) {
             SpellCard c = activeSpells.get(i);
             if (c instanceof PotionCard) {
                 PotionCard pc = (PotionCard) c;
-                if (hasSwap) {
-                    hp_buff = pc.getAtkBuff();
-                } else {
-                    hp_buff = pc.getHpBuff();
-                }
+                hp_buff = pc.getHpBuff();
                 if (hp_buff >= 0) {
                     take = Math.min(damage, hp_buff);
                     damage -= take;
@@ -103,10 +95,7 @@ public class SpawnedCard extends CharacterCard {
         }
         if (damage <= 0)
             return;
-        if (hasSwap)
-            this.atk -= damage;
-        else
-            this.hp -= damage;
+        this.hp -= damage;
     }
 
     public void toggleAttack() {
@@ -122,10 +111,12 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public void levelUp(){
+        this.hp = this.base_hp;
         if (this.level < 10) {
             this.exp = 0;
-            this.atk += this.atk_up;
-            this.hp += this.hp_up;
+            this.base_atk += this.atk_up;
+            this.base_hp += this.hp_up;
+            this.atk = this.base_atk;
             this.level++;
         }
     }
@@ -133,13 +124,36 @@ public class SpawnedCard extends CharacterCard {
     public void levelDown(){
         if (this.level > 1){
             this.exp = 0;
+            this.base_atk -= this.atk_up;
+            this.base_hp -= this.hp_up;
+            this.atk = this.base_atk;
+            if (this.hp > this.base_hp)
+                this.hp = this.base_hp;
             this.level--;
         }
+    }
 
+    public void swapAtkHp() {
+        this.is_swapped = !this.is_swapped;
+        double temp = this.atk;
+        this.atk = this.hp;
+        this.hp = temp;
+        for (SpellCard c: activeSpells) {
+            if (c instanceof PotionCard) {
+                PotionCard pc = (PotionCard) c;
+                temp = pc.getAtkBuff();
+                pc.setAtkBuff(pc.getHpBuff());
+                pc.setHpBuff(temp);
+            }
+        }
     }
 
     public void addSpell(SpellCard sc) {
         if (sc instanceof SwapCard) {
+            if (!is_swapped) {
+                // swap atk and hp
+                this.swapAtkHp();
+            }
             this.swap_duration = sc.getDuration();
             for (SpellCard s: activeSpells) {
                 if (s instanceof SwapCard) {
@@ -185,26 +199,24 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public boolean hasSwapEffect() {
-        boolean res = false;
         for (SpellCard s: activeSpells) {
             if (s instanceof SwapCard) {
-                res = true;
+                return true;
             }
         }
-        return res;
+        return false;
     }
 
     @Override
     protected String ingfo() {
-        boolean swap = hasSwapEffect();
         // double atkBuff = getAtkBuff();
         // double hpBuff = getHpBuff();
-        double hpBuff = swap ? getAtkBuff() : getHpBuff();
-        double atkBuff = swap ? getHpBuff() : getAtkBuff();
+        double hpBuff = getHpBuff();
+        double atkBuff = getAtkBuff();
         String before = String.format("ATK: %s\nHP: %s\n",
-            String.format("%.2f", (swap ? this.hp : this.atk)) +
+            String.format("%.2f", this.atk) +
                 (atkBuff != 0 ? " (" + (atkBuff > 0 ? "+":"") + atkBuff + ")" : ""),
-            String.format("%.2f", (swap ? this.atk : this.hp)) +
+            String.format("%.2f", this.hp) +
                 (hpBuff != 0 ? " (" + (hpBuff > 0 ? "+":"") + hpBuff + ")" : "")
         );
         return before + "Level: " + this.level + "\n" +
@@ -234,6 +246,9 @@ public class SpawnedCard extends CharacterCard {
                 activeSpells.remove(i);
                 i--;
             }
+        }
+        if (is_swapped && this.swap_duration == 0) {
+            this.swapAtkHp();
         }
     }
 }
