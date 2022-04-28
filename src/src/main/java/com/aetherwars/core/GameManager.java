@@ -115,7 +115,7 @@ public class GameManager extends Publisher implements Subscriber {
     }
 
     public void initGame() {
-        initGame(40, null, null);
+        initGame(7, null, null);
     }
 
     public Card getCardById(int id) {

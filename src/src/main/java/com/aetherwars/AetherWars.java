@@ -1,14 +1,12 @@
 package com.aetherwars;
 
 
-import java.io.IOException;
 
 import com.aetherwars.core.DisplayManager;
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.OnGameStart;
 import com.aetherwars.events.OnPhaseChange;
 import javafx.application.Application;
-
 import javafx.stage.Stage;
 
 import com.aetherwars.models.*;
@@ -26,10 +24,10 @@ public class AetherWars extends Application {
 
             manager.sendEvent(new OnGameStart(this));
             manager.sendEvent(new OnPhaseChange(this, Phase.SELECT));
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("bruh? ");
             e.printStackTrace();
-        }
+        } 
 
     }
 

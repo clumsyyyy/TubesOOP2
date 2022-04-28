@@ -6,6 +6,8 @@ import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Subscriber;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GameController implements Subscriber {
     public SplitPane board;
@@ -15,9 +17,17 @@ public class GameController implements Subscriber {
     public FlowPane p2_board;
     public HBox panel_phase;
     public AnchorPane info;
-
+    public Media music;
+    public MediaPlayer music_player;
     public GameController () {
         GameManager.getInstance().addSubscriber(this);
+        try{
+            Media music = new Media(getClass().getResource("../music/main.mp3").toURI().toString());
+            this.music_player = new MediaPlayer(music);
+            this.music_player.setAutoPlay(true);
+        } catch (Exception e){
+            // do nothing
+        }
     }
 
     void init() {

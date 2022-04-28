@@ -85,8 +85,9 @@ public class DrawController implements Subscriber {
                 if (draw_cap > gm.getCurrentPlayer().getDeck().getSize()) {
                     draw_cap = gm.getCurrentPlayer().getDeck().getSize();
                 }
-                System.out.println("Player " + gm.getCurrentPlayerIdx() + ": " + draw_cap);
+            
                 List<Card> random_card = gm.getCurrentPlayer().getDeck().getDrawCard(draw_cap);
+               
                 for (int i = 0; i < draw_cap; i++) {
                     Card c = random_card.get(i);
                     draw_img[i].setBackground(DisplayManager.getImage(c.getImagePath()));
@@ -97,6 +98,16 @@ public class DrawController implements Subscriber {
                     draw_name[i].setText(c.getName());
                     draw_info[i].setText(((Informable)c).getInfo());
                     draw_desc[i].setText(c.getDesc());
+                }
+                for (int i = draw_cap; i < 3; i++){
+                    draw_img[i].setBackground(null);
+                    draw_img[i].setOnMousePressed(null);
+                    draw_img[i].setOnMouseEntered(null);
+                    draw_img[i].setOnMouseExited(null);
+                    draw_mana[i].setText("EMPTY");
+                    draw_name[i].setText("");
+                    draw_info[i].setText("");
+                    draw_desc[i].setText("");
                 }
             }
         }
