@@ -21,13 +21,6 @@ public class GameController implements Subscriber {
     public MediaPlayer music_player;
     public GameController () {
         GameManager.getInstance().addSubscriber(this);
-        try{
-            Media music = new Media(getClass().getResource("../music/main.mp3").toURI().toString());
-            this.music_player = new MediaPlayer(music);
-            this.music_player.setAutoPlay(true);
-        } catch (Exception e){
-            // do nothing
-        }
     }
 
     void init() {

@@ -5,6 +5,7 @@ import java.io.File;
 
 import com.aetherwars.core.DisplayManager;
 import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnGameStart;
 import com.aetherwars.events.OnPhaseChange;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Subscriber;
@@ -12,14 +13,20 @@ import com.aetherwars.models.Phase;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BackgroundSize;
+
 import javafx.stage.FileChooser;
 
 public class SelectController implements Subscriber  {
+    @FXML
     public Button import_btn;
+    @FXML
     public Button random_btn;
-
+    @FXML
+    public AnchorPane select_panel;
     FileChooser f1 = new FileChooser();
     FileChooser f2 = new FileChooser();
    
@@ -32,6 +39,7 @@ public class SelectController implements Subscriber  {
         @Override
         public void handle(ActionEvent event) {
             GameManager manager = GameManager.getInstance();
+            manager.initGame(40, null, null);
             manager.sendEvent(new OnPhaseChange(this, Phase.DRAW));
         }
     };
@@ -44,23 +52,27 @@ public class SelectController implements Subscriber  {
             
             f2.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
             f2.setTitle("Select deck file for player 2: ");
+
             GameManager manager = GameManager.getInstance();
             File file1 = f1.showOpenDialog(DisplayManager.getInstance().getStage());
             File file2 = f2.showOpenDialog(DisplayManager.getInstance().getStage());
-            manager.updateCards(file1, file2);
+            manager.initGame(40, file1, file2);
             manager.sendEvent(new OnPhaseChange(this, Phase.DRAW));
         }
     };
     
 
     public SelectController(){
-        GameManager.getInstance().addSubscriber(this);
+       GameManager.getInstance().addSubscriber(this);
     }
 
     @Override
     public void receiveEvent(Event evt){
-        random_btn.setOnAction(random_evt);
-        import_btn.setOnAction(import_evt);
+        if (evt instanceof OnGameStart){
+            random_btn.setOnAction(random_evt);
+            import_btn.setOnAction(import_evt);
+            select_panel.setBackground(DisplayManager.getImage("background/background.jpg"));
+            GameManager.getInstance().removeSubscriber(this);
+        }
     }
-
 }

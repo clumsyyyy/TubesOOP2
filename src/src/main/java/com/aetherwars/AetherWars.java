@@ -16,7 +16,7 @@ public class AetherWars extends Application {
     public void start(Stage stage) {
         try{
             GameManager manager = GameManager.getInstance();
-            manager.initGame();
+            //manager.initGame();
 
             DisplayManager dm = DisplayManager.getInstance();
             dm.init(stage);

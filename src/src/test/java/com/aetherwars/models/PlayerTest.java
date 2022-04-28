@@ -16,7 +16,7 @@ public class PlayerTest {
     @Test
     public void test_a_playerStart() {
         GameManager gm = GameManager.getInstance();
-        gm.initGame();
+        gm.initGame(40, null, null);
         assertEquals(gm.getCurrentPlayer().getDeck().getSize(), 40);
         assertEquals(gm.getOpponentPlayer().getDeck().getSize(), 40);
         gm.sendEvent(new OnGameStart(gm));

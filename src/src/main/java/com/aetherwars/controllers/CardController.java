@@ -17,9 +17,12 @@ import com.aetherwars.models.cards.SpawnedCard;
 import com.aetherwars.models.cards.SpellCard;
 import com.aetherwars.models.cards.LevelCard;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -33,6 +36,7 @@ public class CardController implements Subscriber {
     private Pane card;
     @FXML
     private Label card_label;
+
 
     private Player player;
     private int player_idx;
@@ -61,9 +65,31 @@ public class CardController implements Subscriber {
             card.setOnDragOver(OnDragAcceptCardBoard);
             card.setOnDragDropped(OnDragEndCardBoard);
             card.setOnDragDetected(OnDragCardAttackBoard);
+
+
+            ContextMenu ctx_menu = new ContextMenu();
+            MenuItem add_item = new MenuItem("Add EXP");
+            add_item.setOnAction(add_event);
+            ctx_menu.getItems().add(add_item);
+            card.setOnContextMenuRequested((e) -> {
+                if (player.getBoard().getCard(card_idx) != null){
+                    ctx_menu.show(card, e.getScreenX(), e.getScreenY());
+                }
+            });
         }
         update();
     }
+
+    public EventHandler<ActionEvent> add_event = new EventHandler<ActionEvent>(){ 
+        @Override
+        public void handle(ActionEvent event) {
+            if (player.getMana() >= 0){
+                player.setMana(player.getMana() - 1);
+                SpawnedCard sc = (SpawnedCard) player.getBoard().getCard(card_idx);
+                sc.addExp(1);
+            }
+        }
+    };
 
     public EventHandler<? super MouseEvent> OnHoverCard = (event -> {
         Card c;
