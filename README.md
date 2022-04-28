@@ -1,31 +1,60 @@
-# IF2210 Project Template
+# Minecraft : Aether Realm Wars
 
-Here is an example of project using gradle as the build tools.
-Try running these commands:
+Proyek ini dibuat untuk memenuhi tugas mata kuliah IF2210 Pemrograman Berorientasi Objek tahun 2021 semester 2.
 
-`./gradlew run`
+## About Project
 
-You will notice that it will open a window that display 'Minecraft: Aether Wars'.
-In the command line you can see the data that is being read by `CSVReader.java`
+Game merupakan turn-based game, dengan dua orang pemain. Implementasi permainan menggunakan bahasa Java dengan memanfaatkan konsep OOP. 
 
-What happen is when you use `./gradlew run`, it will start the main function in your app.
-For this app, the main function lives in `AetherWars.java`.
+## Requirements
+- Java 8
+- Gradle
 
-You can explore more about gradle [here](https://guides.gradle.org/creating-new-gradle-builds/)
+## How To Run 
+``` 
+gradlew run 
+```
 
-## JDK
+## Gameplay 
+### Rules
+- Permainan dilakukan oleh dua orang pemain.
+- Terdapat empat phase tiap turn :
+  - Draw \
+    Pemain mengambil kartu 3 kartu dari deck. Dari 3 kartu, pemain memilih satu kartu untuk digunakan, 2 kartu dikembalikan ke deck. kartu maksimal yang bisa dimiliki pemain adalah 5 kartu.
+  - Plan \
+    Pemain dapat melakukan beberapa aksi :
+    1. Meletakkan kartu karakter ke board.
+    2. Menggunakan spell pada karakter di board.
+    3. Membuang karakter yang dimiliki atau yang ada di board.
+    4. Menggunakan mana atau exp.
+  - Attack \
+    Pemain dapat menyerang karakter lawan, atau hp lawan. Pemain tidak bisa menyerang hp lawan jika ada karakter pada board.
+  - End \
+    Pemain berganti giliran.
+- Pemain menang jika HP lawan nol, atau deck lawan habis.
 
-As of the creation of this template, the assistant team used and tested the JDK 8 installation from OpenJDK and Amazon Corretto (since JavaFX is readily available on those installations). You can easily pick and install your desired JDK version and variant by doing it via an IDE like [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+### Visuals
+#### Draw
+![draw](asset/phase-draw-img.gif)
+
+### Plan
+![plan](asset/phase-plan-img.gif)
+
+### Attack 
+![attack](asset/phase-attack-img.gif)
+
+### End
+![end](asset/phase-end-img.gif)
+
+## Authors
+| Nama | NIM | Email |
+| ----- | --- | ----------|
+|Ilham Prasetyo Wibowo | 13520013 | <13520013@std.stei.itb.ac.id> |
+|Gregorius Moses Marevson | 13520052 | <13520052@std.stei.itb.ac.id> |
+|Amar Fadil | 13520103 | <13520103@std.stei.itb.ac.id> |
+|Owen Christian Wijaya | 13520124 | <13520124@std.stei.itb.ac.id> |
+|Fachry Dennis Heraldi | 13520139 | <13520139@std.stei.itb.ac.id> |
 
 ## Credit
 
 Minecraft images and description are taken from [Minecraft Wikia](https://minecraft.fandom.com/wiki/)
-Other sources for "random" images are:
-
-- Album Supporteran STEI 2018 :D
-- https://mobile.twitter.com/masterlimbad6
-- https://www.nationalgeographic.com/science/article/141104-kamikaze-kublai-khan-winds-typhoon-japan-invasion
-- https://open.spotify.com/album/3GzwPyPZCyrqUTaurTaS23
-- https://cdn.wccftech.com/wp-content/uploads/2021/06/nvidia-geforce-rtx-3080-ti-product-gallery-photo-003-scaled.jpg
-- https://twitter.com/GGumiliar
-- https://dota2.fandom.com/wiki/Spectre
