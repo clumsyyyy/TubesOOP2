@@ -1,50 +1,51 @@
-# Minecraft : Aether Realm Wars
+# Aether Wars: A Minecraft-Inspired Turn-Based Card Game
 
-Proyek ini dibuat untuk memenuhi tugas mata kuliah IF2210 Pemrograman Berorientasi Objek tahun 2021 semester 2.
+> Program implementasi _turn-based card game_ berdasarkan game _Minecraft / Yu-Gi-Oh!_ menggunakan bahasa Java dan menerapkan konsep-konsep _Object-Oriented Programming_ serta _Design Pattern_
+> > Tugas Besar 2 IF2210 Pemrograman Berorientasi Objek
+> > Semester II 2021/2022
 
-## About Project
+## Deskripsi
 
-Game merupakan turn-based game, dengan dua orang pemain. Implementasi permainan menggunakan bahasa Java dengan memanfaatkan konsep OOP. 
+AetherWars merupakan sebuah turn-based card game, dengan dua orang pemain. Implementasi permainan menggunakan bahasa Java dengan memanfaatkan konsep OOP. Dengan menggunakan konsep-konsep OOP dan _design pattern_, program ini dapat dimainkan oleh dua orang pemain secara lokal.
 
 ## Requirements
-- Java 8
-- Gradle
+- <a href = "https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html">Java SE 8 (JDK 8u202)</a>
 
 ## How To Run 
-``` 
-gradlew run 
+1. _Clone_ repository ini terlebih dahulu
+2. Navigasikan ke dalam folder `src`, lalu jalankan perintah berikut
+```java
+./gradlew run 
 ```
 
 ## Gameplay 
-### Rules
 - Permainan dilakukan oleh dua orang pemain.
 - Terdapat empat phase tiap turn :
-  - Draw \
+  - ## **Draw** 
     Pemain mengambil kartu 3 kartu dari deck. Dari 3 kartu, pemain memilih satu kartu untuk digunakan, 2 kartu dikembalikan ke deck. kartu maksimal yang bisa dimiliki pemain adalah 5 kartu.
-  - Plan \
+    
+    ![draw](asset/phase-draw-img.gif)
+   
+  - ## **Plan** 
     Pemain dapat melakukan beberapa aksi :
     1. Meletakkan kartu karakter ke board.
     2. Menggunakan spell pada karakter di board.
     3. Membuang karakter yang dimiliki atau yang ada di board.
     4. Menggunakan mana atau exp.
-  - Attack \
-    Pemain dapat menyerang karakter lawan, atau hp lawan. Pemain tidak bisa menyerang hp lawan jika ada karakter pada board.
-  - End \
-    Pemain berganti giliran.
-- Pemain menang jika HP lawan nol, atau deck lawan habis.
+    
+    ![plan](asset/phase-plan-img.gif)
 
-### Visuals
-#### Draw
-![draw](asset/phase-draw-img.gif)
-
-### Plan
-![plan](asset/phase-plan-img.gif)
-
-### Attack 
-![attack](asset/phase-attack-img.gif)
-
-### End
-![end](asset/phase-end-img.gif)
+  - ## **Attack**
+    Pemain dapat menyerang kartu karakter milik lawan, atau pihak lawan secara langsung (HP pihak lawan akan berkurang) Pemain bisa langsung menyerang pihak lawan apabila tidak ada kartu karakter pada _board_ lawan
+    
+    ![attack](asset/phase-attack-img.gif)
+    
+  - #### **End**
+    Mengakhiri giliran seorang pemain dan mengembalikan kendali ke pemain lawan.
+    
+    ![end](asset/phase-end-img.gif)
+    
+- Permainan akan berakhir apabila salah satu pemain tidak mempunyai HP / kartu di _deck_ tersisa
 
 ## Authors
 | Nama | NIM | Email |
