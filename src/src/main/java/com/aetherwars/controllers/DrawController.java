@@ -73,12 +73,14 @@ public class DrawController implements Subscriber {
     public void receiveEvent(Event evt) {
         GameManager gm = GameManager.getInstance();
         if (evt instanceof OnGameStart) {
+            
             draw_img = new Pane[] {draw_1, draw_2, draw_3};
             draw_mana = new Label[] {draw1_mana, draw2_mana, draw3_mana};
             draw_name = new Label[] {draw1_name, draw2_name, draw3_name};
             draw_desc = new Label[] {draw1_desc, draw2_desc, draw3_desc};
             draw_info = new Label[] {draw1_info, draw2_info, draw3_info};
         } else if (evt instanceof OnPhaseChange) {
+            
             if (((OnPhaseChange) evt).getPhase() == Phase.DRAW) {
                 player_label.setText(gm.getCurrentPlayer().getName() + ", it's your turn to draw!");
                 int draw_cap = 3;

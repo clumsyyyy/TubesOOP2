@@ -5,24 +5,35 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id = "select_panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../font/font.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.SelectController">
+<AnchorPane fx:id="select_panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../font/font.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.SelectController">
    <children>
-      <Label layoutX="583.0" layoutY="136.0" text="Welcome to">
+      <Label layoutX="583.0" layoutY="136.0" text="Welcome to" textFill="#d6d6d6">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Label layoutX="365.0" layoutY="151.0" text="Aether Wars!">
+      <Label layoutX="365.0" layoutY="151.0" text="Aether Wars!" textFill="#d6d6d6">
          <font>
             <Font size="96.0" />
          </font>
       </Label>
-      <Label layoutX="539.0" layoutY="345.0" prefHeight="42.0" prefWidth="204.0" text="Select your method:">
+      <Label layoutX="538.0" layoutY="418.0" prefHeight="42.0" prefWidth="204.0" text="Select your method:" textFill="#d6d6d6">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Button fx:id="import_btn" layoutX="548.0" layoutY="423.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="185.0" text="Import your own deck!" />
-      <Button fx:id="random_btn" layoutX="548.0" layoutY="508.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="185.0" text="Use randomized deck!" />
+      <Button fx:id="import_btn" layoutX="398.0" layoutY="472.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="185.0" text="Import your own deck!" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="19.0" />
+         </font></Button>
+      <Button fx:id="random_btn" alignment="CENTER" layoutX="696.0" layoutY="472.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="185.0" text="Use randomized deck!" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="19.0" />
+         </font></Button>
+      <Label layoutX="429.0" layoutY="264.0" prefHeight="42.0" prefWidth="422.0" text="A Turn-Based Minecraft-Inspired Game" textFill="#d6d6d6">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

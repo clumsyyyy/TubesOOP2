@@ -5,6 +5,7 @@ import java.io.File;
 
 import com.aetherwars.core.DisplayManager;
 import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnGameStart;
 import com.aetherwars.events.OnPhaseChange;
 import com.aetherwars.interfaces.Event;
 import com.aetherwars.interfaces.Subscriber;
@@ -12,13 +13,16 @@ import com.aetherwars.models.Phase;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BackgroundSize;
 import javafx.stage.FileChooser;
 
 public class SelectController implements Subscriber  {
     public Button import_btn;
     public Button random_btn;
+    @FXML public AnchorPane select_panel;
 
     FileChooser f1 = new FileChooser();
     FileChooser f2 = new FileChooser();
@@ -59,8 +63,11 @@ public class SelectController implements Subscriber  {
 
     @Override
     public void receiveEvent(Event evt){
-        random_btn.setOnAction(random_evt);
-        import_btn.setOnAction(import_evt);
+        if (evt instanceof OnGameStart){
+            random_btn.setOnAction(random_evt);
+            import_btn.setOnAction(import_evt);
+            select_panel.setBackground(DisplayManager.getImage("background/background.png"));
+        }
     }
 
 }

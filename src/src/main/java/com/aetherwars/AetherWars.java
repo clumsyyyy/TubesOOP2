@@ -1,7 +1,5 @@
 package com.aetherwars;
 
-
-
 import com.aetherwars.core.DisplayManager;
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.OnGameStart;
