@@ -7,9 +7,9 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root stylesheets="@../font/font.css" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@/com/aetherwars/font/font.css" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="draw_phase" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #8aceed;" stylesheets="@../font/font.css" text="Draw" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+        <Label fx:id="draw_phase" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="200.0" style="-fx-background-color: #8aceed;" stylesheets="@/com/aetherwars/font/font.css" text="Draw" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
             <font>
             <Font name="Eras Demi ITC" size="15.0" />
             </font>

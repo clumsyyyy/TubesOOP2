@@ -108,7 +108,7 @@ public class Player extends Publisher implements Subscriber {
                         turn++;
 
                         // TODO: RESET THE +50 POINT
-                        mana = Math.min(turn, 10) + 100;
+                        mana = Math.min(turn, 10);
                         // update board
                         sendEvent(evt);
                     }

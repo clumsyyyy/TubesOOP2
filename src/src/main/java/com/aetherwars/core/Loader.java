@@ -37,7 +37,6 @@ public class Loader {
                 Double.parseDouble(row[9])
             );
             CardList.add(c);
-            System.out.println(c);
         }
 
         File morphCSVFile = new File(Loader.class.getResource(MORPH_FPATH).toURI());
