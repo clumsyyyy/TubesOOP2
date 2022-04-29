@@ -1,5 +1,7 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.events.OnCardAction;
+import com.aetherwars.interfaces.Actionable;
 import com.aetherwars.interfaces.Informable;
 import com.aetherwars.interfaces.Observable;
 import com.aetherwars.interfaces.Prototype;
@@ -8,7 +10,7 @@ import com.aetherwars.models.Type;
 /**
  * Implementation for Card parent class
  */
-public class Card implements Prototype<Card>, Observable, Informable {
+public abstract class Card implements Prototype<Card>, Observable, Informable, Actionable<OnCardAction> {
     protected int id;
     protected String name;
     protected String desc;
@@ -67,22 +69,5 @@ public class Card implements Prototype<Card>, Observable, Informable {
     public String getInfo() {
         return "Type: " + this.type + "\n" +
                 "Required Mana: " + this.required_mana + "\n";
-    }
-
-    @Override
-    public Card clone() {
-        return new Card(
-            this.id,
-            this.name,
-            this.type,
-            this.desc,
-            this.required_mana,
-            this.image_path
-        );
-    }
-
-    @Override
-    public void update() {
-        // do nothing
     }
 }

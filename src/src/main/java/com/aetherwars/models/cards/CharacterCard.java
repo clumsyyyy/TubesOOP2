@@ -1,5 +1,8 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnCardAction;
+import com.aetherwars.models.Player;
 import com.aetherwars.models.Type;
 
 /**
@@ -57,18 +60,33 @@ public class CharacterCard extends Card {
     }
 
     @Override
-    public Card clone() {
+    public void action(OnCardAction ec) {
+        // Prereq: player has enough mana
+        Player p = GameManager.getInstance().getCurrentPlayer();
+        SpawnedCard c = new SpawnedCard(this);
+        p.getHand().unregister(this);
+        p.getBoard().register(c, ec.getToCardIdx());
+        p.setMana(p.getMana() - this.getRequiredMana());
+    }
+    
+    @Override
+    public Card cloneCard() {
         return new CharacterCard(
-                this.id,
-                this.name,
-                this.type,
-                this.desc,
-                this.image_path,
-                this.required_mana,
-                this.atk,
-                this.hp,
-                this.atk_up,
-                this.hp_up
+            this.id,
+            this.name,
+            this.type,
+            this.desc,
+            this.image_path,
+            this.required_mana,
+            this.atk,
+            this.hp,
+            this.atk_up,
+            this.hp_up
         );
+    }
+
+    @Override
+    public void update() {
+        // do nothing
     }
 }

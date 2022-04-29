@@ -1,6 +1,9 @@
 package com.aetherwars.models.cards;
 
 
+import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnCardAction;
+import com.aetherwars.models.Board;
 import com.aetherwars.models.Type;
 
 
@@ -17,7 +20,7 @@ public class MorphCard extends SpellCard {
     }
 
     @Override
-    public Card clone() {
+    public Card cloneCard() {
         return new MorphCard(
             this.id,
             this.name,
@@ -25,6 +28,18 @@ public class MorphCard extends SpellCard {
             this.image_path,
             this.required_mana,
             this.target_id
+        );
+    }
+
+    @Override
+    public void action(OnCardAction ec) {
+        super.action(ec);
+        GameManager gm = GameManager.getInstance();
+        Board tgt_b = gm.getPlayer(ec.getToPlayerIdx()).getBoard();
+        tgt_b.unregister(ec.getToCardIdx());
+        tgt_b.register(
+            new SpawnedCard((CharacterCard) gm.getCardById(this.getTargetId())),
+            ec.getToCardIdx()
         );
     }
 }

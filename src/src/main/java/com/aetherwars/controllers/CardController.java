@@ -206,16 +206,16 @@ public class CardController implements Subscriber {
                 );
                 if (cfrom instanceof CharacterCard) {
                     gm.sendEvent(
-                            new OnCardAction(this, db.getString(), player_idx, card_idx, CardAction.PICK)
+                        new OnCardAction(this, db.getString(), true, player_idx, card_idx, CardAction.PICK)
                     );
                 } else if (cfrom instanceof SpellCard) {
                     gm.sendEvent(
-                            new OnCardAction(this, db.getString(), player_idx, card_idx, CardAction.SPELL)
+                        new OnCardAction(this, db.getString(), true, player_idx, card_idx, CardAction.SPELL)
                     );
                 }
             } else if (gm.getPhase() == Phase.ATTACK) {
                 gm.sendEvent(
-                        new OnCardAction(this, db.getString(), player_idx, card_idx, CardAction.ATTACK)
+                    new OnCardAction(this, db.getString(), false, player_idx, card_idx, CardAction.ATTACK)
                 );
             }
         }

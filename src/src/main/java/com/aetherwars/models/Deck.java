@@ -16,7 +16,7 @@ public class Deck implements Subscriber {
     }
 
     public void addCard(Card c) {
-        cards.add(c.clone()); // clone it because we want to change it later
+        cards.add(c.cloneCard()); // clone it because we want to change it later
     }
 
     public Card takeCard() {

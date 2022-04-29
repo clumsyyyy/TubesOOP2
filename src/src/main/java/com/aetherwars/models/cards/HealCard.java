@@ -1,5 +1,7 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnCardAction;
 import com.aetherwars.models.Type;
 
 public class HealCard extends SpellCard {
@@ -15,7 +17,7 @@ public class HealCard extends SpellCard {
     }
 
     @Override
-    public Card clone() {
+    public Card cloneCard() {
         return new HealCard(
             this.id,
             this.name,
@@ -24,5 +26,11 @@ public class HealCard extends SpellCard {
             this.required_mana,
             this.heal_value
         );
+    }
+
+    @Override
+    public void action(OnCardAction onActionEvent) {
+        super.action(onActionEvent);
+        GameManager.getInstance().getPlayer(onActionEvent.getToPlayerIdx()).heal(this.getHeal());
     }
 }

@@ -1,5 +1,7 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnCardAction;
 import com.aetherwars.models.Type;
 
 /**
@@ -52,7 +54,7 @@ public class PotionCard extends SpellCard {
     }
 
     @Override
-    public Card clone() {
+    public Card cloneCard() {
         return new PotionCard(
             this.id,
             this.name,
@@ -63,5 +65,14 @@ public class PotionCard extends SpellCard {
             this.required_mana,
             this.init_duration
         );
+    }
+
+    @Override
+    public void action(OnCardAction ec) {
+        super.action(ec);
+        ((SpawnedCard)GameManager.getInstance()
+            .getPlayer(ec.getToPlayerIdx())
+            .getBoard().getCard(ec.getToCardIdx())
+        ).addSpell(this);
     }
 }

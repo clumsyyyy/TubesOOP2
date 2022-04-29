@@ -1,5 +1,7 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnCardAction;
 import com.aetherwars.models.Type;
 
 /**
@@ -18,7 +20,7 @@ public class SwapCard extends SpellCard {
     }
 
     @Override
-    public Card clone() {
+    public Card cloneCard() {
         return new SwapCard(
             this.id,
             this.name,
@@ -27,5 +29,14 @@ public class SwapCard extends SpellCard {
             this.required_mana,
             this.init_duration
         );
+    }
+    
+    @Override
+    public void action(OnCardAction ec) {
+        super.action(ec);
+        ((SpawnedCard)GameManager.getInstance()
+            .getPlayer(ec.getToPlayerIdx())
+            .getBoard().getCard(ec.getToCardIdx())
+        ).addSpell(this);
     }
 }

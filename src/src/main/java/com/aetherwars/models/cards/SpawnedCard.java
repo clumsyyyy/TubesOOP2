@@ -1,6 +1,7 @@
 package com.aetherwars.models.cards;
 
 import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnCardAction;
 import com.aetherwars.models.Type;
 
 import java.util.ArrayList;
@@ -69,7 +70,8 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public double getATK(){
-        return this.atk + this.getAtkBuff();
+        double res = this.atk + this.getAtkBuff();
+        return res < 0 ? 0 : res;
     }
 
     public void takeDamage(double damage) {
@@ -107,7 +109,7 @@ public class SpawnedCard extends CharacterCard {
             exp -= this.getLevelUpExp() - this.exp;
             this.levelUp();
         }
-        if (level < 10){
+        if (level < 10) {
             this.exp += exp;
         }
 
@@ -191,11 +193,6 @@ public class SpawnedCard extends CharacterCard {
             } else {
                 target.takeDamage(this.getATK());
             }
-
-            if (target.getHP() <= 0) {
-                this.addExp(target.getLevel());
-                // TODO: delete target card after this
-            }
         } else { // attack chara
             GameManager.getInstance().getOpponentPlayer().takeDamage(this.getATK());
         }
@@ -212,8 +209,6 @@ public class SpawnedCard extends CharacterCard {
 
     @Override
     protected String ingfo() {
-        // double atkBuff = getAtkBuff();
-        // double hpBuff = getHpBuff();
         double hpBuff = getHpBuff();
         double atkBuff = getAtkBuff();
         String before = String.format("ATK: %s\nHP: %s\n",
@@ -252,6 +247,38 @@ public class SpawnedCard extends CharacterCard {
         }
         if (is_swapped && this.swap_duration == 0) {
             this.swapAtkHp();
+        }
+    }
+
+    @Override
+    public void action(OnCardAction ec) {
+        if (ec.getToCardIdx() == -1) {
+            if (this.canAttack()) {
+                // attack character directly
+                this.atk(null);
+                this.toggleAttack();
+            }
+        } else {
+            GameManager gm = GameManager.getInstance();
+            // use attack function on CharacterCard
+            Card target_att = gm.getOpponentPlayer().getBoard().getCard(ec.getToCardIdx());
+            if (target_att instanceof SpawnedCard) {
+                SpawnedCard tg_att = (SpawnedCard) target_att;
+                if (this.canAttack()) {
+                    this.atk(tg_att);
+                    tg_att.atk(this);
+                    if (tg_att.getHP() <= 0) {
+                        gm.getOpponentPlayer().getBoard().unregister(tg_att);
+                        if (this.getHP() <= 0) {
+                            this.addExp(tg_att.getLevel());
+                        }
+                    }
+                    if (this.getHP() <= 0) {
+                        gm.getCurrentPlayer().getBoard().unregister(this);
+                    }
+                    this.toggleAttack();
+                }
+            }
         }
     }
 }

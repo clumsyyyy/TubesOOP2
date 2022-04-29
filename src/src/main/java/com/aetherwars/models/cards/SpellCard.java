@@ -1,11 +1,14 @@
 package com.aetherwars.models.cards;
 
+import com.aetherwars.core.GameManager;
+import com.aetherwars.events.OnCardAction;
+import com.aetherwars.models.Player;
 import com.aetherwars.models.Type;
 
 /**
  * Implementatino for the spell card class
  */
-public class SpellCard extends Card {
+public abstract class SpellCard extends Card {
     protected int init_duration; // Permanent = 0 / Temporary = depends on dasta
     protected int current_duration;
 
@@ -64,15 +67,10 @@ public class SpellCard extends Card {
     }
 
     @Override
-    public Card clone() {
-        return new SpellCard(
-            this.id,
-            this.name,
-            this.type,
-            this.desc,
-            this.image_path,
-            this.required_mana,
-            this.init_duration
-        );
+    public void action(OnCardAction ec) {
+        // Prereq: player has enough mana
+        Player p = GameManager.getInstance().getCurrentPlayer();
+        p.getHand().unregister(ec.getFromCardIdx());
+        p.setMana(p.getMana() - this.getRequiredMana());
     }
 }

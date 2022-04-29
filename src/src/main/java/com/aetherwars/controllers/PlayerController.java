@@ -85,11 +85,11 @@ public class PlayerController implements Subscriber {
            
             if (gm.getPhase() == Phase.ATTACK) {
                 gm.sendEvent(
-                    new OnCardAction(this, db.getString(), player_idx, -1, CardAction.CHAR_ATTACK)
+                    new OnCardAction(this, db.getString(), false, player_idx, -1, CardAction.CHAR_ATTACK)
                 );
             } else if (gm.getPhase() == Phase.PLAN) {
                 gm.sendEvent(
-                    new OnCardAction(this, db.getString(), player_idx, -1, CardAction.SPELL)
+                    new OnCardAction(this, db.getString(), false, player_idx, -1, CardAction.SPELL)
                 );
             }
         }
