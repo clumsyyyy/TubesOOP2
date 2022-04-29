@@ -28,7 +28,7 @@ public class SelectController implements Subscriber  {
     FileChooser f2 = new FileChooser();
    
     final BackgroundSize bgSize = new BackgroundSize(
-            0.9, 0.9, true, true,
+            1, 1, true, true,
             true, false
     );
 
@@ -36,6 +36,8 @@ public class SelectController implements Subscriber  {
         @Override
         public void handle(ActionEvent event) {
             GameManager manager = GameManager.getInstance();
+            manager.initGame(40, null, null);
+            manager.sendEvent(new OnGameStart(this));
             manager.sendEvent(new OnPhaseChange(this, Phase.DRAW));
         }
     };
@@ -51,7 +53,9 @@ public class SelectController implements Subscriber  {
             GameManager manager = GameManager.getInstance();
             File file1 = f1.showOpenDialog(DisplayManager.getInstance().getStage());
             File file2 = f2.showOpenDialog(DisplayManager.getInstance().getStage());
-            manager.updateCards(file1, file2);
+            //manager.updateCards(file1, file2);
+            manager.initGame(40, file1, file2);
+            manager.sendEvent(new OnGameStart(this));
             manager.sendEvent(new OnPhaseChange(this, Phase.DRAW));
         }
     };
@@ -63,7 +67,7 @@ public class SelectController implements Subscriber  {
 
     @Override
     public void receiveEvent(Event evt){
-        if (evt instanceof OnGameStart){
+        if (evt instanceof OnPhaseChange && ((OnPhaseChange) evt).getPhase() == Phase.SELECT){
             random_btn.setOnAction(random_evt);
             import_btn.setOnAction(import_evt);
             select_panel.setBackground(DisplayManager.getImage("background/background.png"));

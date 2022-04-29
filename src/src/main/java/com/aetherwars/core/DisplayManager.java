@@ -27,7 +27,7 @@ public class DisplayManager implements Subscriber {
     private Map<String, Scene> sceneMap = new HashMap<>();
     private static DropShadow cardShadow;
     static final BackgroundSize bgSize = new BackgroundSize(
-        0.9, 0.9, true, true,
+        1, 1, true, true,
         true, false
     );
 

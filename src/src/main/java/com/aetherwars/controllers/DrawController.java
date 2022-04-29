@@ -11,12 +11,14 @@ import com.aetherwars.interfaces.Subscriber;
 import com.aetherwars.models.Phase;
 import com.aetherwars.models.cards.Card;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import java.util.List;
 
 public class DrawController implements Subscriber {
+    @FXML public AnchorPane draw_panel;
     public Pane draw_1;
     public Pane draw_2;
     public Pane draw_3;
@@ -40,7 +42,7 @@ public class DrawController implements Subscriber {
     public Label[] draw_info;
 
     final BackgroundSize bgSize = new BackgroundSize(
-            0.9, 0.9, true, true,
+            1, 1, true, true,
             true, false
     );
 
@@ -79,9 +81,11 @@ public class DrawController implements Subscriber {
             draw_name = new Label[] {draw1_name, draw2_name, draw3_name};
             draw_desc = new Label[] {draw1_desc, draw2_desc, draw3_desc};
             draw_info = new Label[] {draw1_info, draw2_info, draw3_info};
+            draw_panel.setBackground(DisplayManager.getImage("background/background.png"));
         } else if (evt instanceof OnPhaseChange) {
             
             if (((OnPhaseChange) evt).getPhase() == Phase.DRAW) {
+
                 player_label.setText(gm.getCurrentPlayer().getName() + ", it's your turn to draw!");
                 int draw_cap = 3;
                 if (draw_cap > gm.getCurrentPlayer().getDeck().getSize()) {

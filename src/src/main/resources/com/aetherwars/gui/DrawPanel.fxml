@@ -5,9 +5,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="discard_drawer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../font/font.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.DrawController">
+<AnchorPane fx:id="draw_panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../font/font.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controllers.DrawController">
    <children>
-      <Label fx:id="player_label" layoutX="388.0" layoutY="40.0" text="&lt;NAME&gt;, it's your turn to draw!">
+      <Label fx:id="player_label" layoutX="388.0" layoutY="38.0" text="&lt;NAME&gt;, it's your turn to draw!" textFill="WHITE">
          <font>
             <Font name="Eras Bold ITC" size="36.0" />
          </font>
@@ -19,7 +19,8 @@
                   <Font size="21.0" />
                </font>
             </Label>
-         </children></Pane>
+         </children>
+      </Pane>
       <Pane fx:id="draw_3" layoutX="857.0" layoutY="105.0" prefHeight="299.0" prefWidth="212.0" style="-fx-border-color: #c2c2c2; -fx-border-radius: 10;">
          <children>
             <Label fx:id="draw3_mana" alignment="CENTER" layoutY="239.0" prefHeight="33.0" prefWidth="212.0" style="-fx-background-color: #c2c2c2;" text="[3] EMPTY">
@@ -38,43 +39,44 @@
             </Label>
          </children>
       </Pane>
-      <Label fx:id="draw1_name" layoutX="223.0" layoutY="404.0" prefHeight="43.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw1_name" layoutX="228.0" layoutY="404.0" prefHeight="43.0" prefWidth="202.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Demi ITC" size="20.0" />
          </font></Label>
-      <Label fx:id="draw2_name" layoutX="534.0" layoutY="404.0" prefHeight="43.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw2_name" layoutX="546.0" layoutY="404.0" prefHeight="43.0" prefWidth="202.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Demi ITC" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="draw3_name" layoutX="857.0" layoutY="404.0" prefHeight="43.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw3_name" layoutX="862.0" layoutY="404.0" prefHeight="43.0" prefWidth="202.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="draw1_info" layoutX="223.0" layoutY="469.0" prefHeight="129.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw1_info" alignment="TOP_LEFT" layoutX="223.0" layoutY="469.0" prefHeight="129.0" prefWidth="212.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Light ITC" size="15.0" />
          </font></Label>
-      <Label fx:id="draw2_info" layoutX="541.0" layoutY="469.0" prefHeight="129.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw2_info" alignment="TOP_LEFT" layoutX="541.0" layoutY="469.0" prefHeight="129.0" prefWidth="212.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Light ITC" size="15.0" />
          </font></Label>
-      <Label fx:id="draw3_info" layoutX="857.0" layoutY="469.0" prefHeight="129.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw3_info" alignment="TOP_LEFT" layoutX="857.0" layoutY="469.0" prefHeight="129.0" prefWidth="212.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Demi ITC" size="15.0" />
          </font></Label>
-      <Label fx:id="draw1_desc" layoutX="223.0" layoutY="602.0" prefHeight="108.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw1_desc" alignment="TOP_LEFT" layoutX="223.0" layoutY="602.0" prefHeight="108.0" prefWidth="212.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Light ITC" size="12.0" />
          </font></Label>
-      <Label fx:id="draw2_desc" layoutX="541.0" layoutY="602.0" prefHeight="108.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw2_desc" alignment="TOP_LEFT" layoutX="541.0" layoutY="602.0" prefHeight="108.0" prefWidth="212.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Light ITC" size="12.0" />
          </font></Label>
-      <Label fx:id="draw3_desc" layoutX="857.0" layoutY="602.0" prefHeight="108.0" prefWidth="212.0" text="" wrapText="true">
+      <Label fx:id="draw3_desc" alignment="TOP_LEFT" layoutX="857.0" layoutY="602.0" prefHeight="108.0" prefWidth="212.0" text="" textFill="#cdcdcd" wrapText="true">
          <font>
             <Font name="Eras Light ITC" size="12.0" />
          </font></Label>
+      <Pane layoutY="143.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package com.aetherwars.controllers;
 
+import com.aetherwars.core.DisplayManager;
 import com.aetherwars.core.GameManager;
 import com.aetherwars.events.*;
 import com.aetherwars.interfaces.Event;
@@ -31,6 +32,7 @@ public class GameController implements Subscriber {
         new HandController(p1_hand, 0);
         new HandController(p2_hand, 1);
         new InfoController(info);
+        board.setBackground(DisplayManager.getImage("background/background.png"));
         try {
             Media music = new Media(getClass().getResource("/com/aetherwars/music/main.mp3").toURI().toString());
             this.music_player = new MediaPlayer(music);

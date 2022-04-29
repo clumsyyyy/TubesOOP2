@@ -66,17 +66,20 @@ public class GameManager extends Publisher implements Subscriber {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        Deck[] decks;
-        if (deckFile1 != null & deckFile2 != null)
-            decks = new Deck[]{
-                DeckFactory.create(ins.cardList, deckFile1),
-                DeckFactory.create(ins.cardList, deckFile2),
-            };
-        else
-            decks = new Deck[]{
-                DeckFactory.create(ins.cardList, deckSize),
-                DeckFactory.create(ins.cardList, deckSize)
-            };
+        Deck[] decks = new Deck[]{null, null};
+
+        if (deckFile1 != null){
+            decks[0] = DeckFactory.create(ins.cardList, deckFile1);
+        } else {
+            decks[0] = DeckFactory.create(ins.cardList, deckSize);
+        }
+
+        if (deckFile2 != null){
+            decks[1] = DeckFactory.create(ins.cardList, deckFile2);
+        } else {
+            decks[1] = DeckFactory.create(ins.cardList, deckSize);
+        }
+
         ins.players = new Player[]{
             new Player("Alex",
                 new Board(BoardType.BOARD),
@@ -96,20 +99,6 @@ public class GameManager extends Publisher implements Subscriber {
         addSubscriber(ins);
     }
     
-    public void updateCards( File deckFile1, File deckFile2) {
-
-        Deck[] decks;
-        if (deckFile1 != null && deckFile2 != null){
-            decks = new Deck[]{
-                DeckFactory.create(ins.cardList, deckFile1),
-                DeckFactory.create(ins.cardList, deckFile2),
-            };
-                
-            players[0].setDeck(decks[0]);
-            players[1].setDeck(decks[1]);
-        }
-
-    }
 
     public void initGame() {
         initGame(40, null, null);
