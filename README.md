@@ -8,11 +8,31 @@
 
 AetherWars merupakan sebuah turn-based card game, dengan dua orang pemain. Implementasi permainan menggunakan bahasa Java dengan memanfaatkan konsep OOP. Dengan menggunakan konsep-konsep OOP dan _design pattern_, program ini dapat dimainkan oleh dua orang pemain secara lokal.
 
+## Struktur Kode
+- `main/java/com/aetherwars`: berisi kode utama untuk permainan
+  - `controllers`: folder berisi class controller untuk file-file FXML
+  - `core`: folder berisi file utama untuk permainan, berisi DisplayManager, GameManager, dan Loader
+  - `events`: implementasi turunan events untuk digunakan saat permainan
+  - `interfaces`: implementasi interface untuk design pattern
+  - `models`: berisi model-model yang digunakan dalam permainan (kartu, dek, _factory_, _player_, dan lain-lain)
+  - `util`: utilitas untuk melakukan _parsing_ file
+  - `AetherWars.java`: kode utama yang dijalankan
+- `resources/com/aetherwars`: assets yang digunakan dalam permainan
+  - `background`: latar belakang dalam permainan
+  - `card`: assets mengenai kartu
+    - `data`: file konfigurasi kartu dalam bentuk .csv
+    - `image`: gambar kartu
+  - `deck`: contoh _deck_ yang dapat digunakan untuk _deck importing_
+  - `font`: font dan _stylesheet_ untuk penggunaan font
+  - `gui`: file `FXML` sebagai antarmuka permainan
+  - `music`: _Sorrowful Lullaby by C418_
+- `test`: folder berisi testing
+
 ## Requirements
 - <a href = "https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html">Java SE 8 (JDK 8u202)</a>
 
-## How To Run 
-1. _Clone_ repository ini terlebih dahulu
+## Cara Compile dan Run
+1. _Clone_ repository ini terlebih dahulu, lalu buka terminal _Windows Powershell_
 2. Navigasikan ke dalam folder `src`, lalu jalankan perintah berikut
 ```java
 ./gradlew run 
