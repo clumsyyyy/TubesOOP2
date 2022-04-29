@@ -16,6 +16,7 @@ import com.aetherwars.models.cards.CharacterCard;
 import com.aetherwars.models.cards.SpawnedCard;
 import com.aetherwars.models.cards.SpellCard;
 import com.aetherwars.models.cards.LevelCard;
+import com.aetherwars.models.cards.MorphCard;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -83,7 +84,7 @@ public class CardController implements Subscriber {
     public EventHandler<ActionEvent> add_event = new EventHandler<ActionEvent>(){ 
         @Override
         public void handle(ActionEvent event) {
-            if (player.getMana() >= 0){
+            if (player.getMana() - 1 >= 0){
                 player.setMana(player.getMana() - 1);
                 SpawnedCard sc = (SpawnedCard) player.getBoard().getCard(card_idx);
                 sc.addExp(1);
@@ -151,7 +152,8 @@ public class CardController implements Subscriber {
                         ( // and check if it's character usage or spell card usage
                             (c == null && player_idx == gm.getCurrentPlayerIdx()
                                     && !(cfrom instanceof SpellCard)) ||
-                            (c != null && cfrom instanceof SpellCard)
+                            (c != null && cfrom instanceof SpellCard) ||
+                            ((cfrom instanceof MorphCard) && player_idx != gm.getCurrentPlayerIdx())
                         )
                         // and make sure players from have enough mana to use card
                         && fromPlayer.getMana() >=
@@ -161,8 +163,7 @@ public class CardController implements Subscriber {
                 ) ||
                 // ... or if it's attack and coming from another player which card is exist
                 (gm.getPhase() == Phase.ATTACK &&
-                        player_idx != gm.getCurrentPlayerIdx() &&
-                        c != null)
+                        (player_idx != gm.getCurrentPlayerIdx() && c != null))
             )
             event.acceptTransferModes(TransferMode.MOVE);
         }

@@ -78,18 +78,18 @@ public class GameManager extends Publisher implements Subscriber {
                 DeckFactory.create(ins.cardList, deckSize)
             };
         ins.players = new Player[]{
-                new Player("Alex",
-                        new Board(BoardType.BOARD),
-                        new Board(BoardType.HAND),
-                        decks[0],
-                        "card/image/character/player1.png"
-                ),
-                new Player("Steve",
-                        new Board(BoardType.BOARD),
-                        new Board(BoardType.HAND),
-                        decks[1],
-                        "card/image/character/player2.png"
-                )
+            new Player("Alex",
+                new Board(BoardType.BOARD),
+                new Board(BoardType.HAND),
+                decks[0],
+                "card/image/character/player1.png"
+            ),
+            new Player("Steve",
+                new Board(BoardType.BOARD),
+                new Board(BoardType.HAND),
+                decks[1],
+                "card/image/character/player2.png"
+            )
         };
         addSubscriber(ins.players[0]);
         addSubscriber(ins.players[1]);
@@ -99,19 +99,16 @@ public class GameManager extends Publisher implements Subscriber {
     public void updateCards( File deckFile1, File deckFile2) {
 
         Deck[] decks;
-        if (deckFile1 != null & deckFile2 != null)
+        if (deckFile1 != null && deckFile2 != null){
             decks = new Deck[]{
                 DeckFactory.create(ins.cardList, deckFile1),
                 DeckFactory.create(ins.cardList, deckFile2),
             };
-        else
-            decks = new Deck[]{
-                DeckFactory.create(ins.cardList, 40),
-                DeckFactory.create(ins.cardList, 40)
-            };
+                
+            players[0].setDeck(decks[0]);
+            players[1].setDeck(decks[1]);
+        }
 
-        ins.players[0].setDeck(decks[0]);
-        ins.players[1].setDeck(decks[1]);
     }
 
     public void initGame() {

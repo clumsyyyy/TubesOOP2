@@ -67,7 +67,6 @@ public class SelectController implements Subscriber  {
             random_btn.setOnAction(random_evt);
             import_btn.setOnAction(import_evt);
             select_panel.setBackground(DisplayManager.getImage("background/background.png"));
-        }
+        } 
     }
-
 }

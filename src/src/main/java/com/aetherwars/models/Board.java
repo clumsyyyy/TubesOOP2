@@ -150,6 +150,7 @@ public class Board implements Observer<Card>, Subscriber {
                         Player target = gm.getPlayer(ec.getToPlayerIdx());
                         Board tgt_b = target.getBoard();
                         SpawnedCard sc_tgt = null;
+                        
                         if (ec.getToCardIdx() != -1){
                             sc_tgt = (SpawnedCard) tgt_b.getCard(ec.getToCardIdx());
                         }

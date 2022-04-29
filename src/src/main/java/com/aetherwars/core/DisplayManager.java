@@ -45,7 +45,7 @@ public class DisplayManager implements Subscriber {
         addDisplay("main.board", "Game.fxml");
         addDisplay("panel.draw", "DrawPanel.fxml");
         addDisplay("panel.select", "SelectPanel.fxml");
-        showDisplay("main.board");
+        showDisplay("panel.select");
     }
 
     public final Stage getStage(){

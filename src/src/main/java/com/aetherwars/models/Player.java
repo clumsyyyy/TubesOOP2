@@ -104,6 +104,7 @@ public class Player extends Publisher implements Subscriber {
         } else if (evt instanceof OnPhaseChange) {
             switch (((OnPhaseChange) evt).getPhase()) {
                 case DRAW:
+                    // getFirstDraw();
                     if (this == gm.getCurrentPlayer()) {
                         turn++;
 
