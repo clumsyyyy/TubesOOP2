@@ -70,24 +70,19 @@ public class CardController implements Subscriber {
         if (is_hand) {
             card.setOnDragDetected(OnDragCardPlanHand);
             ctx_menu.getItems().add(discard_item);
-            card.setOnContextMenuRequested((e) -> {
-                if (player.getHand().getCard(card_idx) != null &&
-                GameManager.getInstance().getCurrentPlayerIdx() == player_idx){
-                    ctx_menu.show(card, e.getScreenX(), e.getScreenY());
-                }
-            });
         } else {
             card.setOnDragOver(OnDragAcceptCardBoard);
             card.setOnDragDropped(OnDragEndCardBoard);
             card.setOnDragDetected(OnDragCardAttackBoard);
             ctx_menu.getItems().addAll(add_item, discard_item);
-            card.setOnContextMenuRequested((e) -> {
-                if (player.getBoard().getCard(card_idx) != null &&
-                GameManager.getInstance().getCurrentPlayerIdx() == player_idx){
-                    ctx_menu.show(card, e.getScreenX(), e.getScreenY());
-                }
-            });
         }
+        card.setOnContextMenuRequested((e) -> {
+            if ((is_hand?player.getHand():player.getBoard()).getCard(card_idx) != null &&
+            GameManager.getInstance().getCurrentPlayerIdx() == player_idx &&
+            GameManager.getInstance().getPhase() == Phase.PLAN){
+                ctx_menu.show(card, e.getScreenX(), e.getScreenY());
+            }
+        });
         update();
     }
 
