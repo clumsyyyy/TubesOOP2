@@ -13,6 +13,7 @@ import com.aetherwars.models.Phase;
 import com.aetherwars.models.Player;
 import com.aetherwars.models.cards.Card;
 import com.aetherwars.models.cards.CharacterCard;
+import com.aetherwars.models.cards.HealCard;
 import com.aetherwars.models.cards.SpawnedCard;
 import com.aetherwars.models.cards.SpellCard;
 import com.aetherwars.models.cards.LevelCard;
@@ -172,12 +173,13 @@ public class CardController implements Subscriber {
             if (
                 // make sure it's plan
                 (gm.getPhase() == Phase.PLAN &&
-                        ( // and check if it's character usage or spell card usage
+                        ( // and check if it's character usage or spell card usage and not heal card
                             (c == null && player_idx == gm.getCurrentPlayerIdx()
-                                    && !(cfrom instanceof SpellCard)) ||
+                                && !(cfrom instanceof SpellCard)) ||
                             (c != null && cfrom instanceof SpellCard) ||
-                            ((cfrom instanceof MorphCard) && player_idx != gm.getCurrentPlayerIdx())
-                        )
+                            ((cfrom instanceof MorphCard)
+                                && player_idx != gm.getCurrentPlayerIdx())
+                        ) && !(cfrom instanceof HealCard)
                         // and make sure players from have enough mana to use card
                         && fromPlayer.getMana() >=
                          ((cfrom instanceof LevelCard) ? 

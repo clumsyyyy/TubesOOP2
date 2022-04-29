@@ -33,13 +33,13 @@ public class GameController implements Subscriber {
         new HandController(p2_hand, 1);
         new InfoController(info);
         board.setBackground(DisplayManager.getImage("background/background.png"));
-        // try {
-        //     Media music = new Media(getClass().getResource("/com/aetherwars/music/main.mp3").toURI().toString());
-        //     this.music_player = new MediaPlayer(music);
-        //     this.music_player.cycleCountProperty().set(MediaPlayer.INDEFINITE);
-        //     this.music_player.setAutoPlay(true);
-        //     this.music_player.setVolume(1);
-        // } catch(Exception e) { }
+        try {
+            Media music = new Media(getClass().getResource("/com/aetherwars/music/main.mp3").toURI().toString());
+            this.music_player = new MediaPlayer(music);
+            this.music_player.cycleCountProperty().set(MediaPlayer.INDEFINITE);
+            this.music_player.setAutoPlay(true);
+            this.music_player.setVolume(1);
+        } catch(Exception e) { }
     }
 
     @Override

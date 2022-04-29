@@ -89,7 +89,7 @@ public class PlayerController implements Subscriber {
                 );
             } else if (gm.getPhase() == Phase.PLAN) {
                 gm.sendEvent(
-                    new OnCardAction(this, db.getString(), false, player_idx, -1, CardAction.SPELL)
+                    new OnCardAction(this, db.getString(), true, player_idx, -1, CardAction.SPELL)
                 );
             }
         }
