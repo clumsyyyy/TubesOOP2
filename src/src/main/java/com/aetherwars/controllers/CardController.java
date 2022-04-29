@@ -70,7 +70,8 @@ public class CardController implements Subscriber {
             card.setOnDragDetected(OnDragCardPlanHand);
             ctx_menu.getItems().add(discard_item);
             card.setOnContextMenuRequested((e) -> {
-                if (player.getHand().getCard(card_idx) != null){
+                if (player.getHand().getCard(card_idx) != null &&
+                GameManager.getInstance().getCurrentPlayerIdx() == player_idx){
                     ctx_menu.show(card, e.getScreenX(), e.getScreenY());
                 }
             });
@@ -80,7 +81,8 @@ public class CardController implements Subscriber {
             card.setOnDragDetected(OnDragCardAttackBoard);
             ctx_menu.getItems().addAll(add_item, discard_item);
             card.setOnContextMenuRequested((e) -> {
-                if (player.getBoard().getCard(card_idx) != null){
+                if (player.getBoard().getCard(card_idx) != null &&
+                GameManager.getInstance().getCurrentPlayerIdx() == player_idx){
                     ctx_menu.show(card, e.getScreenX(), e.getScreenY());
                 }
             });
@@ -94,7 +96,7 @@ public class CardController implements Subscriber {
             if (player.getMana() - 1 >= 0){
                 player.setMana(player.getMana() - 1);
                 SpawnedCard sc = (SpawnedCard) player.getBoard().getCard(card_idx);
-                sc.addExp(100);
+                sc.addExp(1);
             }
         }
     };
@@ -102,11 +104,13 @@ public class CardController implements Subscriber {
     public EventHandler<ActionEvent> discard_event = new EventHandler<ActionEvent>(){ 
         @Override
         public void handle(ActionEvent event) {
+
             if (is_hand){
                 player.getHand().unregister(card_idx);
             } else {
                 player.getBoard().unregister(card_idx);
             }
+            
         }
     };
 
