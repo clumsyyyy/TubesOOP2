@@ -13,11 +13,14 @@ import com.aetherwars.models.Player;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -117,6 +120,33 @@ public class PlayerController implements Subscriber {
                 avatarShadow.setColor(Color.web("#fa7a7a"));
                 healthbar.setStyle("-fx-accent: #fa7a7a;");
             }
+        }
+
+        if (gm.getCurrentPlayer().getHP() <= 0 ||
+            gm.getOpponentPlayer().getHP() <= 0 ||
+            gm.getCurrentPlayer().getDeck().getSize() == 0 ||
+            gm.getOpponentPlayer().getDeck().getSize() == 0) {
+
+            Alert a = new Alert(AlertType.INFORMATION);
+            a.initModality(Modality.APPLICATION_MODAL);
+            a.initOwner(DisplayManager.getInstance().getStage());
+
+            if (gm.getCurrentPlayer().getHP() <= 0 ) {
+                a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
+                a.setContentText(gm.getCurrentPlayer().getName() + " lost because he has no HP left!");
+            } else if (gm.getOpponentPlayer().getHP() <= 0){
+                a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
+                a.setContentText(gm.getOpponentPlayer().getName() + " lost because he has no HP left!");
+            } else if (gm.getCurrentPlayer().getDeck().getSize() == 0){
+                a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
+                a.setContentText(gm.getCurrentPlayer().getName() + " lost - no cards remaining!");
+            }else if (gm.getOpponentPlayer().getDeck().getSize() == 0){
+                a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
+                a.setContentText(gm.getOpponentPlayer().getName() + " lost - no cards remaining!");
+            }
+            
+            a.showAndWait();
+            System.exit(0);
         }
 
         avatarShadow.setRadius(30.0);

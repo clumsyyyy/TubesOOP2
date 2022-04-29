@@ -30,7 +30,7 @@ public class CharacterCard extends Card {
                          int mana, double atk, double hp, double atk_up, double hp_up){
         super(id, name, type, description, mana, image_path);
         this.base_atk = atk;
-        this.base_hp = atk;
+        this.base_hp = hp;
         this.atk = atk;
         this.hp = hp;
         this.atk_up = atk_up;
@@ -47,7 +47,9 @@ public class CharacterCard extends Card {
 
     protected String ingfo() {
         return "ATK: " + this.atk + "\n" +
-                "HP: " + this.hp + "\n";
+                "HP: " + this.hp + "\n" +
+                "ATK-UP: " + this.atk_up + "\n" +
+                "HP-UP :" + this.hp_up + "\n";
     }
 
     @Override

@@ -116,7 +116,6 @@ public class SpawnedCard extends CharacterCard {
     }
 
     public void levelUp(){
-        this.hp = this.base_hp;
         if (this.level < 10) {
             this.exp = 0;
             this.base_atk += this.atk_up;
@@ -124,6 +123,7 @@ public class SpawnedCard extends CharacterCard {
             this.atk = this.base_atk;
             this.level++;
         }
+        this.hp = this.base_hp;
     }
 
     public void levelDown(){
@@ -244,6 +244,7 @@ public class SpawnedCard extends CharacterCard {
                 activeSpells.remove(i);
                 i--;
             }
+
         }
         if (is_swapped && this.swap_duration == 0) {
             this.swapAtkHp();

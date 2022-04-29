@@ -19,7 +19,7 @@ public class AetherWars extends Application {
             manager.addSubscriber(dm);
             manager.sendEvent(new OnPhaseChange(this, Phase.SELECT));
         } catch (Exception e) {
-            System.out.println("bruh? ");
+            System.out.println("ERROR: ");
             e.printStackTrace();
         } 
 

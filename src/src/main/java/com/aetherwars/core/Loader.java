@@ -30,13 +30,14 @@ public class Loader {
                 Type.valueOf(row[2]),
                 row[3], 
                 row[4], 
-                Integer.parseInt(row[5]), 
-                Double.parseDouble(row[6]),
-                Double.parseDouble(row[7]), 
+                Integer.parseInt(row[7]), 
+                Double.parseDouble(row[5]),
+                Double.parseDouble(row[6]), 
                 Double.parseDouble(row[8]), 
                 Double.parseDouble(row[9])
             );
             CardList.add(c);
+            System.out.println(c);
         }
 
         File morphCSVFile = new File(Loader.class.getResource(MORPH_FPATH).toURI());

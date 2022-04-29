@@ -89,9 +89,9 @@ public class CardController implements Subscriber {
     public EventHandler<ActionEvent> add_event = new EventHandler<ActionEvent>(){ 
         @Override
         public void handle(ActionEvent event) {
-            if (player.getMana() - 1 >= 0){
+            SpawnedCard sc = (SpawnedCard) player.getBoard().getCard(card_idx);
+            if (player.getMana() - 1 >= 0 && sc.getLevel() < 10){
                 player.setMana(player.getMana() - 1);
-                SpawnedCard sc = (SpawnedCard) player.getBoard().getCard(card_idx);
                 sc.addExp(1);
             }
         }
