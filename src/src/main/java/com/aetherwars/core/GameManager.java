@@ -115,37 +115,40 @@ public class GameManager extends Publisher implements Subscriber {
     @Override
     public void receiveEvent(Event evt) {
         if (evt instanceof OnPhaseChange) {
+            
             Phase curPhase = ((OnPhaseChange) evt).getPhase();
             phase = curPhase;
+
+            GameManager gm = GameManager.getInstance();
+            if (gm.getCurrentPlayer().getHP() <= 0 ||
+                gm.getOpponentPlayer().getHP() <= 0 ||
+                gm.getCurrentPlayer().getDeck().getSize() == 0 ||
+                gm.getOpponentPlayer().getDeck().getSize() == 0) {
+
+                Alert a = new Alert(AlertType.INFORMATION);
+                a.initModality(Modality.APPLICATION_MODAL);
+                a.initOwner(DisplayManager.getInstance().getStage());
+
+                if (gm.getCurrentPlayer().getHP() <= 0 ) {
+                    a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
+                    a.setContentText(gm.getCurrentPlayer().getName() + " lost because he has no HP left!");
+                } else if (gm.getOpponentPlayer().getHP() <= 0){
+                    a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
+                    a.setContentText(gm.getOpponentPlayer().getName() + " lost because he has no HP left!");
+                } else if (gm.getCurrentPlayer().getDeck().getSize() == 0){
+                    a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
+                    a.setContentText(gm.getCurrentPlayer().getName() + " lost - no cards remaining!");
+                }else if (gm.getOpponentPlayer().getDeck().getSize() == 0){
+                    a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
+                    a.setContentText(gm.getOpponentPlayer().getName() + " lost - no cards remaining!");
+                }
+                
+                a.showAndWait();
+                System.exit(0);
+            }
+            
             if (curPhase == Phase.END) {
                 changeCurrentPlayer();
-                GameManager gm = GameManager.getInstance();
-                if (gm.getCurrentPlayer().getHP() <= 0 ||
-                    gm.getOpponentPlayer().getHP() <= 0 ||
-                    gm.getCurrentPlayer().getDeck().getSize() == 0 ||
-                    gm.getOpponentPlayer().getDeck().getSize() == 0) {
-
-                    Alert a = new Alert(AlertType.INFORMATION);
-                    a.initModality(Modality.APPLICATION_MODAL);
-                    a.initOwner(DisplayManager.getInstance().getStage());
-
-                    if (gm.getCurrentPlayer().getHP() <= 0 ) {
-                        a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
-                        a.setContentText(gm.getCurrentPlayer().getName() + " lost because he has no HP left!");
-                    } else if (gm.getOpponentPlayer().getHP() <= 0){
-                        a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
-                        a.setContentText(gm.getOpponentPlayer().getName() + " lost because he has no HP left!");
-                    } else if (gm.getCurrentPlayer().getDeck().getSize() == 0){
-                        a.setHeaderText("GAME OVER - " + gm.getOpponentPlayer().getName() + " wins!");
-                        a.setContentText(gm.getCurrentPlayer().getName() + " lost - no cards remaining!");
-                    }else if (gm.getOpponentPlayer().getDeck().getSize() == 0){
-                        a.setHeaderText("GAME OVER - " + gm.getCurrentPlayer().getName() + " wins!");
-                        a.setContentText(gm.getOpponentPlayer().getName() + " lost - no cards remaining!");
-                    }
-                    
-                    a.showAndWait();
-                    System.exit(0);
-                }
             }
         }
         // cek apakah end game.

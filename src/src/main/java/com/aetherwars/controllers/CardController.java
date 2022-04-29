@@ -58,20 +58,27 @@ public class CardController implements Subscriber {
             e.printStackTrace();
         }
 
+        ContextMenu ctx_menu = new ContextMenu();
+        MenuItem add_item = new MenuItem("Add EXP");
+        MenuItem discard_item = new MenuItem("Discard");
+        add_item.setOnAction(add_event);
+        discard_item.setOnAction(discard_event);
+
         card.setOnMouseEntered(OnHoverCard);
         card.setOnMouseExited(OnHoverExitCard);
         if (is_hand) {
             card.setOnDragDetected(OnDragCardPlanHand);
+            ctx_menu.getItems().add(discard_item);
+            card.setOnContextMenuRequested((e) -> {
+                if (player.getHand().getCard(card_idx) != null){
+                    ctx_menu.show(card, e.getScreenX(), e.getScreenY());
+                }
+            });
         } else {
             card.setOnDragOver(OnDragAcceptCardBoard);
             card.setOnDragDropped(OnDragEndCardBoard);
             card.setOnDragDetected(OnDragCardAttackBoard);
-
-
-            ContextMenu ctx_menu = new ContextMenu();
-            MenuItem add_item = new MenuItem("Add EXP");
-            add_item.setOnAction(add_event);
-            ctx_menu.getItems().add(add_item);
+            ctx_menu.getItems().addAll(add_item, discard_item);
             card.setOnContextMenuRequested((e) -> {
                 if (player.getBoard().getCard(card_idx) != null){
                     ctx_menu.show(card, e.getScreenX(), e.getScreenY());
@@ -87,10 +94,22 @@ public class CardController implements Subscriber {
             if (player.getMana() - 1 >= 0){
                 player.setMana(player.getMana() - 1);
                 SpawnedCard sc = (SpawnedCard) player.getBoard().getCard(card_idx);
-                sc.addExp(1);
+                sc.addExp(100);
             }
         }
     };
+
+    public EventHandler<ActionEvent> discard_event = new EventHandler<ActionEvent>(){ 
+        @Override
+        public void handle(ActionEvent event) {
+            if (is_hand){
+                player.getHand().unregister(card_idx);
+            } else {
+                player.getBoard().unregister(card_idx);
+            }
+        }
+    };
+
 
     public EventHandler<? super MouseEvent> OnHoverCard = (event -> {
         Card c;
@@ -233,7 +252,7 @@ public class CardController implements Subscriber {
                 card.setBackground(DisplayManager.getImage(c.getImagePath()));
                 if (c instanceof SpawnedCard){
                     SpawnedCard temp = (SpawnedCard)c;
-                    card_label.setText("LV: " + temp.getLevel() + " / EXP: " + temp.getExp());
+                    card_label.setText("LV: " + temp.getLevel() + " / " + (temp.getLevel() < 10 ? "EXP: " + temp.getExp() : "MAX"));
                     DropShadow cardShadow = new DropShadow();
                     if (temp.canAttack())
                         cardShadow.setColor(Color.web("#03fc6f"));

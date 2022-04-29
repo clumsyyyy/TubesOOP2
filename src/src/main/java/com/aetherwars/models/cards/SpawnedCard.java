@@ -107,7 +107,10 @@ public class SpawnedCard extends CharacterCard {
             exp -= this.getLevelUpExp() - this.exp;
             this.levelUp();
         }
-        this.exp += exp;
+        if (level < 10){
+            this.exp += exp;
+        }
+
     }
 
     public void levelUp(){
